@@ -1,0 +1,63 @@
+\documentclass{uetgraduation}
+
+% Document metadata
+\studentname{Your Full Name}
+\title{Nghiên cứu cơ chế giao tiếp trong kiến trúc microservice}
+\documenttype{Khóa luận tốt nghiệp đại học hệ chính quy}
+\major{Công nghệ thông tin}
+\year{2024}
+\supervisor{Your Supervisor's Name}
+% \cosupervisor{Your Co-supervisor's Name} % Uncomment if you have a co-supervisor
+
+% English metadata (for CLC students)
+\englishtitle{Study of Communication Mechanisms in Microservice Architecture}
+\englishmajor{Information Technology}
+\englishsupervisor{Your Supervisor's Name in English}
+% \englishcosupervisor{Your Co-supervisor's Name in English} % Uncomment if you have a co-supervisor
+
+\begin{document}
+
+% Cover pages
+\makecovers
+
+% Abstract
+\begin{preamble}{Tóm tắt}
+    \textbf{Tóm tắt:} Kiến trúc microservice đã trở thành một xu hướng quan trọng trong phát triển phần mềm hiện đại, cho phép xây dựng các hệ thống phức tạp từ các dịch vụ nhỏ, độc lập. Một trong những thách thức chính trong kiến trúc này là việc quản lý giao tiếp giữa các microservice. Khóa luận này tập trung nghiên cứu các cơ chế giao tiếp trong kiến trúc microservice, bao gồm các mô hình đồng bộ và bất đồng bộ, các giao thức và công nghệ được sử dụng, cũng như các thách thức và giải pháp trong việc triển khai. Nghiên cứu cũng đánh giá hiệu quả của các phương pháp giao tiếp khác nhau thông qua các trường hợp sử dụng thực tế và đề xuất các hướng tiếp cận tối ưu cho các tình huống cụ thể.
+
+    \textit{\textbf{Từ khóa:} Microservice, Kiến trúc phần mềm, Giao tiếp dịch vụ, API, Message Queue.}
+\end{preamble}
+
+% Table of contents and lists
+\begin{contentlisting}
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
+    \begin{contentlistingsection}{Danh sách từ viết tắt}
+        API: Application Programming Interface -- Giao diện lập trình ứng dụng
+
+        RPC: Remote Procedure Call -- Gọi thủ tục từ xa
+
+        MQ: Message Queue -- Hàng đợi tin nhắn
+
+        REST: Representational State Transfer -- Chuyển giao trạng thái biểu diễn
+
+        SOA: Service-Oriented Architecture -- Kiến trúc hướng dịch vụ
+    \end{contentlistingsection}
+\end{contentlisting}
+
+% Main content
+\input{chapters/chapter1}
+\input{chapters/chapter2}
+\input{chapters/chapter3}
+\input{chapters/chapter4}
+
+% References
+\begin{thebibliography}{99}
+    \begin{bibsection}{Tài liệu tham khảo}
+        \bibitem{ref1} Tài liệu tham khảo 1
+        \bibitem{ref2} Tài liệu tham khảo 2
+    \end{bibsection}
+\end{thebibliography}
+
+\end{document}
