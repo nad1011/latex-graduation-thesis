@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  8 APR 2025 21:58
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  11 APR 2025 23:37
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -965,39 +965,75 @@ Package mathfont Info: Adjusting font Times New Roman Bold. (./chapters/chapter
 
 [5]) (./chapters/chapter1/structure.tex)) (./chapters/chapter2.tex
 
-[6]
+[6] (./chapters/chapter2/2.1.tex
 Package mathfont Info: Adjusting font Times New Roman.
 Package mathfont Info: Adjusting font Times New Roman Bold.
 
 [7
 
-]) (./chapters/chapter3.tex
-
-[8]
-
-[9
-
 ]
 
-[10]) (./chapters/chapter4.tex
+[8]
+Underfull \hbox (badness 1168) in paragraph at lines 113--117
+[]\TU/TimesNewRoman(0)/m/n/12 Domain-Driven Design (DDD) là một phương ph
+áp thiết kế hữu ích cho kiến trúc
+ []
+
+) (./chapters/chapter2/2.2.tex
+
+[9]
+
+[10]
 
 [11]
 
-[12
+[12]
 
-]
-
-[13]) (./chapters/chapter5.tex
+[13]) (./chapters/chapter2/2.3.tex
 
 [14]
 
-[15
-
-])
+[15]
 
 [16]
 
-[17
+[17]
+
+[18]
+
+[19]
+
+[20]) (./chapters/chapter2/2.4.tex
+
+[21]
+
+[22])) (./chapters/chapter3.tex
+
+[23]
+
+[24
+
+]
+
+[25]) (./chapters/chapter4.tex
+
+[26]
+
+[27
+
+]
+
+[28]) (./chapters/chapter5.tex
+
+[29]
+
+[30
+
+])
+
+[31]
+
+[32
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1007,20 +1043,20 @@ L3 programming layer <2025-01-18>
 )
 
 Here is how much of LuaTeX's memory you used:
- 21227 strings out of 475506
+ 21263 strings out of 475506
  125217,1144653 words of node,token memory allocated
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 2:535,3:223,4:122,5:283,6:92,7:8102,8:1,9:383,10:22,11:20
- 43701 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:535,3:223,4:122,5:273,6:92,7:8729,8:1,9:383,10:22,11:32
+ 43713 multiletter control sequences out of 65536+600000
  68 fonts using 35359255 bytes
  99i,6n,105p,1428b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/WINDOWS/Fonts/timesi.ttf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/tim
 es.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (28 pages, 200641 bytes).
+Output written on main.pdf (43 pages, 272356 bytes).
 
-PDF statistics: 122 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 169 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -1,0 +1,23 @@
+\section{Tổng kết}
+
+Chương này đã cung cấp một cái nhìn tổng quan về kiến trúc microservice và vai trò quan trọng của giao tiếp trong kiến trúc này. Chúng ta đã thảo luận về các đặc điểm chính của microservices, so sánh với kiến trúc nguyên khối, và xem xét các lợi ích cũng như thách thức.
+
+Về mặt đặc điểm, microservice là một kiến trúc phân tán, trong đó mỗi dịch vụ tự trị, tập trung vào một chức năng nghiệp vụ cụ thể, quản lý dữ liệu riêng của nó, được thiết kế để xử lý lỗi, và có thể phát triển độc lập. So với kiến trúc nguyên khối, microservice cung cấp khả năng mở rộng có mục tiêu, phát triển nhanh hơn, tính linh hoạt công nghệ, khả năng chịu lỗi tốt hơn, và khả năng bảo trì và hiểu biết tốt hơn.
+
+Tuy nhiên, microservice cũng đặt ra một số thách thức, bao gồm độ phức tạp phân tán, giao tiếp giữa các dịch vụ, quản lý dữ liệu, vận hành và giám sát, và kiểm thử. Để giải quyết những thách thức này, một số nguyên tắc thiết kế nên được tuân thủ, bao gồm Single Responsibility Principle, Domain-Driven Design, API First, tự động hóa, Monitoring và Observability, và Fault Tolerance.
+
+Trong phần về giao tiếp, chúng ta đã khám phá vai trò quan trọng của giao tiếp trong kiến trúc microservice, bao gồm tạo điều kiện cho sự hợp tác giữa các dịch vụ, đảm bảo tính nhất quán dữ liệu, hỗ trợ khả năng chịu lỗi, và cho phép tính mở rộng. Chúng ta cũng đã thảo luận về các thuộc tính quan trọng của giao tiếp microservice, bao gồm độ tin cậy, độ trễ, khả năng mở rộng, cách ly lỗi, tính nhất quán, định dạng dữ liệu, khả năng tương tác, và bảo mật.
+
+Hai mô hình giao tiếp cơ bản trong microservices là đồng bộ và bất đồng bộ. Trong giao tiếp đồng bộ, người gửi đợi phản hồi từ người nhận, trong khi trong giao tiếp bất đồng bộ, người gửi không đợi phản hồi. Ngoài ra, các microservice cũng giao tiếp theo các kiểu tương tác khác nhau, bao gồm one-to-one, one-to-many, many-to-one, và many-to-many.
+
+Có nhiều công nghệ và giao thức được sử dụng cho giao tiếp microservice, bao gồm HTTP/REST, gRPC, Message Queue, Pub/Sub, WebSockets và GraphQL. Mỗi công nghệ có ưu và nhược điểm riêng và phù hợp với các tình huống khác nhau.
+
+Giao tiếp microservice đặt ra một số thách thức, bao gồm Network Reliability, Service Discovery, Load Balancing, Data Consistency, Versioning, Error Handling, và Monitoring and Debugging. Để giải quyết những thách thức này, một số mẫu giao tiếp đã được phát triển, bao gồm API Gateway, Circuit Breaker, Bulkhead, Retry, Timeout, Saga, Event Sourcing, và CQRS.
+
+Trong phần về đo lường hiệu năng, chúng ta đã thảo luận về các thông số đo lường chính, bao gồm Latency, Throughput, Error Rate, Resource Utilization, và Scalability. Chúng ta cũng đã khám phá các phương pháp đo lường, bao gồm Load Testing, Benchmarking, Profiling, Distributed Tracing, và Metrics Collection. Cuối cùng, chúng ta đã giới thiệu một số công cụ phổ biến để đo lường hiệu năng của microservices, bao gồm K6, Prometheus, Grafana, Jaeger/Zipkin, và ELK Stack.
+
+Các khái niệm và hiểu biết từ chương này sẽ làm nền tảng cho các chương tiếp theo, nơi chúng ta sẽ đi sâu vào việc phân tích chi tiết các mẫu giao tiếp cụ thể trong kiến trúc microservice. Chúng ta sẽ phân loại các mẫu này theo tiêu chí đồng bộ/bất đồng bộ và one-to-one/one-to-many, phân tích ưu và nhược điểm của từng mẫu, và cung cấp hướng dẫn cho việc lựa chọn mẫu phù hợp cho các tình huống cụ thể.
+
+Việc hiểu rõ các khái niệm cơ bản và thách thức của giao tiếp microservice sẽ giúp chúng ta đánh giá tốt hơn hiệu quả của các mẫu giao tiếp trong các kịch bản thực tế. Đồng thời, các phương pháp và công cụ đo lường hiệu năng đã được giới thiệu sẽ được áp dụng trong các phần tiếp theo để đánh giá hiệu suất của các mẫu giao tiếp và đưa ra các khuyến nghị dựa trên dữ liệu.
+
+Tóm lại, chương này đã cung cấp một cái nhìn toàn diện về kiến trúc microservice và vai trò quan trọng của giao tiếp trong kiến trúc này. Chúng ta đã hiểu được các đặc điểm, lợi ích và thách thức của microservice, cũng như các mô hình giao tiếp, công nghệ và mẫu thiết kế phổ biến. Những kiến thức này sẽ là nền tảng vững chắc cho các phân tích chi tiết hơn trong các chương tiếp theo. 

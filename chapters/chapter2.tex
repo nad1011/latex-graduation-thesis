@@ -1,42 +1,6 @@
 \chapter{Cơ sở lý thuyết}
 
-\section{Tổng quan về Microservice Architecture}
-\subsection{Khái niệm và đặc điểm}
-Microservice Architecture là một kiến trúc phần mềm trong đó các ứng dụng được phát triển như một tập hợp các dịch vụ nhỏ, độc lập, mỗi dịch vụ chạy trong một quy trình riêng và giao tiếp với nhau thông qua các cơ chế nhẹ, thường là HTTP resource API.
-
-\subsection{Lợi ích và thách thức}
-\begin{itemize}
-    \item Lợi ích:
-    \begin{itemize}
-        \item Khả năng mở rộng độc lập
-        \item Dễ dàng triển khai và bảo trì
-        \item Sử dụng công nghệ đa dạng
-        \item Khả năng chịu lỗi cao
-    \end{itemize}
-    \item Thách thức:
-    \begin{itemize}
-        \item Quản lý giao tiếp giữa các dịch vụ
-        \item Đảm bảo tính nhất quán dữ liệu
-        \item Giám sát và debug phức tạp
-        \item Quản lý phiên bản
-    \end{itemize}
-\end{itemize}
-
-\section{Communication trong Microservices}
-\subsection{Tầm quan trọng của giao tiếp}
-Giao tiếp giữa các microservice là yếu tố quan trọng quyết định hiệu suất và độ tin cậy của toàn bộ hệ thống. Việc lựa chọn cơ chế giao tiếp phù hợp ảnh hưởng trực tiếp đến:
-\begin{itemize}
-    \item Hiệu suất của hệ thống
-    \item Khả năng mở rộng
-    \item Độ tin cậy
-    \item Tính nhất quán dữ liệu
-\end{itemize}
-
-\subsection{Các yếu tố ảnh hưởng đến giao tiếp}
-\begin{itemize}
-    \item Yêu cầu về độ trễ
-    \item Tính nhất quán dữ liệu
-    \item Khối lượng giao tiếp
-    \item Mô hình giao tiếp (đồng bộ/bất đồng bộ)
-    \item Phạm vi giao tiếp (one-to-one/one-to-many)
-\end{itemize} 
+\input{chapters/chapter2/2.1}
+\input{chapters/chapter2/2.2}
+\input{chapters/chapter2/2.3}
+\input{chapters/chapter2/2.4} 

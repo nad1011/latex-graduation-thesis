@@ -1,0 +1,248 @@
+\section{Communication trong Microservices}
+
+\subsection{Vai trò của giao tiếp trong kiến trúc microservice}
+Giao tiếp đóng vai trò then chốt trong kiến trúc microservice. Khác với các ứng
+dụng nguyên khối, nơi các thành phần tương tác thông qua lời gọi hàm nội bộ,
+các microservice giao tiếp qua mạng, thường là thông qua HTTP, gRPC hoặc một
+middleware messaging.
+
+Wolff (2018) nhấn mạnh rằng: "Giao tiếp không chỉ là cách các dịch vụ trao đổi
+dữ liệu, mà còn định hình toàn bộ kiến trúc và ảnh hưởng đến tính khả dụng,
+hiệu suất và khả năng mở rộng của toàn bộ hệ thống." Nhận xét này nhấn mạnh tầm
+quan trọng của việc lựa chọn mẫu giao tiếp phù hợp trong kiến trúc
+microservice.
+
+Giao tiếp trong microservices tạo điều kiện cho sự hợp tác giữa các dịch vụ.
+Các dịch vụ cần phối hợp để hoàn thành các tác vụ nghiệp vụ phức tạp. Ví dụ,
+một quy trình đặt hàng có thể liên quan đến các dịch vụ quản lý đơn hàng, thanh
+toán, kho hàng và vận chuyển. Các dịch vụ này cần giao tiếp để đảm bảo đơn hàng
+được xử lý chính xác.
+
+Giao tiếp cũng đóng vai trò quan trọng trong việc đảm bảo tính nhất quán dữ
+liệu. Trong một hệ thống dữ liệu phân tán, mỗi dịch vụ có thể quản lý một phần
+dữ liệu của hệ thống. Để duy trì tính nhất quán, các dịch vụ cần giao tiếp với
+nhau khi dữ liệu thay đổi. Ví dụ, khi một đơn hàng được tạo, dịch vụ đơn hàng
+cần thông báo cho dịch vụ kho hàng để đặt trước sản phẩm.
+
+Giao tiếp hỗ trợ khả năng chịu lỗi của hệ thống microservice. Các cơ chế giao
+tiếp phù hợp có thể giúp hệ thống phục hồi từ lỗi và tiếp tục hoạt động. Ví dụ,
+mẫu Circuit Breaker có thể ngăn lỗi lan truyền bằng cách ngừng gửi yêu cầu đến
+các dịch vụ không phản hồi.
+
+Cuối cùng, giao tiếp cho phép tính mở rộng của hệ thống microservice. Thiết kế
+giao tiếp tốt là chìa khóa để mở rộng hệ thống, cho phép thêm các dịch vụ mới
+hoặc phiên bản mới của các dịch vụ hiện có mà không ảnh hưởng đến các dịch vụ
+khác.
+
+\subsection{Các thuộc tính quan trọng của giao tiếp microservice}
+Khi thiết kế cơ chế giao tiếp cho microservice, một số thuộc tính quan trọng
+cần được xem xét. Độ tin cậy là một thuộc tính quan trọng, đề cập đến khả năng
+đảm bảo rằng thông điệp được gửi và nhận thành công. Trong một hệ thống phân
+tán, mạng có thể không đáng tin cậy và thông điệp có thể bị mất. Các cơ chế như
+xác nhận, thử lại và hàng đợi bền vững có thể được sử dụng để tăng độ tin cậy.
+
+Độ trễ là một thuộc tính quan trọng khác, đề cập đến thời gian cần thiết để thông điệp đi từ nguồn đến đích. Độ trễ cao có thể ảnh hưởng đến hiệu suất và trải nghiệm người dùng. Các yếu tố ảnh hưởng đến độ trễ bao gồm khoảng cách vật lý giữa các dịch vụ, phương pháp tuần tự hóa và tải mạng.
+
+Khả năng mở rộng là một thuộc tính quan trọng khác, đề cập đến khả năng xử lý
+khối lượng thông điệp tăng. Khi hệ thống phát triển, khối lượng giao tiếp giữa
+các dịch vụ cũng tăng. Cơ chế giao tiếp nên hỗ trợ khả năng mở rộng theo chiều
+ngang bằng cách thêm nhiều phiên bản của cùng một dịch vụ.
+
+Cách ly lỗi là một thuộc tính quan trọng, đề cập đến khả năng ngăn lỗi lan
+truyền giữa các dịch vụ. Trong một hệ thống phân tán, lỗi là điều không thể
+tránh khỏi. Các mẫu như Circuit Breaker và Bulkhead có thể được sử dụng để ngăn
+lỗi từ một dịch vụ ảnh hưởng đến các dịch vụ khác.
+
+Tính nhất quán là một thuộc tính quan trọng khác, đề cập đến mức độ và cách
+thức đảm bảo tính nhất quán dữ liệu. Trong một hệ thống phân tán, có một sự
+đánh đổi giữa tính nhất quán, khả năng sẵn sàng và khả năng chịu đựng phân vùng
+(định lý CAP). Các mẫu giao tiếp khác nhau cung cấp các mức độ nhất quán khác
+nhau, từ nhất quán mạnh đến nhất quán tối thiểu.
+
+Định dạng dữ liệu là một thuộc tính quan trọng, đề cập đến cách dữ liệu được cấu trúc và tuần tự hóa. Các định dạng phổ biến bao gồm JSON, XML và Protocol Buffers. Mỗi định dạng có ưu và nhược điểm riêng về hiệu suất, khả năng đọc và khả năng tương tác.
+
+Khả năng tương tác là một thuộc tính quan trọng, đề cập đến khả năng các dịch
+vụ sử dụng công nghệ khác nhau giao tiếp với nhau. Trong một môi trường
+microservice, các dịch vụ có thể được viết bằng các ngôn ngữ khác nhau và chạy
+trên các nền tảng khác nhau. Giao thức giao tiếp nên hỗ trợ khả năng tương tác
+giữa các dịch vụ không đồng nhất này.
+
+Cuối cùng, bảo mật là một thuộc tính quan trọng, đề cập đến việc bảo vệ thông
+điệp khỏi truy cập trái phép. Các dịch vụ thường giao tiếp qua mạng, có thể
+không đáng tin cậy và không an toàn. Các cơ chế như mã hóa, xác thực và ủy
+quyền có thể được sử dụng để bảo vệ giao tiếp.
+
+\subsection{Các mô hình giao tiếp cơ bản}
+Có hai mô hình giao tiếp cơ bản trong microservices: đồng bộ và bất đồng bộ.
+Mỗi mô hình có ưu và nhược điểm riêng và phù hợp với các tình huống khác nhau.
+
+Trong giao tiếp đồng bộ, người gửi đợi phản hồi từ người nhận trước khi tiếp
+tục xử lý. Ví dụ, khi một dịch vụ gửi yêu cầu HTTP đến một dịch vụ khác, nó đợi
+phản hồi HTTP trước khi tiếp tục. Giao tiếp đồng bộ đơn giản và dễ hiểu, làm
+cho nó trở thành một lựa chọn phổ biến cho nhiều tình huống. Nó cũng cung cấp
+phản hồi tức thì, cho phép người gửi biết ngay lập tức liệu yêu cầu của nó có
+thành công hay không.
+
+Tuy nhiên, giao tiếp đồng bộ cũng có một số nhược điểm. Nó có thể dẫn đến hiệu
+suất kém hơn do người gửi bị chặn trong khi đợi phản hồi. Nó cũng có thể dẫn
+đến hiệu ứng xung hồi (ripple effect) khi một dịch vụ chậm hoặc không khả dụng
+ảnh hưởng đến tất cả các dịch vụ gọi nó. Hơn nữa, giao tiếp đồng bộ có thể gây
+ra các vấn đề về khả năng mở rộng khi số lượng yêu cầu tăng lên.
+
+Trong giao tiếp bất đồng bộ, người gửi không đợi phản hồi từ người nhận và có
+thể tiếp tục xử lý. Ví dụ, khi một dịch vụ gửi một thông điệp đến một hàng đợi,
+nó có thể tiếp tục xử lý mà không cần đợi thông điệp được tiêu thụ. Giao tiếp
+bất đồng bộ cung cấp coupling lỏng lẻo hơn giữa các dịch vụ, vì người gửi không
+cần biết ai sẽ xử lý thông điệp của nó. Nó cũng cung cấp khả năng đệm, cho phép
+hệ thống xử lý các đợt tải cao bằng cách xếp hàng các thông điệp cho đến khi
+chúng có thể được xử lý.
+
+Tuy nhiên, giao tiếp bất đồng bộ cũng có một số nhược điểm. Nó có thể phức tạp
+hơn để triển khai và gỡ lỗi do tính chất phi đồng bộ của nó. Nó cũng có thể dẫn
+đến độ trễ cao hơn, vì thông điệp có thể đợi trong hàng đợi trước khi được xử
+lý. Hơn nữa, giao tiếp bất đồng bộ có thể gây ra các vấn đề về tính nhất quán
+dữ liệu, vì các thay đổi không được phản ánh ngay lập tức trong tất cả các dịch
+vụ.
+
+\subsection{Kiểu tương tác}
+Ngoài các mô hình giao tiếp, các microservice cũng giao tiếp theo các kiểu
+tương tác khác nhau. Kiểu tương tác one-to-one (một-đối-một) liên quan đến một
+dịch vụ giao tiếp với một dịch vụ khác. Đây là kiểu tương tác đơn giản nhất và
+phổ biến nhất. Ví dụ, dịch vụ đơn hàng có thể gọi dịch vụ thanh toán để xử lý
+thanh toán cho một đơn hàng.
+
+Kiểu tương tác one-to-many (một-đối-nhiều) liên quan đến một dịch vụ giao tiếp
+với nhiều dịch vụ khác. Kiểu này thường được sử dụng cho các tình huống
+broadcasting hoặc fanout. Ví dụ, dịch vụ đơn hàng có thể thông báo cho nhiều
+dịch vụ khác khi một đơn hàng được tạo, như dịch vụ kho hàng, dịch vụ vận
+chuyển và dịch vụ thông báo.
+
+Kiểu tương tác many-to-one (nhiều-đối-một) liên quan đến nhiều dịch vụ giao
+tiếp với một dịch vụ. Kiểu này thường được sử dụng cho các tình huống tổng hợp
+hoặc orchestration. Ví dụ, nhiều dịch vụ có thể gửi dữ liệu đến một dịch vụ
+phân tích để xử lý.
+
+Kiểu tương tác many-to-many (nhiều-đối-nhiều) liên quan đến nhiều dịch vụ giao
+tiếp với nhiều dịch vụ khác. Đây là kiểu tương tác phức tạp nhất và thường được
+triển khai bằng cách sử dụng một middleware như message broker hoặc service
+mesh. Ví dụ, nhiều dịch vụ có thể xuất bản các sự kiện đến một event bus, và
+nhiều dịch vụ khác có thể đăng ký để nhận các sự kiện này.
+
+\subsection{Các công nghệ và giao thức phổ biến}
+Có nhiều công nghệ và giao thức được sử dụng cho giao tiếp microservice.
+HTTP/REST là giao thức phổ biến nhất cho giao tiếp đồng bộ, sử dụng các phương
+thức HTTP và các tài nguyên đại diện. REST dựa trên các nguyên tắc của web và
+sử dụng các phương thức HTTP như GET, POST, PUT và DELETE để thực hiện các hoạt
+động trên tài nguyên. REST đơn giản, dễ hiểu và được hỗ trợ rộng rãi, làm cho
+nó trở thành một lựa chọn phổ biến cho giao tiếp microservice.
+
+gRPC là một framework RPC hiệu suất cao, sử dụng HTTP/2 và Protocol Buffers.
+gRPC cung cấp hiệu suất tốt hơn REST nhờ sử dụng HTTP/2 và Protocol Buffers.
+HTTP/2 cung cấp multiplexing, cho phép nhiều yêu cầu và phản hồi được gửi qua
+một kết nối TCP duy nhất, trong khi Protocol Buffers cung cấp định dạng tuần tự
+hóa nhỏ gọn và hiệu quả hơn JSON hoặc XML. gRPC cũng hỗ trợ streaming hai
+chiều, cho phép các ứng dụng gửi và nhận luồng dữ liệu liên tục.
+
+Message Queue (Hàng đợi thông điệp) là một mẫu giao tiếp bất đồng bộ, trong đó
+các dịch vụ gửi thông điệp đến một hàng đợi, và các dịch vụ khác nhận thông
+điệp từ hàng đợi. Các ví dụ phổ biến về middleware Message Queue bao gồm
+RabbitMQ, ActiveMQ và AWS SQS. Message Queue cung cấp một số lợi ích, bao gồm
+coupling lỏng lẻo, khả năng đệm và khả năng xử lý lỗi được cải thiện. Tuy
+nhiên, chúng cũng đưa ra sự phức tạp bổ sung và có thể dẫn đến độ trễ cao hơn.
+
+Pub/Sub (Publish/Subscribe) là một mẫu giao tiếp bất đồng bộ khác, trong đó các
+nhà xuất bản gửi thông điệp mà không biết ai sẽ nhận, và người đăng ký nhận
+thông điệp mà không biết ai đã gửi. Mẫu này thường được triển khai bằng Apache
+Kafka, AWS SNS/SQS, Google Pub/Sub hoặc NATS. Pub/Sub cung cấp coupling lỏng
+lẻo cao và khả năng mở rộng tốt, làm cho nó phù hợp cho các tình huống
+broadcasting và fanout. Tuy nhiên, giống như Message Queue, nó cũng đưa ra sự
+phức tạp bổ sung và có thể dẫn đến độ trễ cao hơn.
+
+WebSockets là một giao thức cung cấp kênh liên lạc hai chiều toàn thời gian
+trên một kết nối TCP duy nhất. WebSockets được sử dụng cho giao tiếp thời gian
+thực, trong đó các dịch vụ cần trao đổi dữ liệu nhanh chóng trong cả hai hướng.
+Các ứng dụng phổ biến bao gồm ứng dụng trò chuyện, cập nhật thị trường tài
+chính và trò chơi trực tuyến. WebSockets cung cấp độ trễ thấp và overhead thấp,
+nhưng có thể khó triển khai và quản lý, đặc biệt là trong một hệ thống phân
+tán.
+
+GraphQL là một ngôn ngữ truy vấn và thao tác dữ liệu, cung cấp một cách hiệu
+quả để truy xuất dữ liệu từ nhiều nguồn. GraphQL cho phép người dùng chỉ định
+chính xác dữ liệu họ cần, tránh over-fetching và under-fetching dữ liệu. Nó đặc
+biệt hữu ích cho các ứng dụng di động, nơi băng thông có thể hạn chế. GraphQL
+cung cấp một giao diện thống nhất cho nhiều dịch vụ, nhưng có thể phức tạp để
+triển khai và có thể dẫn đến các vấn đề về hiệu suất nếu không được sử dụng một
+cách thận trọng.
+
+\subsection{Thách thức trong giao tiếp microservice}
+Giao tiếp microservice đặt ra một số thách thức đáng kể. Network Reliability
+(Độ tin cậy của mạng) là một thách thức quan trọng. Mạng không đáng tin cậy và
+có thể gặp lỗi, dẫn đến mất thông điệp hoặc độ trễ cao. Các cơ chế để đối phó
+với độ tin cậy mạng thấp bao gồm retry, timeout và circuit breaker. Retry cho
+phép một dịch vụ thử lại một yêu cầu thất bại, timeout đặt giới hạn thời gian
+cho một yêu cầu, và circuit breaker ngăn một dịch vụ tiếp tục gửi yêu cầu đến
+một dịch vụ không phản hồi.
+
+Service Discovery (Khám phá dịch vụ) là một thách thức khác. Trong một môi
+trường động, các dịch vụ cần phải tìm thấy nhau để giao tiếp. Các dịch vụ có
+thể thay đổi vị trí do triển khai mới, mở rộng theo chiều ngang hoặc khôi phục
+từ lỗi. Các giải pháp cho Service Discovery bao gồm Client-side Discovery,
+trong đó người dùng truy vấn một service registry để tìm vị trí của một dịch
+vụ, và Server-side Discovery, trong đó một thành phần trung gian như load
+balancer hoặc API gateway xử lý việc khám phá dịch vụ.
+
+Load Balancing (Cân bằng tải) là một thách thức quan trọng khác. Phân phối tải
+công bằng giữa các phiên bản của cùng một dịch vụ là quan trọng để đảm bảo hiệu
+suất và độ tin cậy. Các cơ chế Load Balancing bao gồm Round Robin, Least
+Connections và Hash-based. Round Robin phân phối các yêu cầu đều nhau giữa các
+phiên bản, Least Connections phân phối các yêu cầu đến phiên bản có ít kết nối
+nhất, và Hash-based phân phối các yêu cầu dựa trên một giá trị hash, đảm bảo
+rằng các yêu cầu với cùng giá trị hash đi đến cùng một phiên bản.
+
+Data Consistency (Tính nhất quán dữ liệu) là một thách thức đáng kể trong giao
+tiếp microservice. Duy trì tính nhất quán dữ liệu trên nhiều dịch vụ, đặc biệt
+là trong giao tiếp bất đồng bộ, có thể phức tạp. Các mẫu để đối phó với Data
+Consistency bao gồm Saga, Event Sourcing và CQRS. Saga quản lý giao dịch phân
+tán bằng cách sử dụng một chuỗi giao dịch địa phương với các hoạt động bù trừ,
+Event Sourcing lưu trữ trạng thái của hệ thống dưới dạng một chuỗi các sự kiện,
+và CQRS tách các hoạt động đọc và ghi thành các mô hình riêng biệt.
+
+Versioning (Quản lý phiên bản) là một thách thức khác trong giao tiếp
+microservice. Quản lý các thay đổi API giữa các dịch vụ khi chúng phát triển có
+thể phức tạp. Các cơ chế để đối phó với Versioning bao gồm Semantic Versioning,
+API Versioning và Backward Compatibility. Semantic Versioning sử dụng một hệ
+thống đánh số phiên bản rõ ràng (MAJOR.MINOR.PATCH) để truyền đạt tác động của
+các thay đổi, API Versioning duy trì nhiều phiên bản của cùng một API, và
+Backward Compatibility đảm bảo rằng các phiên bản mới của API có thể xử lý các
+yêu cầu được tạo ra cho các phiên bản cũ.
+
+Error Handling (Xử lý lỗi) là một thách thức quan trọng trong giao tiếp
+microservice. Xử lý lỗi trong một hệ thống phân tán, nơi nhiều thứ có thể đi
+sai, có thể phức tạp. Các cơ chế để đối phó với Error Handling bao gồm Retry,
+Circuit Breaker và Fallback. Retry thử lại các yêu cầu thất bại, Circuit
+Breaker ngăn các yêu cầu đến các dịch vụ không phản hồi, và Fallback cung cấp
+một phản hồi thay thế khi một yêu cầu thất bại.
+
+Cuối cùng, Monitoring and Debugging (Giám sát và gỡ lỗi) là một thách thức đáng
+kể trong giao tiếp microservice. Theo dõi và giải quyết vấn đề trong một hệ
+thống phân tán phức tạp có thể khó khăn. Các công cụ để đối phó với Monitoring
+and Debugging bao gồm Logging tập trung, Distributed Tracing và Metrics
+Collection. Logging tập trung thu thập log từ tất cả các dịch vụ vào một vị trí
+trung tâm, Distributed Tracing theo dõi yêu cầu khi chúng đi qua nhiều dịch vụ,
+và Metrics Collection thu thập các chỉ số về hiệu suất và sức khỏe của hệ
+thống.
+
+\subsection{Các mẫu giao tiếp (Communication Patterns)}
+Trong kiến trúc microservice, giao tiếp giữa các dịch vụ đóng vai trò quan trọng. Các dịch vụ cần trao đổi thông tin để phối hợp và hoàn thành các chức năng nghiệp vụ. Dưới đây là năm mẫu giao tiếp chính trong microservice:
+
+Request-Response (Yêu cầu-Phản hồi) là mẫu giao tiếp đồng bộ phổ biến nhất, trong đó một dịch vụ gửi yêu cầu đến dịch vụ khác và đợi phản hồi trước khi tiếp tục xử lý. Dịch vụ gửi thiết lập kết nối và gửi yêu cầu HTTP/REST hoặc gRPC đến dịch vụ nhận, sau đó chờ đợi cho đến khi nhận được phản hồi. Dịch vụ nhận xử lý yêu cầu và trả về kết quả qua cùng một kết nối. Mẫu này có ưu điểm là đơn giản, dễ hiểu và triển khai, đồng thời đảm bảo tính nhất quán dữ liệu cao vì người gọi nhận được phản hồi ngay lập tức. Tuy nhiên, mẫu này cũng tạo ra coupling chặt chẽ giữa các dịch vụ, có hiệu suất kém trong trường hợp độ trễ mạng cao, và tiềm ẩn nguy cơ lỗi cascade nếu một dịch vụ trong chuỗi gọi không phản hồi.
+
+Event-Driven (Hướng sự kiện) là mẫu trong đó các dịch vụ giao tiếp thông qua việc phát và lắng nghe các sự kiện, thường thông qua một message broker. Dịch vụ phát hành sự kiện không cần biết dịch vụ nào sẽ xử lý nó, và các dịch vụ khác đăng ký sự kiện quan tâm và phản ứng khi chúng xảy ra. Message broker đứng giữa đảm bảo việc phân phối sự kiện đến các dịch vụ đã đăng ký. Một ưu điểm lớn của mẫu này là tạo sự tách rời (decoupling) cao giữa các dịch vụ, do dịch vụ phát hành không cần biết ai đang lắng nghe. Khả năng mở rộng cũng rất tốt vì có thể thêm người lắng nghe mới mà không cần thay đổi người phát hành. Tuy nhiên, việc theo dõi luồng thực thi và gỡ lỗi trở nên phức tạp hơn, và có thể gây khó khăn trong việc duy trì tính nhất quán dữ liệu trong hệ thống phân tán.
+
+Publish-Subscribe (Xuất bản-Đăng ký) là một dạng cụ thể của mẫu Event-Driven, cho phép phân phối thông tin từ một nguồn đến nhiều người nhận. Nhà xuất bản (publisher) gửi thông điệp đến một kênh hoặc chủ đề, và nhiều người đăng ký (subscribers) có thể nhận thông điệp từ cùng một kênh. Mẫu này thường được triển khai qua các nền tảng như Apache Kafka, RabbitMQ hoặc NATS. Mẫu Publish-Subscribe đặc biệt phù hợp cho các trường hợp cần truyền thông tin một-đến-nhiều, như thông báo về các sự kiện trong hệ thống. Việc mở rộng dễ dàng khi chỉ cần thêm người đăng ký mới mà không ảnh hưởng đến nhà xuất bản. Tuy nhiên, mẫu này làm tăng độ phức tạp trong quản lý tính nhất quán dữ liệu và có thể dẫn đến xử lý trùng lặp nếu không được cấu hình đúng.
+
+Point-to-Point Messaging (Nhắn tin điểm-đến-điểm) là mẫu trong đó thông điệp được gửi từ một nguồn đến một đích cụ thể thông qua một hàng đợi. Một producer gửi thông điệp vào hàng đợi, và chỉ một consumer xử lý mỗi thông điệp. Thông điệp được lưu trữ trong hàng đợi cho đến khi được xử lý thành công, đảm bảo rằng không có thông điệp nào bị mất ngay cả khi consumer tạm thời không khả dụng. Mẫu Point-to-Point đảm bảo tin cậy cao vì thông điệp không bị mất và luôn được xử lý, ngay cả khi hệ thống gặp sự cố. Mẫu này phù hợp cho việc phân phối tác vụ và cân bằng tải giữa nhiều instance của cùng một dịch vụ. Tuy nhiên, nếu consumer xử lý chậm, có thể dẫn đến tình trạng nghẽn hàng đợi. Ngoài ra, mẫu này không phù hợp cho trường hợp nhiều dịch vụ khác nhau cần nhận cùng một thông tin.
+
+Asynchronous Request-Response (Yêu cầu-Phản hồi bất đồng bộ) là biến thể bất đồng bộ của mẫu Request-Response, kết hợp ưu điểm của cả giao tiếp đồng bộ và bất đồng bộ. Dịch vụ gửi yêu cầu và tiếp tục xử lý mà không chờ đợi, trong khi dịch vụ nhận xử lý yêu cầu và gửi phản hồi (thường qua hàng đợi). Dịch vụ gửi được thông báo khi phản hồi có sẵn, thường thông qua callback, webhook hoặc long polling. Một lợi ích chính của mẫu này là tránh được việc chờ đợi và blocking, cải thiện hiệu suất và khả năng phản hồi của hệ thống. Dịch vụ gửi không bị chặn trong khi chờ đợi dịch vụ khác, nhưng vẫn duy trì được mối quan hệ yêu cầu-phản hồi. Tuy nhiên, việc triển khai và quản lý trở nên phức tạp hơn, đòi hỏi cơ chế tương quan giữa yêu cầu và phản hồi, cũng như cơ chế xử lý lỗi và timeout.
+
+Mỗi mẫu giao tiếp có ưu và nhược điểm riêng, và lựa chọn mẫu phù hợp phụ thuộc vào các yêu cầu cụ thể như tính nhất quán, hiệu suất, khả năng mở rộng và độ tin cậy. Trong thực tế, một hệ thống microservice thường kết hợp nhiều mẫu giao tiếp khác nhau để giải quyết các tình huống khác nhau một cách hiệu quả.

@@ -1,0 +1,136 @@
+\section{Tổng quan về Microservice Architecture}
+
+\subsection{Định nghĩa và đặc điểm}
+Kiến trúc Microservice là một phương pháp phát triển phần mềm trong đó một ứng
+dụng được cấu thành từ nhiều dịch vụ nhỏ, độc lập và có khả năng triển khai
+riêng biệt. Mỗi dịch vụ này được thiết kế để thực hiện một chức năng cụ thể
+trong phạm vi nghiệp vụ được định nghĩa rõ ràng, và giao tiếp với các dịch vụ
+khác thông qua các cơ chế giao tiếp nhẹ, thường là API.
+
+Theo Newman (2021), các đặc điểm chính của kiến trúc microservice bao gồm tính
+tự trị cao, trong đó mỗi dịch vụ có thể được phát triển, triển khai và mở rộng
+độc lập với các dịch vụ khác. Các dịch vụ được tổ chức xoay quanh các khả năng
+nghiệp vụ thay vì các lớp công nghệ, thể hiện sự phân tách theo chức năng
+nghiệp vụ. Quản lý dữ liệu trong microservice được thực hiện phi tập trung, với
+mỗi dịch vụ quản lý dữ liệu riêng và chỉ có thể truy cập dữ liệu thông qua API
+của dịch vụ sở hữu dữ liệu đó.
+
+Thiết kế hướng lỗi là một đặc điểm quan trọng khác của microservice, trong đó
+các dịch vụ được thiết kế để xử lý lỗi và khả năng các dịch vụ khác không khả
+dụng. Cuối cùng, microservice cho phép tiến hóa độc lập, nghĩa là các dịch vụ
+có thể thay đổi và phát triển theo thời gian mà không ảnh hưởng đến toàn bộ hệ
+thống.
+
+\subsection{So sánh với kiến trúc nguyên khối (Monolithic)}
+Để hiểu rõ hơn về kiến trúc microservice, việc so sánh với kiến trúc nguyên khối là rất hữu ích. Trong kiến trúc nguyên khối, toàn bộ ứng dụng được xây dựng như một đơn vị duy nhất. Tất cả các chức năng nằm trong một codebase và được triển khai cùng nhau.
+
+Về triển khai, kiến trúc nguyên khối đòi hỏi toàn bộ ứng dụng được triển khai
+cùng một lúc, trong khi kiến trúc microservice cho phép các dịch vụ được triển
+khai độc lập. Điều này có ý nghĩa quan trọng trong việc giảm thiểu rủi ro và
+tăng tốc độ phát hành.
+
+Khả năng mở rộng cũng khác biệt đáng kể giữa hai kiến trúc. Trong kiến trúc
+nguyên khối, toàn bộ ứng dụng phải được mở rộng, ngay cả khi chỉ một phần cần
+thêm tài nguyên. Ngược lại, kiến trúc microservice cho phép mở rộng từng dịch
+vụ riêng biệt, tối ưu hóa việc sử dụng tài nguyên.
+
+Về phát triển, kiến trúc nguyên khối thường có một nhóm phát triển làm việc
+trên một codebase, dẫn đến các xung đột trong quá trình phát triển và triển
+khai. Trong khi đó, kiến trúc microservice cho phép nhiều nhóm làm việc độc lập
+trên các dịch vụ khác nhau, tăng tốc độ phát triển và giảm thiểu xung đột.
+
+Công nghệ là một khía cạnh khác có sự khác biệt. Kiến trúc nguyên khối thường
+bị giới hạn trong một stack công nghệ, trong khi mỗi microservice có thể sử
+dụng công nghệ phù hợp nhất với yêu cầu của nó. Điều này tạo ra sự linh hoạt và
+khả năng thích ứng với các công nghệ mới.
+
+Khả năng chịu lỗi cũng là một điểm khác biệt quan trọng. Trong kiến trúc nguyên
+khối, lỗi ở một phần có thể ảnh hưởng đến toàn bộ ứng dụng, trong khi trong
+kiến trúc microservice, lỗi được cô lập trong một dịch vụ, giảm thiểu tác động
+đến toàn bộ hệ thống.
+
+Cuối cùng, về độ phức tạp, kiến trúc nguyên khối đơn giản hơn trong các ứng
+dụng nhỏ, nhưng phức tạp hơn khi ứng dụng phát triển. Ngược lại, kiến trúc
+microservice phức tạp hơn ngay từ đầu do tính phân tán, nhưng độ phức tạp này
+được quản lý tốt hơn khi hệ thống phát triển.
+
+\subsection{Lợi ích và thách thức của kiến trúc microservice}
+Kiến trúc microservice mang lại nhiều lợi ích đáng kể cho việc phát triển và
+vận hành phần mềm. Một trong những lợi ích chính là khả năng mở rộng có mục
+tiêu. Các dịch vụ có thể được mở rộng độc lập dựa trên nhu cầu, tối ưu hóa việc
+sử dụng tài nguyên. Điều này đặc biệt quan trọng trong môi trường cloud, nơi
+chi phí tỷ lệ thuận với tài nguyên được sử dụng.
+
+Phát triển nhanh hơn là một lợi ích khác của kiến trúc microservice. Các nhóm
+nhỏ có thể làm việc trên các dịch vụ độc lập, cho phép phát triển song song và
+chu kỳ phát hành nhanh hơn. Mỗi nhóm có thể tập trung vào một dịch vụ cụ thể,
+hiểu rõ nó và phát triển nó một cách hiệu quả.
+
+Tính linh hoạt công nghệ cũng là một lợi thế đáng kể. Mỗi dịch vụ có thể sử
+dụng công nghệ phù hợp nhất với yêu cầu của nó. Ví dụ, một dịch vụ xử lý giao
+dịch có thể sử dụng một ngôn ngữ chú trọng vào tính nhất quán, trong khi một
+dịch vụ phân tích dữ liệu có thể sử dụng một ngôn ngữ tối ưu cho xử lý dữ liệu
+lớn.
+
+Khả năng chịu lỗi tốt hơn là một lợi ích khác của kiến trúc microservice. Lỗi
+trong một dịch vụ không nhất thiết phải làm cho toàn bộ hệ thống không khả
+dụng. Ví dụ, nếu dịch vụ gợi ý sản phẩm không hoạt động, người dùng vẫn có thể
+duyệt và mua sản phẩm.
+
+Khả năng bảo trì và hiểu biết tốt hơn cũng là một lợi thế của kiến trúc
+microservice. Các dịch vụ nhỏ hơn dễ hiểu và bảo trì hơn các ứng dụng lớn. Mã
+nguồn của mỗi dịch vụ nhỏ hơn và tập trung vào một chức năng cụ thể, giúp nhà
+phát triển dễ dàng hiểu và thay đổi nó.
+
+Tuy nhiên, kiến trúc microservice cũng đặt ra một số thách thức đáng kể. Độ
+phức tạp phân tán là một thách thức lớn. Hệ thống phân tán vốn phức tạp hơn,
+đòi hỏi kiến thức và công cụ chuyên biệt. Các vấn đề như latency mạng, xử lý
+lỗi và đồng bộ hóa dữ liệu trở nên phức tạp hơn trong một hệ thống phân tán.
+
+Giao tiếp giữa các dịch vụ là một thách thức khác. Thiết kế và quản lý giao
+tiếp giữa các dịch vụ đòi hỏi cân nhắc kỹ lưỡng về hiệu suất, độ tin cậy và khả
+năng mở rộng. Việc lựa chọn giao thức giao tiếp phù hợp và xử lý các trường hợp
+lỗi trong giao tiếp là các vấn đề phức tạp.
+
+Quản lý dữ liệu cũng là một thách thức đáng kể trong kiến trúc microservice.
+Duy trì tính nhất quán dữ liệu giữa các dịch vụ có thể phức tạp, đặc biệt là
+khi mỗi dịch vụ có cơ sở dữ liệu riêng. Các mẫu như Saga và Event Sourcing được
+sử dụng để giải quyết vấn đề này, nhưng chúng cũng đưa ra sự phức tạp riêng.
+
+Vận hành và giám sát là một thách thức khác của kiến trúc microservice. Triển
+khai và giám sát nhiều dịch vụ đòi hỏi công cụ và quy trình tinh vi hơn. Các
+công cụ như Kubernetes và Prometheus đã được phát triển để giải quyết vấn đề
+này, nhưng chúng cũng đòi hỏi kiến thức và nỗ lực đáng kể để sử dụng hiệu quả.
+
+Cuối cùng, kiểm thử cũng trở nên phức tạp hơn trong kiến trúc microservice.
+Kiểm thử tích hợp đòi hỏi sự phối hợp giữa nhiều dịch vụ, có thể chạy trên các
+máy khác nhau và sử dụng các công nghệ khác nhau. Các kỹ thuật như kiểm thử hợp
+đồng và môi trường kiểm thử tích hợp được sử dụng để giải quyết vấn đề này.
+
+\subsection{Các nguyên tắc thiết kế}
+Để thiết kế một kiến trúc microservice hiệu quả, một số nguyên tắc thiết kế chính cần được tuân thủ. Nguyên tắc đầu tiên là Single Responsibility Principle (Nguyên tắc Trách nhiệm Đơn lẻ), theo đó mỗi dịch vụ nên chịu trách nhiệm cho một chức năng nghiệp vụ duy nhất. Điều này giúp giữ các dịch vụ đơn giản và tập trung, dễ hiểu và bảo trì.
+
+Domain-Driven Design (DDD) là một phương pháp thiết kế hữu ích cho kiến trúc
+microservice. DDD sử dụng các khái niệm như Bounded Context để định nghĩa ranh
+giới giữa các dịch vụ. Bounded Context giúp xác định phạm vi trách nhiệm của
+mỗi dịch vụ và cách chúng tương tác với nhau.
+
+API First là một nguyên tắc khác, nhấn mạnh việc thiết kế API trước, xem nó như
+một hợp đồng giữa các dịch vụ. Điều này giúp đảm bảo rằng các dịch vụ có thể
+giao tiếp hiệu quả và rằng các thay đổi không phá vỡ tương thích ngược.
+
+Tự động hóa là một phần quan trọng của kiến trúc microservice thành công. Tự
+động hóa quá trình xây dựng, kiểm thử và triển khai giúp quản lý sự phức tạp
+của việc phát triển và vận hành nhiều dịch vụ. Các công cụ CI/CD (Continuous
+Integration/Continuous Deployment) là rất quan trọng trong môi trường
+microservice.
+
+Monitoring và Observability là các nguyên tắc quan trọng khác. Thiết kế hệ
+thống để dễ dàng giám sát và hiểu được hoạt động nội bộ giúp phát hiện và giải
+quyết vấn đề một cách nhanh chóng. Các công cụ như logging tập trung, theo dõi
+phân tán và thu thập số liệu là rất quan trọng.
+
+Cuối cùng, Fault Tolerance (Khả năng chịu lỗi) là một nguyên tắc thiết kế quan
+trọng cho kiến trúc microservice. Các dịch vụ nên được thiết kế để xử lý lỗi
+một cách thanh nhã, sử dụng các kỹ thuật như Circuit Breaker. Circuit Breaker
+ngăn lỗi lan truyền bằng cách ngừng gửi yêu cầu đến các dịch vụ không phản hồi.
