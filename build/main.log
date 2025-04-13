@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  13 APR 2025 20:24
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  13 APR 2025 21:42
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -1060,40 +1060,50 @@ Underfull \hbox (badness 1383) in paragraph at lines 2--3
 
 [33]
 
-[34]) (./chapters/chapter3/3.4.tex
+[34]
 
-[35]
+[35]) (./chapters/chapter3/3.4.tex
 
-[36]) (./chapters/chapter3/3.5.tex
+[36]
 
 [37]
 
-[38])) (./chapters/chapter4.tex
+[38]
 
-[39]
+[39]) (./chapters/chapter3/3.5.tex
 
 [40]
 
-[41
+[41])) (./chapters/chapter4.tex
+
+[42]
+
+[43
 
 ]
 
-[42]) (./chapters/chapter5.tex
+[44]) (./chapters/chapter5.tex
 
-[43]
+[45]
 
-[44
+[46
 
 ])
 
-[45]
+[47]
 Underfull \hbox (badness 1024) in paragraph at lines 95--99
 []\TU/TimesNewRoman(0)/m/n/12 Gartner, Inc., ``Gartner Identifies Key Trends in PaaS and Platform Architecture for
  []
 
 
+Underfull \hbox (badness 2261) in paragraph at lines 139--143
+[]\TU/TimesNewRoman(0)/m/n/12 Fielding, R. T., ``Architectural Styles and the De
+sign of Network-based Software
+ []
 
-[46
+
+
+[48
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1103,20 +1113,20 @@ L3 programming layer <2025-01-18>
 )
 
 Here is how much of LuaTeX's memory you used:
- 21379 strings out of 475506
+ 21387 strings out of 475506
  125217,1144653 words of node,token memory allocated
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 2:578,3:228,4:144,5:281,6:92,7:10793,8:1,9:383,10:24,11:68
- 43794 multiletter control sequences out of 65536+600000
- 70 fonts using 37171143 bytes
- 99i,14n,105p,1725b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
+   avail lists: 2:604,3:232,4:146,5:265,6:92,7:9927,8:1,9:383,10:24,11:68
+ 43802 multiletter control sequences out of 65536+600000
+ 70 fonts using 37170975 bytes
+ 99i,14n,105p,1747b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/WINDOWS/Fonts/timesi.ttf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/tim
 es.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (57 pages, 338743 bytes).
+Output written on main.pdf (59 pages, 358747 bytes).
 
-PDF statistics: 212 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 218 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
