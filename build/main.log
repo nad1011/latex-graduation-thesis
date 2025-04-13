@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  12 APR 2025 00:59
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  13 APR 2025 20:24
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -740,28 +740,35 @@ LaTeX Info: Redefining \year on input line 98.
 \c@a@figure=\count335
 \c@a@table=\count336
 \c@bibitem=\count337
+) (D:/MikTeX/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip56
+\multirow@cntb=\count338
+\multirow@dima=\skip57
+\bigstrutjot=\dimen275
 )
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 18.
- (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
+h' as default language. on input line 19.
+
+(d:/Learn/thesis/uet-graduation-latex/build/main.aux)
 \openout1 = main.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
@@ -799,16 +806,16 @@ LaTeX Font Info:    ... okay on input line 18.
 
 (D:/MikTeX/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count338
-\scratchdimen=\dimen275
+\scratchcounter=\count339
+\scratchdimen=\dimen276
 \scratchbox=\box79
-\nofMPsegments=\count339
-\nofMParguments=\count340
+\nofMPsegments=\count340
+\nofMParguments=\count341
 \everyMPshowfont=\toks41
-\MPscratchCnt=\count341
-\MPscratchDim=\dimen276
-\MPnumerator=\count342
-\makeMPintoPDFobject=\count343
+\MPscratchCnt=\count342
+\MPscratchDim=\dimen277
+\MPnumerator=\count343
+\makeMPintoPDFobject=\count344
 \everyMPtoPDFconversion=\toks42
 ) (D:/MikTeX/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -860,12 +867,12 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 18.
+or `english'. on input line 19.
 Package mathfont Info: Adjusting font Times New Roman Bold.
 <UET logo.pdf, id=4, 142.26378pt x 142.26378pt>
 File: UET logo.pdf Graphic file (type pdf)
 <use UET logo.pdf>
-Package luatex.def Info: UET logo.pdf  used on input line 21.
+Package luatex.def Info: UET logo.pdf  used on input line 22.
 (luatex.def)             Requested size: 85.35892pt x 85.35892pt.
 Package mathfont Info: Adjusting font Times New Roman.
 Package mathfont Info: Adjusting font Times New Roman Bold.
@@ -889,13 +896,13 @@ Package mathfont Info: Adjusting font Times New Roman Bold Italic.
 
 
 ]
-Underfull \hbox (badness 1308) in paragraph at lines 31--32
+Underfull \hbox (badness 1308) in paragraph at lines 32--33
 []\TU/TimesNewRoman(0)/b/n/12 Abstract: \TU/TimesNewRoman(0)/m/n/12 Microservice
  architecture has become a significant trend in modern software
  []
 
 
-Underfull \hbox (badness 2726) in paragraph at lines 31--32
+Underfull \hbox (badness 2726) in paragraph at lines 32--33
 \TU/TimesNewRoman(0)/m/n/12 One of the main challenges in this architecture is 
 managing communication between
  []
@@ -974,7 +981,7 @@ Package mathfont Info: Adjusting font Times New Roman Bold.
 ]
 
 [8]
-Underfull \hbox (badness 1168) in paragraph at lines 113--117
+Underfull \hbox (badness 1168) in paragraph at lines 110--114
 []\TU/TimesNewRoman(0)/m/n/12 Domain-Driven Design (DDD) là một phương ph
 áp thiết kế hữu ích cho kiến trúc
  []
@@ -1006,34 +1013,87 @@ Underfull \hbox (badness 1168) in paragraph at lines 113--117
 [20]) (./chapters/chapter2/2.4.tex
 
 [21]
+Underfull \hbox (badness 2573) in paragraph at lines 13--14
+\TU/TimesNewRoman(0)/m/n/12 Response, Event-Driven, Publish-Subscribe, Point-to-
+Point Messaging, và Asynchronous
+ []
+
+
 
 [22])) (./chapters/chapter3.tex
 
-[23]
+[23] (./chapters/chapter3/3.1.tex
+Package mathfont Info: Adjusting font Times New Roman.
+Package mathfont Info: Adjusting font Times New Roman Bold.
 
 [24
 
 ]
 
-[25]) (./chapters/chapter4.tex
+[25]) (./chapters/chapter3/3.2.tex
 
 [26]
+Underfull \hbox (badness 1178) in paragraph at lines 15--16
+[]\TU/TimesNewRoman(0)/m/n/12 Trong kiến trúc microservices, REST API thư
+ờng được sử dụng để triển khai mẫu
+ []
 
-[27
 
-]
 
-[28]) (./chapters/chapter5.tex
+[27]
+
+[28]
 
 [29]
 
-[30
+[30]) (./chapters/chapter3/3.3.tex
+Underfull \hbox (badness 1383) in paragraph at lines 2--3
+[]\TU/TimesNewRoman(0)/m/n/12 Giao tiếp bất đồng bộ one-to-one là m
+ột phương pháp quan trọng trong kiến trúc
+ []
 
-])
+
 
 [31]
 
-[32
+[32]
+
+[33]
+
+[34]) (./chapters/chapter3/3.4.tex
+
+[35]
+
+[36]) (./chapters/chapter3/3.5.tex
+
+[37]
+
+[38])) (./chapters/chapter4.tex
+
+[39]
+
+[40]
+
+[41
+
+]
+
+[42]) (./chapters/chapter5.tex
+
+[43]
+
+[44
+
+])
+
+[45]
+Underfull \hbox (badness 1024) in paragraph at lines 95--99
+[]\TU/TimesNewRoman(0)/m/n/12 Gartner, Inc., ``Gartner Identifies Key Trends in PaaS and Platform Architecture for
+ []
+
+
+
+[46
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1043,20 +1103,20 @@ L3 programming layer <2025-01-18>
 )
 
 Here is how much of LuaTeX's memory you used:
- 21251 strings out of 475506
+ 21379 strings out of 475506
  125217,1144653 words of node,token memory allocated
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 2:535,3:223,4:122,5:273,6:92,7:8729,8:1,9:383,10:22,11:32
- 43701 multiletter control sequences out of 65536+600000
- 68 fonts using 35359415 bytes
- 99i,6n,105p,1421b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
+   avail lists: 2:578,3:228,4:144,5:281,6:92,7:10793,8:1,9:383,10:24,11:68
+ 43794 multiletter control sequences out of 65536+600000
+ 70 fonts using 37171143 bytes
+ 99i,14n,105p,1725b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/WINDOWS/Fonts/timesi.ttf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/tim
 es.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (43 pages, 272375 bytes).
+Output written on main.pdf (57 pages, 338743 bytes).
 
-PDF statistics: 169 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 212 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

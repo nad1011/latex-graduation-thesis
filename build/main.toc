@@ -26,44 +26,58 @@
 \contentsline {subsection}{\numberline {2.3.4.}{Công cụ đo lường hiệu năng}}{21}{}%
 \contentsline {section}{\numberline {2.4.}{Tổng kết}}{22}{}%
 \contentsline {chapter}{\numberline {Chương\ 3.}{Phân tích các Communication Patterns}}{24}{}%
-\contentsline {section}{\numberline {3.1.}{Cách phân loại các pattern}}{24}{}%
-\contentsline {subsection}{\numberline {3.1.1.}{Tiêu chí phân loại theo communication mode}}{24}{}%
-\contentsline {subsection}{\numberline {3.1.2.}{Tiêu chí phân loại theo communication scope}}{24}{}%
-\contentsline {subsection}{\numberline {3.1.3.}{Các yếu tố ảnh hưởng đến việc lựa chọn pattern}}{24}{}%
-\contentsline {section}{\numberline {3.2.}{Synchronous Communication Patterns}}{25}{}%
-\contentsline {subsection}{\numberline {3.2.1.}{REST API Pattern}}{25}{}%
-\contentsline {section}{\numberline {3.3.}{Asynchronous Communication (one-to-one)}}{25}{}%
-\contentsline {subsection}{\numberline {3.3.1.}{Message Queue Pattern}}{25}{}%
-\contentsline {section}{\numberline {3.4.}{Asynchronous Communication (one-to-many)}}{26}{}%
-\contentsline {subsection}{\numberline {3.4.1.}{Pub/Sub Pattern}}{26}{}%
-\contentsline {section}{\numberline {3.5.}{So sánh và đánh giá các patterns}}{26}{}%
-\contentsline {subsection}{\numberline {3.5.1.}{Performance comparison}}{26}{}%
-\contentsline {subsection}{\numberline {3.5.2.}{Error handling capabilities}}{26}{}%
-\contentsline {subsection}{\numberline {3.5.3.}{Scalability considerations}}{26}{}%
-\contentsline {chapter}{\numberline {Chương\ 4.}{Triển khai thử nghiệm}}{27}{}%
-\contentsline {section}{\numberline {4.1.}{Mô tả bài toán và yêu cầu}}{27}{}%
-\contentsline {subsection}{\numberline {4.1.1.}{Hệ thống thử nghiệm}}{27}{}%
-\contentsline {subsection}{\numberline {4.1.2.}{Yêu cầu hệ thống}}{27}{}%
-\contentsline {section}{\numberline {4.2.}{Cài đặt và triển khai}}{27}{}%
-\contentsline {subsection}{\numberline {4.2.1.}{Thiết kế kiến trúc}}{27}{}%
-\contentsline {subsection}{\numberline {4.2.2.}{Lựa chọn công nghệ}}{27}{}%
-\contentsline {subsection}{\numberline {4.2.3.}{Chi tiết triển khai}}{28}{}%
-\contentsline {section}{\numberline {4.3.}{Kết quả triển khai}}{28}{}%
-\contentsline {subsection}{\numberline {4.3.1.}{Hiệu suất hệ thống}}{28}{}%
-\contentsline {subsection}{\numberline {4.3.2.}{Độ tin cậy}}{28}{}%
-\contentsline {subsection}{\numberline {4.3.3.}{Khả năng mở rộng}}{28}{}%
-\contentsline {subsection}{\numberline {4.3.4.}{Thiết lập hạ tầng}}{28}{}%
-\contentsline {section}{\numberline {4.4.}{Đánh giá hiệu năng}}{29}{}%
-\contentsline {subsection}{\numberline {4.4.1.}{Phương pháp đánh giá}}{29}{}%
-\contentsline {subsection}{\numberline {4.4.2.}{Phân tích so sánh}}{29}{}%
-\contentsline {chapter}{\numberline {Chương\ 5.}{Đánh giá và thảo luận}}{30}{}%
-\contentsline {section}{\numberline {5.1.}{Phương pháp và tiêu chí đánh giá}}{30}{}%
-\contentsline {subsection}{\numberline {5.1.1.}{Phương pháp đánh giá}}{30}{}%
-\contentsline {subsection}{\numberline {5.1.2.}{Tiêu chí đánh giá}}{30}{}%
-\contentsline {section}{\numberline {5.2.}{Kết quả đánh giá}}{30}{}%
-\contentsline {subsection}{\numberline {5.2.1.}{Đánh giá hiệu suất}}{30}{}%
-\contentsline {subsection}{\numberline {5.2.2.}{Đánh giá độ tin cậy}}{30}{}%
-\contentsline {subsection}{\numberline {5.2.3.}{Đánh giá khả năng mở rộng}}{31}{}%
-\contentsline {section}{\numberline {5.3.}{Thảo luận}}{31}{}%
-\contentsline {subsection}{\numberline {5.3.1.}{Ưu điểm và hạn chế}}{31}{}%
-\contentsline {subsection}{\numberline {5.3.2.}{Kiến nghị và hướng phát triển}}{31}{}%
+\contentsline {section}{\numberline {3.1.}{Cách phân loại các Communication pattern}}{24}{}%
+\contentsline {subsection}{\numberline {3.1.1.}{Tiêu chí phân loại theo communication mode (sync/async)}}{24}{}%
+\contentsline {subsection}{\numberline {3.1.2.}{Tiêu chí phân loại theo communication scope (one-to-one/one-to-many)}}{25}{}%
+\contentsline {subsection}{\numberline {3.1.3.}{Các yếu tố ảnh hưởng đến việc lựa chọn pattern}}{25}{}%
+\contentsline {section}{\numberline {3.2.}{Synchronous Communication Patterns (one-to-one)}}{26}{}%
+\contentsline {subsection}{\numberline {3.2.1.}{Request/Response Pattern}}{27}{}%
+\contentsline {subsection}{\numberline {3.2.2.}{Ưu điểm và Hạn chế của Synchronous Communication}}{28}{}%
+\contentsline {subsection}{\numberline {3.2.3.}{Use cases phù hợp cho Synchronous Communication}}{29}{}%
+\contentsline {subsection}{\numberline {3.2.4.}{Case studies}}{29}{}%
+\contentsline {subsection}{\numberline {3.2.5.}{Tương lai của Synchronous Communication trong Microservices}}{30}{}%
+\contentsline {subsection}{\numberline {3.2.6.}{Kết luận}}{31}{}%
+\contentsline {section}{\numberline {3.3.}{Asynchronous Communication Patterns (one-to-one)}}{31}{}%
+\contentsline {subsection}{\numberline {3.3.1.}{Cơ chế hoạt động}}{31}{}%
+\contentsline {subsection}{\numberline {3.3.2.}{One-way Notifications Pattern}}{32}{}%
+\contentsline {subsection}{\numberline {3.3.3.}{Message Queue Pattern}}{32}{}%
+\contentsline {subsection}{\numberline {3.3.4.}{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-one)}}{33}{}%
+\contentsline {subsection}{\numberline {3.3.5.}{Use cases phù hợp cho Asynchronous Communication (one-to-one)}}{34}{}%
+\contentsline {subsection}{\numberline {3.3.6.}{Case studies}}{34}{}%
+\contentsline {subsection}{\numberline {3.3.7.}{Kết luận}}{35}{}%
+\contentsline {section}{\numberline {3.4.}{Phân tích và so sánh hiệu suất}}{36}{}%
+\contentsline {subsection}{\numberline {3.4.1.}{Phương pháp đánh giá hiệu suất}}{36}{}%
+\contentsline {subsection}{\numberline {3.4.2.}{So sánh hiệu suất giữa các patterns}}{36}{}%
+\contentsline {subsection}{\numberline {3.4.3.}{Các yếu tố ảnh hưởng đến hiệu suất}}{37}{}%
+\contentsline {subsection}{\numberline {3.4.4.}{Khuyến nghị lựa chọn pattern}}{37}{}%
+\contentsline {section}{\numberline {3.5.}{Case Studies và Best Practices}}{38}{}%
+\contentsline {subsection}{\numberline {3.5.1.}{Case Studies thực tế}}{38}{}%
+\contentsline {subsection}{\numberline {3.5.2.}{Best Practices}}{38}{}%
+\contentsline {subsection}{\numberline {3.5.3.}{Khuyến nghị triển khai}}{39}{}%
+\contentsline {chapter}{\numberline {Chương\ 4.}{Triển khai thử nghiệm}}{41}{}%
+\contentsline {section}{\numberline {4.1.}{Mô tả bài toán và yêu cầu}}{41}{}%
+\contentsline {subsection}{\numberline {4.1.1.}{Hệ thống thử nghiệm}}{41}{}%
+\contentsline {subsection}{\numberline {4.1.2.}{Yêu cầu hệ thống}}{41}{}%
+\contentsline {section}{\numberline {4.2.}{Cài đặt và triển khai}}{41}{}%
+\contentsline {subsection}{\numberline {4.2.1.}{Thiết kế kiến trúc}}{41}{}%
+\contentsline {subsection}{\numberline {4.2.2.}{Lựa chọn công nghệ}}{41}{}%
+\contentsline {subsection}{\numberline {4.2.3.}{Chi tiết triển khai}}{42}{}%
+\contentsline {section}{\numberline {4.3.}{Kết quả triển khai}}{42}{}%
+\contentsline {subsection}{\numberline {4.3.1.}{Hiệu suất hệ thống}}{42}{}%
+\contentsline {subsection}{\numberline {4.3.2.}{Độ tin cậy}}{42}{}%
+\contentsline {subsection}{\numberline {4.3.3.}{Khả năng mở rộng}}{42}{}%
+\contentsline {subsection}{\numberline {4.3.4.}{Thiết lập hạ tầng}}{42}{}%
+\contentsline {section}{\numberline {4.4.}{Đánh giá hiệu năng}}{43}{}%
+\contentsline {subsection}{\numberline {4.4.1.}{Phương pháp đánh giá}}{43}{}%
+\contentsline {subsection}{\numberline {4.4.2.}{Phân tích so sánh}}{43}{}%
+\contentsline {chapter}{\numberline {Chương\ 5.}{Đánh giá và thảo luận}}{44}{}%
+\contentsline {section}{\numberline {5.1.}{Phương pháp và tiêu chí đánh giá}}{44}{}%
+\contentsline {subsection}{\numberline {5.1.1.}{Phương pháp đánh giá}}{44}{}%
+\contentsline {subsection}{\numberline {5.1.2.}{Tiêu chí đánh giá}}{44}{}%
+\contentsline {section}{\numberline {5.2.}{Kết quả đánh giá}}{44}{}%
+\contentsline {subsection}{\numberline {5.2.1.}{Đánh giá hiệu suất}}{44}{}%
+\contentsline {subsection}{\numberline {5.2.2.}{Đánh giá độ tin cậy}}{44}{}%
+\contentsline {subsection}{\numberline {5.2.3.}{Đánh giá khả năng mở rộng}}{45}{}%
+\contentsline {section}{\numberline {5.3.}{Thảo luận}}{45}{}%
+\contentsline {subsection}{\numberline {5.3.1.}{Ưu điểm và hạn chế}}{45}{}%
+\contentsline {subsection}{\numberline {5.3.2.}{Kiến nghị và hướng phát triển}}{45}{}%

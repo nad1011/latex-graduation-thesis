@@ -5,11 +5,9 @@ Kiến trúc Microservice là một phương pháp phát triển phần mềm tr
 dụng được cấu thành từ nhiều dịch vụ nhỏ, độc lập và có khả năng triển khai
 riêng biệt. Mỗi dịch vụ này được thiết kế để thực hiện một chức năng cụ thể
 trong phạm vi nghiệp vụ được định nghĩa rõ ràng, và giao tiếp với các dịch vụ
-khác thông qua các cơ chế giao tiếp nhẹ, thường là API.
+khác thông qua các cơ chế giao tiếp nhẹ, thường là API \cite{fowler2014}.
 
-Theo Newman (2021), các đặc điểm chính của kiến trúc microservice bao gồm tính
-tự trị cao, trong đó mỗi dịch vụ có thể được phát triển, triển khai và mở rộng
-độc lập với các dịch vụ khác. Các dịch vụ được tổ chức xoay quanh các khả năng
+Các đặc điểm chính của kiến trúc microservice bao gồm tính tự trị cao, trong đó mỗi dịch vụ có thể được phát triển, triển khai và mở rộng độc lập với các dịch vụ khác \cite{newman2015}. Các dịch vụ được tổ chức xoay quanh các khả năng
 nghiệp vụ thay vì các lớp công nghệ, thể hiện sự phân tách theo chức năng
 nghiệp vụ. Quản lý dữ liệu trong microservice được thực hiện phi tập trung, với
 mỗi dịch vụ quản lý dữ liệu riêng và chỉ có thể truy cập dữ liệu thông qua API
@@ -19,15 +17,14 @@ Thiết kế hướng lỗi là một đặc điểm quan trọng khác của mi
 các dịch vụ được thiết kế để xử lý lỗi và khả năng các dịch vụ khác không khả
 dụng. Cuối cùng, microservice cho phép tiến hóa độc lập, nghĩa là các dịch vụ
 có thể thay đổi và phát triển theo thời gian mà không ảnh hưởng đến toàn bộ hệ
-thống.
+thống \cite{richardson2019}.
 
 \subsection{So sánh với kiến trúc nguyên khối (Monolithic)}
 Để hiểu rõ hơn về kiến trúc microservice, việc so sánh với kiến trúc nguyên khối là rất hữu ích. Trong kiến trúc nguyên khối, toàn bộ ứng dụng được xây dựng như một đơn vị duy nhất. Tất cả các chức năng nằm trong một codebase và được triển khai cùng nhau.
 
 Về triển khai, kiến trúc nguyên khối đòi hỏi toàn bộ ứng dụng được triển khai
 cùng một lúc, trong khi kiến trúc microservice cho phép các dịch vụ được triển
-khai độc lập. Điều này có ý nghĩa quan trọng trong việc giảm thiểu rủi ro và
-tăng tốc độ phát hành.
+khai độc lập \cite{newman2015}. Điều này có ý nghĩa quan trọng trong việc giảm thiểu rủi ro và tăng tốc độ phát hành.
 
 Khả năng mở rộng cũng khác biệt đáng kể giữa hai kiến trúc. Trong kiến trúc
 nguyên khối, toàn bộ ứng dụng phải được mở rộng, ngay cả khi chỉ một phần cần
@@ -37,7 +34,7 @@ vụ riêng biệt, tối ưu hóa việc sử dụng tài nguyên.
 Về phát triển, kiến trúc nguyên khối thường có một nhóm phát triển làm việc
 trên một codebase, dẫn đến các xung đột trong quá trình phát triển và triển
 khai. Trong khi đó, kiến trúc microservice cho phép nhiều nhóm làm việc độc lập
-trên các dịch vụ khác nhau, tăng tốc độ phát triển và giảm thiểu xung đột.
+trên các dịch vụ khác nhau, tăng tốc độ phát triển và giảm thiểu xung đột \cite{richardson2019}.
 
 Công nghệ là một khía cạnh khác có sự khác biệt. Kiến trúc nguyên khối thường
 bị giới hạn trong một stack công nghệ, trong khi mỗi microservice có thể sử
@@ -47,7 +44,7 @@ khả năng thích ứng với các công nghệ mới.
 Khả năng chịu lỗi cũng là một điểm khác biệt quan trọng. Trong kiến trúc nguyên
 khối, lỗi ở một phần có thể ảnh hưởng đến toàn bộ ứng dụng, trong khi trong
 kiến trúc microservice, lỗi được cô lập trong một dịch vụ, giảm thiểu tác động
-đến toàn bộ hệ thống.
+đến toàn bộ hệ thống \cite{fowler2014}.
 
 Cuối cùng, về độ phức tạp, kiến trúc nguyên khối đơn giản hơn trong các ứng
 dụng nhỏ, nhưng phức tạp hơn khi ứng dụng phát triển. Ngược lại, kiến trúc
@@ -85,7 +82,7 @@ phát triển dễ dàng hiểu và thay đổi nó.
 Tuy nhiên, kiến trúc microservice cũng đặt ra một số thách thức đáng kể. Độ
 phức tạp phân tán là một thách thức lớn. Hệ thống phân tán vốn phức tạp hơn,
 đòi hỏi kiến thức và công cụ chuyên biệt. Các vấn đề như latency mạng, xử lý
-lỗi và đồng bộ hóa dữ liệu trở nên phức tạp hơn trong một hệ thống phân tán.
+lỗi và đồng bộ hóa dữ liệu trở nên phức tạp hơn trong một hệ thống phân tán \cite{newman2015}.
 
 Giao tiếp giữa các dịch vụ là một thách thức khác. Thiết kế và quản lý giao
 tiếp giữa các dịch vụ đòi hỏi cân nhắc kỹ lưỡng về hiệu suất, độ tin cậy và khả
@@ -105,7 +102,7 @@ này, nhưng chúng cũng đòi hỏi kiến thức và nỗ lực đáng kể �
 Cuối cùng, kiểm thử cũng trở nên phức tạp hơn trong kiến trúc microservice.
 Kiểm thử tích hợp đòi hỏi sự phối hợp giữa nhiều dịch vụ, có thể chạy trên các
 máy khác nhau và sử dụng các công nghệ khác nhau. Các kỹ thuật như kiểm thử hợp
-đồng và môi trường kiểm thử tích hợp được sử dụng để giải quyết vấn đề này.
+đồng và môi trường kiểm thử tích hợp được sử dụng để giải quyết vấn đề này \cite{newman2015}.
 
 \subsection{Các nguyên tắc thiết kế}
 Để thiết kế một kiến trúc microservice hiệu quả, một số nguyên tắc thiết kế chính cần được tuân thủ. Nguyên tắc đầu tiên là Single Responsibility Principle (Nguyên tắc Trách nhiệm Đơn lẻ), theo đó mỗi dịch vụ nên chịu trách nhiệm cho một chức năng nghiệp vụ duy nhất. Điều này giúp giữ các dịch vụ đơn giản và tập trung, dễ hiểu và bảo trì.

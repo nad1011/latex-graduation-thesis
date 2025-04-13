@@ -1,0 +1,96 @@
+\section{Synchronous Communication Patterns (one-to-one)}
+Giao tiếp đồng bộ là hình thức tương tác phổ biến nhất giữa các microservice, đặc biệt trong các mô hình one-to-one. Đây là mô hình được ứng dụng rộng rãi nhờ tính đơn giản và dễ triển khai của nó. Trong phần này, chúng ta sẽ tìm hiểu sâu về Request/Response - mẫu giao tiếp đồng bộ cơ bản nhất trong kiến trúc microservices, cùng các công nghệ triển khai phổ biến và những ứng dụng thực tế của nó.
+
+\subsection{Request/Response Pattern}
+Request/Response là mẫu giao tiếp đồng bộ cơ bản nhất, trong đó một microservice (client) gửi yêu cầu đến một microservice khác (server) và chờ đợi cho đến khi nhận được phản hồi. Quá trình giao tiếp này tạo ra một sự ràng buộc tạm thời giữa hai dịch vụ, buộc client phải chờ đợi server xử lý và phản hồi trước khi tiếp tục các hoạt động khác.
+
+Mẫu Request/Response tuân theo một quy trình cơ bản: client microservice xác định yêu cầu cần thực hiện và endpoint của server microservice; gửi yêu cầu đến server microservice, thường thông qua một giao thức như HTTP; server microservice nhận yêu cầu, xử lý nó và chuẩn bị phản hồi; server gửi phản hồi trở lại client microservice; và cuối cùng client nhận phản hồi và tiếp tục quá trình xử lý của mình. Trong suốt quá trình này, luồng thực thi của client microservice bị chặn cho đến khi nhận được phản hồi từ server microservice, đây chính là đặc điểm định nghĩa tính đồng bộ của mẫu giao tiếp này [1].
+
+Các công nghệ triển khai Request/Response phổ biến nhất bao gồm REST, gRPC, GraphQL, và SOAP. Trong đó, REST (Representational State Transfer) là phương pháp phổ biến nhất do tính đơn giản và khả năng tương thích rộng rãi của nó.
+
+REST (Representational State Transfer)
+
+REST là một kiến trúc giao tiếp dựa trên HTTP, sử dụng các phương thức HTTP chuẩn (GET, POST, PUT, DELETE) để thực hiện các thao tác CRUD (Create, Read, Update, Delete) trên tài nguyên. REST đã trở thành tiêu chuẩn de facto cho việc xây dựng API web và giao tiếp giữa các dịch vụ trên Internet [2].
+
+Trong kiến trúc microservices, REST API thường được sử dụng để triển khai mẫu Request/Response bởi những ưu điểm về tính đơn giản và dễ hiểu, tính stateless (mỗi yêu cầu chứa đầy đủ thông tin cần thiết, không phụ thuộc vào yêu cầu trước đó), khả năng mở rộng tốt (nhờ tính chất stateless, REST API có thể mở rộng dễ dàng bằng cách thêm nhiều instance server), và tính tương thích cao (REST có thể được triển khai trên nhiều nền tảng và ngôn ngữ lập trình khác nhau).
+
+Một tương tác REST điển hình trong kiến trúc microservices có thể bao gồm một yêu cầu GET đến một endpoint như /api/products/123 để lấy thông tin về một sản phẩm cụ thể. Server sẽ phản hồi với mã trạng thái HTTP (như 200 OK cho thành công) và dữ liệu sản phẩm, thường ở định dạng JSON.
+
+Mặc dù REST là phương pháp triển khai phổ biến nhất cho Request/Response, nó cũng có một số hạn chế như vấn đề overloading nghiêm trọng (REST thường dẫn đến overfetching hoặc underfetching), thiếu kiểm soát contract (REST không có cơ chế tích hợp để định nghĩa và kiểm tra contract giữa client và server), và hiệu suất không tối ưu (HTTP là một giao thức text-based, không hiệu quả bằng các giao thức binary).
+
+gRPC (Google Remote Procedure Call)
+
+gRPC là một framework RPC hiệu suất cao được phát triển bởi Google, sử dụng Protocol Buffers làm ngôn ngữ định nghĩa interface và HTTP/2 làm giao thức truyền tải. gRPC cung cấp một cách hiệu quả hơn để triển khai mẫu Request/Response trong kiến trúc microservices [3].
+
+So với REST, gRPC có nhiều ưu điểm đáng kể về hiệu suất (gRPC sử dụng Protocol Buffers, một định dạng nhị phân hiệu quả hơn JSON hoặc XML), service contract rõ ràng (gRPC sử dụng .proto files để định nghĩa service interface, giúp tạo ra client và server code tự động), hỗ trợ streaming (gRPC hỗ trợ cả streaming đơn hướng và hai chiều), và hỗ trợ đa ngôn ngữ (gRPC tạo code cho nhiều ngôn ngữ lập trình từ cùng một định nghĩa).
+
+Trong gRPC, dịch vụ được định nghĩa trong file .proto với các messages (cấu trúc dữ liệu) và services (các phương thức RPC). Từ file này, gRPC sẽ tự động tạo ra code client và server cho nhiều ngôn ngữ lập trình khác nhau. Quá trình giao tiếp diễn ra thông qua HTTP/2, cung cấp nhiều tính năng như multiplexing, header compression, và full-duplex communication.
+
+Mặc dù gRPC mang lại nhiều lợi ích, nó cũng có một số hạn chế như độ phức tạp cao hơn (gRPC đòi hỏi hiểu biết về Protocol Buffers và HTTP/2), thiếu hỗ trợ trình duyệt (hầu hết các trình duyệt web không hỗ trợ trực tiếp gRPC), và khó khăn trong debug (do sử dụng định dạng nhị phân, việc debug gRPC phức tạp hơn so với REST).
+
+GraphQL
+
+GraphQL là một ngôn ngữ truy vấn và thao tác dữ liệu được phát triển bởi Facebook. Trong kiến trúc microservices, GraphQL thường được sử dụng như một lớp API gateway để tổng hợp dữ liệu từ nhiều microservices và cho phép client chỉ định chính xác dữ liệu họ cần [4].
+
+GraphQL có một số ưu điểm đáng chú ý so với REST và gRPC như tránh được overfetching và underfetching (client có thể chỉ định chính xác dữ liệu cần thiết), sử dụng một endpoint duy nhất cho tất cả các truy vấn, khả năng introspection (GraphQL API tự mô tả, cho phép tạo tài liệu tự động), và hỗ trợ tốt cho frontend (các thư viện client như Apollo và Relay cung cấp tích hợp mạnh mẽ với các framework frontend).
+
+Trong GraphQL, client gửi một truy vấn (query) xác định chính xác dữ liệu mà họ cần. Ví dụ, thay vì gọi nhiều endpoint REST khác nhau để lấy thông tin về sản phẩm, đánh giá và người dùng, client có thể gửi một truy vấn GraphQL duy nhất chỉ định tất cả thông tin cần thiết. Server GraphQL chịu trách nhiệm thu thập dữ liệu từ các nguồn khác nhau (có thể là các microservices khác) và trả về chính xác những gì client yêu cầu.
+
+Mặc dù GraphQL mang lại nhiều lợi ích, nó cũng có những thách thức như độ phức tạp cao (triển khai GraphQL API đòi hỏi kiến thức chuyên sâu và nhiều boilerplate code), caching phức tạp hơn (do sử dụng một endpoint duy nhất, caching với GraphQL phức tạp hơn so với REST), và vấn đề N+1 truy vấn (GraphQL có thể dẫn đến vấn đề N+1 truy vấn nếu không được triển khai cẩn thận).
+
+\subsection{Ưu điểm và Hạn chế của Synchronous Communication}
+Giao tiếp đồng bộ trong kiến trúc microservices có nhiều ưu điểm và hạn chế đáng chú ý. Hiểu rõ những điểm mạnh và điểm yếu này là chìa khóa để lựa chọn mẫu giao tiếp phù hợp cho từng trường hợp sử dụng cụ thể.
+
+Về ưu điểm, giao tiếp đồng bộ mang lại tính đơn giản và trực quan, làm cho nó dễ hiểu và triển khai, đặc biệt là với REST. Client gửi yêu cầu và nhận phản hồi theo một cách rõ ràng và trực tiếp, không đòi hỏi hiểu biết về các khái niệm phức tạp như message broker hay event handling. Ưu điểm thứ hai là phản hồi tức thì, client nhận được phản hồi ngay lập tức sau khi server xử lý yêu cầu, điều này quan trọng cho các tương tác yêu cầu tốc độ như truy vấn dữ liệu trong giao diện người dùng. Thứ ba, giao tiếp đồng bộ cho phép xử lý lỗi một cách dễ dàng, lỗi được phát hiện và xử lý ngay lập tức trong quy trình giao tiếp, giúp client có thể phản hồi lập tức cho người dùng hoặc thử lại yêu cầu. Ngoài ra, giao tiếp đồng bộ còn mang lại tính nhất quán cao, client biết ngay lập tức kết quả của yêu cầu, tạo điều kiện cho tính nhất quán dữ liệu giữa các dịch vụ. Cuối cùng, giao tiếp đồng bộ dễ dàng debug, luồng yêu cầu-phản hồi rõ ràng và dễ theo dõi, giúp nhà phát triển nhanh chóng xác định và sửa lỗi.
+
+Tuy nhiên, giao tiếp đồng bộ cũng có những hạn chế đáng kể. Đầu tiên là coupling chặt chẽ, client và server phải đồng thời hoạt động để giao tiếp thành công, nếu server không khả dụng, client sẽ không thể tiếp tục hoạt động. Hạn chế thứ hai là hiệu suất kém trong môi trường phân tán, độ trễ mạng có thể ảnh hưởng đáng kể đến hiệu suất, đặc biệt là khi có nhiều cuộc gọi nối tiếp. Giao tiếp đồng bộ cũng thiếu khả năng mở rộng, nó có thể tạo thành bottleneck khi số lượng yêu cầu tăng cao, hạn chế khả năng mở rộng của hệ thống. Một hạn chế nghiêm trọng khác là khả năng gây ra lỗi cascade, khi một service gặp sự cố, các service gọi đến nó sẽ bị chặn, và lỗi có thể lan truyền trong toàn hệ thống, gây ra hiệu ứng domino. Cuối cùng, giao tiếp đồng bộ khiến tài nguyên bị chặn, client phải chờ đợi phản hồi trước khi tiếp tục, dẫn đến lãng phí tài nguyên và giảm throughput.
+
+Để giảm thiểu những hạn chế này, nhiều mẫu thiết kế và kỹ thuật đã được phát triển và áp dụng trong giao tiếp đồng bộ microservices. Ví dụ, để giải quyết vấn đề lỗi cascade, các kỹ thuật như circuit breaker pattern có thể được sử dụng. Để cải thiện hiệu suất, các kỹ thuật như caching, connection pooling, và batch processing có thể được áp dụng.
+
+\subsection{Use cases phù hợp cho Synchronous Communication}
+Giao tiếp đồng bộ đặc biệt phù hợp cho một số trường hợp sử dụng cụ thể trong kiến trúc microservices. Hiểu rõ những trường hợp này giúp kiến trúc sư và nhà phát triển đưa ra quyết định đúng đắn về việc khi nào nên sử dụng giao tiếp đồng bộ.
+
+Trường hợp sử dụng đầu tiên và quan trọng nhất là khi yêu cầu phản hồi tức thì. Trong nhiều tình huống, client cần phản hồi ngay lập tức từ server để tiếp tục xử lý hoặc cung cấp phản hồi cho người dùng. Ví dụ, khi người dùng thực hiện thanh toán, hệ thống cần kiểm tra ngay lập tức tính khả dụng của sản phẩm và xác thực thanh toán trước khi hoàn tất đơn hàng. Giao tiếp đồng bộ là lựa chọn tự nhiên cho những tình huống này do khả năng cung cấp phản hồi tức thì.
+
+Trường hợp thứ hai là truy vấn dữ liệu đơn giản. Các hoạt động CRUD (Create, Read, Update, Delete) cơ bản mà không yêu cầu xử lý phức tạp thường phù hợp với giao tiếp đồng bộ. Ví dụ, khi ứng dụng cần lấy thông tin chi tiết về một sản phẩm để hiển thị cho người dùng, một cuộc gọi API REST đơn giản là đủ và hiệu quả.
+
+Trường hợp thứ ba là khi tính nhất quán dữ liệu quan trọng. Trong một số quy trình nghiệp vụ, client cần biết ngay lập tức liệu hoạt động đã thành công hay không để đảm bảo tính nhất quán dữ liệu. Ví dụ, khi cập nhật thông tin quan trọng như số dư tài khoản hoặc trạng thái đặt phòng, hệ thống cần đảm bảo cập nhật đã được thực hiện thành công trước khi tiếp tục các hoạt động khác.
+
+Trường hợp thứ tư là tương tác người dùng trực tiếp. Khi hành động của người dùng trực tiếp kích hoạt yêu cầu, và người dùng đang chờ kết quả, giao tiếp đồng bộ thường là lựa chọn tốt nhất. Điều này đảm bảo người dùng nhận được phản hồi ngay lập tức, cải thiện trải nghiệm người dùng. Ví dụ, khi người dùng nhấp vào nút "Thêm vào giỏ hàng", hệ thống cần xác nhận ngay lập tức rằng sản phẩm đã được thêm thành công.
+
+Trường hợp cuối cùng là quy trình nghiệp vụ đơn giản. Các quy trình không yêu cầu xử lý phức tạp hoặc nhiều bước thường phù hợp với giao tiếp đồng bộ. Quy trình càng đơn giản, lợi ích của giao tiếp bất đồng bộ càng ít, và chi phí phức tạp bổ sung càng khó được biện minh.
+
+Fowler [5] lưu ý rằng giao tiếp đồng bộ thường được ưu tiên trong các hệ thống ban đầu và những hệ thống có quy mô nhỏ, sau đó có thể phát triển thành mô hình bất đồng bộ khi hệ thống phát triển hoặc yêu cầu về khả năng mở rộng tăng lên. Điều này phản ánh sự đánh đổi giữa tính đơn giản của giao tiếp đồng bộ và khả năng mở rộng của giao tiếp bất đồng bộ.
+
+\subsection{Case studies}
+Để hiểu rõ hơn về cách giao tiếp đồng bộ được triển khai và sử dụng trong thế giới thực, chúng ta sẽ xem xét một số trường hợp nghiên cứu từ các công ty nổi tiếng đã thành công với kiến trúc microservices.
+
+Netflix là một ví dụ điển hình về việc sử dụng giao tiếp đồng bộ trong kiến trúc microservices quy mô lớn. Netflix sử dụng Zuul làm API Gateway để quản lý các yêu cầu từ nhiều client khác nhau đến hàng trăm microservices backend [6]. Zuul cung cấp một điểm vào duy nhất cho tất cả các client, thực hiện các chức năng như routing, filtering, và load balancing. Bên cạnh Zuul, Netflix cũng sử dụng Hystrix để triển khai Circuit Breaker pattern, bảo vệ hệ thống khỏi lỗi cascade và cải thiện khả năng phục hồi. Netflix đã phát triển một hệ sinh thái các công cụ để hỗ trợ kiến trúc microservices của họ, bao gồm Eureka (service discovery), Ribbon (client-side load balancing), và Feign (declarative HTTP client). Tất cả các công cụ này đều được thiết kế để hoạt động hiệu quả trong môi trường đám mây và xử lý các thách thức của giao tiếp đồng bộ giữa các microservices.
+
+Amazon là một ví dụ khác về việc sử dụng giao tiếp đồng bộ trong kiến trúc microservices quy mô lớn. Amazon sử dụng AWS API Gateway để quản lý và định tuyến các yêu cầu API đến các microservices backend khác nhau [7]. AWS API Gateway cung cấp nhiều tính năng như authentication, authorization, rate limiting, và caching. Nó cũng tích hợp với các dịch vụ AWS khác như Lambda, DynamoDB, và SNS, cho phép xây dựng kiến trúc serverless kết hợp với microservices. Bên cạnh đó, Amazon cũng sử dụng các service mesh như AWS App Mesh để quản lý giao tiếp giữa các microservices, cung cấp các tính năng như service discovery, traffic routing, và observation.
+
+Uber là một ví dụ về công ty đã chuyển đổi từ REST sang gRPC để cải thiện hiệu suất giao tiếp giữa các microservices [8]. Kiến trúc của Uber bao gồm hàng nghìn microservices với hàng triệu yêu cầu mỗi giây. Uber đã phát triển một framework gọi là Ringpop, sử dụng gRPC để giao tiếp giữa các dịch vụ. Ringpop sử dụng giao thức gossip để phân phối thông tin về trạng thái của các node trong hệ thống và đưa ra quyết định về việc định tuyến yêu cầu. Uber cũng đã phát triển một thư viện gọi là TChannel, một giao thức RPC có độ tin cậy cao dựa trên Thrift, trước khi chuyển sang gRPC. Việc chuyển đổi từ REST sang gRPC đã giúp Uber cải thiện đáng kể hiệu suất và giảm kích thước của các tin nhắn trao đổi giữa các dịch vụ.
+
+Những trường hợp nghiên cứu này minh họa cách các công ty lớn triển khai và điều chỉnh giao tiếp đồng bộ để đáp ứng nhu cầu cụ thể của họ. Chúng cũng cho thấy rằng không có một giải pháp "one-size-fits-all" cho giao tiếp microservices - mỗi công ty cần đánh giá nhu cầu của mình và lựa chọn công nghệ phù hợp nhất.
+
+\subsection{Tương lai của Synchronous Communication trong Microservices}
+Dù giao tiếp bất đồng bộ ngày càng phổ biến trong kiến trúc microservices, giao tiếp đồng bộ vẫn sẽ tiếp tục đóng vai trò quan trọng, đặc biệt là đối với các tương tác yêu cầu phản hồi tức thì.
+
+Một xu hướng đáng chú ý trong tương lai của giao tiếp đồng bộ là Service Mesh. Công nghệ service mesh như Istio, Linkerd, và Consul Connect đang ngày càng được áp dụng để quản lý giao tiếp giữa các microservices, cung cấp các tính năng như mã hóa TLS, authentication, authorization, và observability. Service mesh hoạt động bằng cách triển khai một proxy bên cạnh mỗi instance của microservice, tạo thành một lớp infrastructure layer quản lý tất cả giao tiếp giữa các dịch vụ. Điều này cho phép tách biệt logic nghiệp vụ khỏi logic giao tiếp mạng, làm cho hệ thống dễ quản lý và bảo trì hơn.
+
+WebAssembly (Wasm) cũng đang trở thành một công nghệ quan trọng trong tương lai của giao tiếp đồng bộ. WebAssembly đang được áp dụng trong API Gateway và service mesh để cải thiện hiệu suất và linh hoạt. Ví dụ, Envoy proxy (được sử dụng trong Istio) hỗ trợ các filter được viết bằng WebAssembly, cho phép mở rộng proxy một cách an toàn và hiệu quả mà không cần triển khai lại.
+
+Serverless API Gateway là một xu hướng khác, với các giải pháp như AWS Lambda + API Gateway hoặc Azure Functions + API Management đang trở nên phổ biến, giúp giảm chi phí và cải thiện khả năng mở rộng. Trong mô hình này, API Gateway định tuyến yêu cầu đến các hàm serverless, chỉ được kích hoạt khi cần thiết, giúp giảm chi phí khi không có lưu lượng truy cập.
+
+GraphQL Federation cũng đang ngày càng được áp dụng, với Apollo Federation và những công nghệ tương tự cho phép chia GraphQL schema thành nhiều microservices, mỗi dịch vụ sở hữu một phần của schema tổng thể. Điều này cho phép các đội phát triển độc lập quản lý các phần khác nhau của API mà không ảnh hưởng đến nhau.
+
+Cuối cùng, các giao thức mới như HTTP/3 và QUIC hứa hẹn cải thiện hiệu suất giao tiếp đồng bộ, đặc biệt trong điều kiện mạng không ổn định. HTTP/3 dựa trên QUIC, một giao thức truyền tải mới phát triển bởi Google, cung cấp những cải tiến đáng kể về độ trễ và độ tin cậy so với TCP.
+
+\subsection{Kết luận}
+Giao tiếp đồng bộ one-to-one, đặc biệt là mẫu Request/Response, vẫn là một phần không thể thiếu trong kiến trúc microservices hiện đại. Mặc dù có những hạn chế về coupling và khả năng mở rộng, giao tiếp đồng bộ vẫn cung cấp nhiều lợi ích quan trọng như đơn giản, trực quan, và phản hồi tức thì.
+
+Việc lựa chọn công nghệ triển khai phù hợp (REST, gRPC, GraphQL) phụ thuộc vào nhu cầu cụ thể của dự án, bao gồm yêu cầu về hiệu suất, khả năng mở rộng, và độ phức tạp. REST vẫn là lựa chọn phổ biến nhất do tính đơn giản và khả năng tương thích rộng rãi, nhưng gRPC và GraphQL đang ngày càng được áp dụng cho các trường hợp sử dụng cụ thể yêu cầu hiệu suất cao hoặc truy vấn dữ liệu phức tạp.
+
+Trong thực tế, một hệ thống microservices hiệu quả thường kết hợp cả giao tiếp đồng bộ và bất đồng bộ, sử dụng mẫu phù hợp cho từng trường hợp sử dụng cụ thể. Hiểu rõ ưu điểm và hạn chế của mỗi mẫu giao tiếp là chìa khóa để thiết kế một kiến trúc microservices thành công.
+
+Với sự phát triển liên tục của công nghệ và sự xuất hiện của các mẫu thiết kế mới, giao tiếp đồng bộ trong kiến trúc microservices sẽ tiếp tục phát triển và cải thiện, cung cấp nhiều tùy chọn hơn cho các kiến trúc sư và nhà phát triển để xây dựng các hệ thống phân tán mạnh mẽ và hiệu quả.

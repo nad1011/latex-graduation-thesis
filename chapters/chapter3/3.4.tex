@@ -1,0 +1,112 @@
+\section{Phân tích và so sánh hiệu suất}
+
+\subsection{Phương pháp đánh giá hiệu suất}
+Theo nghiên cứu của Niswar et al. (2021), việc đánh giá hiệu suất của các communication patterns cần xem xét các yếu tố sau:
+
+\begin{itemize}
+    \item Latency: Thời gian từ khi gửi request đến khi nhận response
+    \item Throughput: Số lượng request có thể xử lý trong một đơn vị thời gian
+    \item Resource utilization: Mức độ sử dụng tài nguyên hệ thống
+    \item Error rate: Tỷ lệ request thất bại
+\end{itemize}
+
+\begin{itemize}
+    \item Load testing với các mức tải khác nhau
+    \item Stress testing để xác định điểm giới hạn
+    \item Endurance testing để đánh giá hiệu suất dài hạn
+    \item Scalability testing để đánh giá khả năng mở rộng
+\end{itemize}
+
+\subsection{So sánh hiệu suất giữa các patterns}
+\begin{itemize}
+    \item Synchronous patterns:
+    \begin{itemize}
+        \item Latency thấp hơn cho các request đơn giản
+        \item Throughput cao hơn trong điều kiện tải thấp
+        \item Resource utilization hiệu quả hơn
+        \item Dễ monitoring và debugging
+    \end{itemize}
+    
+    \item Asynchronous patterns:
+    \begin{itemize}
+        \item Xử lý tốt hơn với tải cao
+        \item Khả năng mở rộng tốt hơn
+        \item Sử dụng tài nguyên hiệu quả hơn cho các tác vụ dài
+        \item Độ tin cậy cao hơn trong môi trường không ổn định
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item REST API:
+    \begin{itemize}
+        \item Latency: Trung bình (50-100ms)
+        \item Throughput: Trung bình (1000-5000 req/s)
+        \item Memory usage: Thấp
+        \item CPU usage: Trung bình
+    \end{itemize}
+    
+    \item gRPC:
+    \begin{itemize}
+        \item Latency: Thấp (10-30ms)
+        \item Throughput: Cao (10000-20000 req/s)
+        \item Memory usage: Trung bình
+        \item CPU usage: Cao
+    \end{itemize}
+    
+    \item Message Queue:
+    \begin{itemize}
+        \item Latency: Cao (100-500ms)
+        \item Throughput: Trung bình (1000-3000 msg/s)
+        \item Memory usage: Cao
+        \item CPU usage: Trung bình
+    \end{itemize}
+    
+    \item Pub/Sub:
+    \begin{itemize}
+        \item Latency: Trung bình (50-200ms)
+        \item Throughput: Cao (5000-10000 msg/s)
+        \item Memory usage: Cao
+        \item CPU usage: Cao
+    \end{itemize}
+\end{itemize}
+
+\subsection{Các yếu tố ảnh hưởng đến hiệu suất}
+\begin{itemize}
+    \item Kích thước message/payload
+    \item Số lượng kết nối đồng thời
+    \item Độ phức tạp của xử lý
+    \item Cấu hình hệ thống
+    \item Mạng lưới và độ trễ mạng
+\end{itemize}
+
+\subsection{Khuyến nghị lựa chọn pattern}
+Dựa trên kết quả phân tích, có thể đưa ra các khuyến nghị sau:
+\begin{itemize}
+    \item Sử dụng REST API cho:
+    \begin{itemize}
+        \item Các tương tác đơn giản
+        \item Môi trường có độ trễ mạng thấp
+        \item Yêu cầu đơn giản về monitoring
+    \end{itemize}
+    
+    \item Sử dụng gRPC cho:
+    \begin{itemize}
+        \item Các tương tác phức tạp
+        \item Yêu cầu hiệu suất cao
+        \item Streaming data
+    \end{itemize}
+    
+    \item Sử dụng Message Queue cho:
+    \begin{itemize}
+        \item Các tác vụ xử lý dài
+        \item Yêu cầu độ tin cậy cao
+        \item Xử lý tải cao
+    \end{itemize}
+    
+    \item Sử dụng Pub/Sub cho:
+    \begin{itemize}
+        \item One-to-many communication
+        \item Real-time updates
+        \item Event-driven architecture
+    \end{itemize}
+\end{itemize} 

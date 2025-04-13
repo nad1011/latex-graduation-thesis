@@ -6,11 +6,7 @@ dụng nguyên khối, nơi các thành phần tương tác thông qua lời g�
 các microservice giao tiếp qua mạng, thường là thông qua HTTP, gRPC hoặc một
 middleware messaging.
 
-Wolff (2018) nhấn mạnh rằng: "Giao tiếp không chỉ là cách các dịch vụ trao đổi
-dữ liệu, mà còn định hình toàn bộ kiến trúc và ảnh hưởng đến tính khả dụng,
-hiệu suất và khả năng mở rộng của toàn bộ hệ thống." Nhận xét này nhấn mạnh tầm
-quan trọng của việc lựa chọn mẫu giao tiếp phù hợp trong kiến trúc
-microservice.
+Giao tiếp không chỉ là cách các dịch vụ trao đổi dữ liệu, mà còn định hình toàn bộ kiến trúc và ảnh hưởng đến tính khả dụng, hiệu suất và khả năng mở rộng của toàn bộ hệ thống \cite{wolff2016}. Nhận xét này nhấn mạnh tầm quan trọng của việc lựa chọn mẫu giao tiếp phù hợp trong kiến trúc microservice.
 
 Giao tiếp trong microservices tạo điều kiện cho sự hợp tác giữa các dịch vụ.
 Các dịch vụ cần phối hợp để hoàn thành các tác vụ nghiệp vụ phức tạp. Ví dụ,
@@ -39,7 +35,7 @@ Khi thiết kế cơ chế giao tiếp cho microservice, một số thuộc tín
 cần được xem xét. Độ tin cậy là một thuộc tính quan trọng, đề cập đến khả năng
 đảm bảo rằng thông điệp được gửi và nhận thành công. Trong một hệ thống phân
 tán, mạng có thể không đáng tin cậy và thông điệp có thể bị mất. Các cơ chế như
-xác nhận, thử lại và hàng đợi bền vững có thể được sử dụng để tăng độ tin cậy.
+xác nhận, thử lại và hàng đợi bền vững có thể được sử dụng để tăng độ tin cậy \cite{hohpe2004}.
 
 Độ trễ là một thuộc tính quan trọng khác, đề cập đến thời gian cần thiết để thông điệp đi từ nguồn đến đích. Độ trễ cao có thể ảnh hưởng đến hiệu suất và trải nghiệm người dùng. Các yếu tố ảnh hưởng đến độ trễ bao gồm khoảng cách vật lý giữa các dịch vụ, phương pháp tuần tự hóa và tải mạng.
 
@@ -79,7 +75,7 @@ Mỗi mô hình có ưu và nhược điểm riêng và phù hợp với các t�
 Trong giao tiếp đồng bộ, người gửi đợi phản hồi từ người nhận trước khi tiếp
 tục xử lý. Ví dụ, khi một dịch vụ gửi yêu cầu HTTP đến một dịch vụ khác, nó đợi
 phản hồi HTTP trước khi tiếp tục. Giao tiếp đồng bộ đơn giản và dễ hiểu, làm
-cho nó trở thành một lựa chọn phổ biến cho nhiều tình huống. Nó cũng cung cấp
+cho nó trở thành một lựa chọn phổ biến cho nhiều tình huống \cite{newman2015}. Nó cũng cung cấp
 phản hồi tức thì, cho phép người gửi biết ngay lập tức liệu yêu cầu của nó có
 thành công hay không.
 
@@ -93,7 +89,7 @@ Trong giao tiếp bất đồng bộ, người gửi không đợi phản hồi 
 thể tiếp tục xử lý. Ví dụ, khi một dịch vụ gửi một thông điệp đến một hàng đợi,
 nó có thể tiếp tục xử lý mà không cần đợi thông điệp được tiêu thụ. Giao tiếp
 bất đồng bộ cung cấp coupling lỏng lẻo hơn giữa các dịch vụ, vì người gửi không
-cần biết ai sẽ xử lý thông điệp của nó. Nó cũng cung cấp khả năng đệm, cho phép
+cần biết ai sẽ xử lý thông điệp của nó \cite{hohpe2004}. Nó cũng cung cấp khả năng đệm, cho phép
 hệ thống xử lý các đợt tải cao bằng cách xếp hàng các thông điệp cho đến khi
 chúng có thể được xử lý.
 
@@ -167,7 +163,7 @@ nhưng có thể khó triển khai và quản lý, đặc biệt là trong một
 tán.
 
 GraphQL là một ngôn ngữ truy vấn và thao tác dữ liệu, cung cấp một cách hiệu
-quả để truy xuất dữ liệu từ nhiều nguồn. GraphQL cho phép người dùng chỉ định
+quả để truy xuất dữ liệu từ nhiều nguồn \cite{richardson2019}. GraphQL cho phép người dùng chỉ định
 chính xác dữ liệu họ cần, tránh over-fetching và under-fetching dữ liệu. Nó đặc
 biệt hữu ích cho các ứng dụng di động, nơi băng thông có thể hạn chế. GraphQL
 cung cấp một giao diện thống nhất cho nhiều dịch vụ, nhưng có thể phức tạp để
@@ -202,7 +198,7 @@ rằng các yêu cầu với cùng giá trị hash đi đến cùng một phiên
 Data Consistency (Tính nhất quán dữ liệu) là một thách thức đáng kể trong giao
 tiếp microservice. Duy trì tính nhất quán dữ liệu trên nhiều dịch vụ, đặc biệt
 là trong giao tiếp bất đồng bộ, có thể phức tạp. Các mẫu để đối phó với Data
-Consistency bao gồm Saga, Event Sourcing và CQRS. Saga quản lý giao dịch phân
+Consistency bao gồm Saga, Event Sourcing và CQRS \cite{richardson2019}. Saga quản lý giao dịch phân
 tán bằng cách sử dụng một chuỗi giao dịch địa phương với các hoạt động bù trừ,
 Event Sourcing lưu trữ trạng thái của hệ thống dưới dạng một chuỗi các sự kiện,
 và CQRS tách các hoạt động đọc và ghi thành các mô hình riêng biệt.
