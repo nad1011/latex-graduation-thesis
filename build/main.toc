@@ -49,39 +49,36 @@
 \contentsline {subsection}{\numberline {3.4.1.}{Cơ chế hoạt động}}{36}{}%
 \contentsline {subsection}{\numberline {3.4.2.}{Publish/Subscribe Pattern}}{36}{}%
 \contentsline {subsection}{\numberline {3.4.3.}{Event Sourcing Pattern}}{37}{}%
-\contentsline {subsection}{\numberline {3.4.4.}{Message Broker với Exchange Routing}}{37}{}%
+\contentsline {subsection}{\numberline {3.4.4.}{Message Broker với Exchange Routing}}{38}{}%
 \contentsline {subsection}{\numberline {3.4.5.}{Streaming Platform}}{38}{}%
 \contentsline {subsection}{\numberline {3.4.6.}{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-many)}}{38}{}%
 \contentsline {subsection}{\numberline {3.4.7.}{Use cases phù hợp cho Asynchronous Communication (one-to-many)}}{39}{}%
 \contentsline {subsection}{\numberline {3.4.8.}{Kết luận}}{40}{}%
-\contentsline {section}{\numberline {3.5.}{Case Studies và Best Practices}}{40}{}%
-\contentsline {subsection}{\numberline {3.5.1.}{Case Studies thực tế}}{40}{}%
-\contentsline {subsection}{\numberline {3.5.2.}{Best Practices}}{41}{}%
-\contentsline {subsection}{\numberline {3.5.3.}{Khuyến nghị triển khai}}{42}{}%
-\contentsline {chapter}{\numberline {Chương\ 4.}{Triển khai thử nghiệm}}{43}{}%
-\contentsline {section}{\numberline {4.1.}{Mô tả bài toán và yêu cầu}}{43}{}%
-\contentsline {subsection}{\numberline {4.1.1.}{Hệ thống thử nghiệm}}{43}{}%
-\contentsline {subsection}{\numberline {4.1.2.}{Yêu cầu hệ thống}}{43}{}%
-\contentsline {section}{\numberline {4.2.}{Cài đặt và triển khai}}{43}{}%
-\contentsline {subsection}{\numberline {4.2.1.}{Thiết kế kiến trúc}}{43}{}%
-\contentsline {subsection}{\numberline {4.2.2.}{Lựa chọn công nghệ}}{43}{}%
-\contentsline {subsection}{\numberline {4.2.3.}{Chi tiết triển khai}}{44}{}%
-\contentsline {section}{\numberline {4.3.}{Kết quả triển khai}}{44}{}%
-\contentsline {subsection}{\numberline {4.3.1.}{Hiệu suất hệ thống}}{44}{}%
-\contentsline {subsection}{\numberline {4.3.2.}{Độ tin cậy}}{44}{}%
-\contentsline {subsection}{\numberline {4.3.3.}{Khả năng mở rộng}}{44}{}%
-\contentsline {subsection}{\numberline {4.3.4.}{Thiết lập hạ tầng}}{44}{}%
-\contentsline {section}{\numberline {4.4.}{Đánh giá hiệu năng}}{45}{}%
-\contentsline {subsection}{\numberline {4.4.1.}{Phương pháp đánh giá}}{45}{}%
-\contentsline {subsection}{\numberline {4.4.2.}{Phân tích so sánh}}{45}{}%
-\contentsline {chapter}{\numberline {Chương\ 5.}{Đánh giá và thảo luận}}{46}{}%
-\contentsline {section}{\numberline {5.1.}{Phương pháp và tiêu chí đánh giá}}{46}{}%
-\contentsline {subsection}{\numberline {5.1.1.}{Phương pháp đánh giá}}{46}{}%
-\contentsline {subsection}{\numberline {5.1.2.}{Tiêu chí đánh giá}}{46}{}%
-\contentsline {section}{\numberline {5.2.}{Kết quả đánh giá}}{46}{}%
-\contentsline {subsection}{\numberline {5.2.1.}{Đánh giá hiệu suất}}{46}{}%
-\contentsline {subsection}{\numberline {5.2.2.}{Đánh giá độ tin cậy}}{46}{}%
-\contentsline {subsection}{\numberline {5.2.3.}{Đánh giá khả năng mở rộng}}{47}{}%
-\contentsline {section}{\numberline {5.3.}{Thảo luận}}{47}{}%
-\contentsline {subsection}{\numberline {5.3.1.}{Ưu điểm và hạn chế}}{47}{}%
-\contentsline {subsection}{\numberline {5.3.2.}{Kiến nghị và hướng phát triển}}{47}{}%
+\contentsline {section}{\numberline {3.5.}{Tổng kết}}{41}{}%
+\contentsline {chapter}{\numberline {Chương\ 4.}{Triển khai thử nghiệm}}{42}{}%
+\contentsline {section}{\numberline {4.1.}{Mô tả bài toán và yêu cầu}}{42}{}%
+\contentsline {subsection}{\numberline {4.1.1.}{Hệ thống thử nghiệm}}{42}{}%
+\contentsline {subsection}{\numberline {4.1.2.}{Yêu cầu hệ thống}}{42}{}%
+\contentsline {section}{\numberline {4.2.}{Cài đặt và triển khai}}{42}{}%
+\contentsline {subsection}{\numberline {4.2.1.}{Thiết kế kiến trúc}}{42}{}%
+\contentsline {subsection}{\numberline {4.2.2.}{Lựa chọn công nghệ}}{42}{}%
+\contentsline {subsection}{\numberline {4.2.3.}{Chi tiết triển khai}}{43}{}%
+\contentsline {section}{\numberline {4.3.}{Kết quả triển khai}}{43}{}%
+\contentsline {subsection}{\numberline {4.3.1.}{Hiệu suất hệ thống}}{43}{}%
+\contentsline {subsection}{\numberline {4.3.2.}{Độ tin cậy}}{43}{}%
+\contentsline {subsection}{\numberline {4.3.3.}{Khả năng mở rộng}}{43}{}%
+\contentsline {subsection}{\numberline {4.3.4.}{Thiết lập hạ tầng}}{43}{}%
+\contentsline {section}{\numberline {4.4.}{Đánh giá hiệu năng}}{44}{}%
+\contentsline {subsection}{\numberline {4.4.1.}{Phương pháp đánh giá}}{44}{}%
+\contentsline {subsection}{\numberline {4.4.2.}{Phân tích so sánh}}{44}{}%
+\contentsline {chapter}{\numberline {Chương\ 5.}{Đánh giá và thảo luận}}{45}{}%
+\contentsline {section}{\numberline {5.1.}{Phương pháp và tiêu chí đánh giá}}{45}{}%
+\contentsline {subsection}{\numberline {5.1.1.}{Phương pháp đánh giá}}{45}{}%
+\contentsline {subsection}{\numberline {5.1.2.}{Tiêu chí đánh giá}}{45}{}%
+\contentsline {section}{\numberline {5.2.}{Kết quả đánh giá}}{45}{}%
+\contentsline {subsection}{\numberline {5.2.1.}{Đánh giá hiệu suất}}{45}{}%
+\contentsline {subsection}{\numberline {5.2.2.}{Đánh giá độ tin cậy}}{45}{}%
+\contentsline {subsection}{\numberline {5.2.3.}{Đánh giá khả năng mở rộng}}{46}{}%
+\contentsline {section}{\numberline {5.3.}{Thảo luận}}{46}{}%
+\contentsline {subsection}{\numberline {5.3.1.}{Ưu điểm và hạn chế}}{46}{}%
+\contentsline {subsection}{\numberline {5.3.2.}{Kiến nghị và hướng phát triển}}{46}{}%

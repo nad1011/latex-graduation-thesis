@@ -1,122 +1,14 @@
-\section{Case Studies và Best Practices}
+\section{Tổng kết}
+Trong chương này, chúng ta đã tìm hiểu chi tiết về các mẫu giao tiếp trong kiến trúc microservices. Đầu tiên, chúng ta đã phân loại các mẫu giao tiếp theo hai tiêu chí chính: communication mode (synchronous/asynchronous) và communication scope (one-to-one/one-to-many).
 
-\subsection{Case Studies thực tế}
-\begin{itemize}
-    \item Sử dụng kết hợp nhiều patterns:
-    \begin{itemize}
-        \item REST API cho client-server communication
-        \item gRPC cho service-to-service communication
-        \item Message Queue cho xử lý bất đồng bộ
-    \end{itemize}
-    \item Bài học kinh nghiệm:
-    \begin{itemize}
-        \item Chọn pattern phù hợp với từng use case
-        \item Đầu tư vào monitoring và observability
-        \item Tập trung vào fault tolerance
-    \end{itemize}
-\end{itemize}
+Với giao tiếp đồng bộ (synchronous) one-to-one, chúng ta tập trung vào mẫu Request/Response, được triển khai thông qua các công nghệ phổ biến như REST, gRPC và GraphQL. Mẫu này có ưu điểm là đơn giản, trực quan và phản hồi tức thì, nhưng hạn chế ở khả năng mở rộng và độ tin cậy.
 
-\begin{itemize}
-    \item Kiến trúc giao tiếp:
-    \begin{itemize}
-        \item Event-driven architecture với Pub/Sub
-        \item gRPC cho các service quan trọng
-        \item Message Queue cho xử lý đơn hàng
-    \end{itemize}
-    \item Thách thức và giải pháp:
-    \begin{itemize}
-        \item Xử lý tải cao với horizontal scaling
-        \item Đảm bảo tính nhất quán dữ liệu
-        \item Monitoring phân tán
-    \end{itemize}
-\end{itemize}
+Trong giao tiếp bất đồng bộ (asynchronous) one-to-one, chúng ta đã xem xét các mẫu như One-way Notifications và Message Queue. Các mẫu này cung cấp decoupling tốt hơn, khả năng chịu lỗi cao và khả năng mở rộng tốt, nhưng lại phức tạp hơn trong triển khai và debug.
 
-\subsection{Best Practices}
-\begin{itemize}
-    \item API Design:
-    \begin{itemize}
-        \item Sử dụng versioning cho API
-        \item Document rõ ràng các endpoints
-        \item Thiết kế theo RESTful principles
-        \item Sử dụng OpenAPI/Swagger
-    \end{itemize}
-    
-    \item Error Handling:
-    \begin{itemize}
-        \item Sử dụng HTTP status codes phù hợp
-        \item Cung cấp error messages rõ ràng
-        \item Implement retry mechanisms
-        \item Sử dụng circuit breakers
-    \end{itemize}
-\end{itemize}
+Đối với giao tiếp bất đồng bộ one-to-many, chúng ta đã tìm hiểu các mẫu như Publish/Subscribe, Event Sourcing và Message Broker với Exchange Routing. Các mẫu này cung cấp decoupling cao nhất và khả năng mở rộng tốt nhất, đặc biệt phù hợp cho việc phát tán thông tin và xử lý sự kiện.
 
-\begin{itemize}
-    \item Metrics:
-    \begin{itemize}
-        \item Theo dõi latency và throughput
-        \item Monitor error rates
-        \item Track resource utilization
-        \item Alerting thresholds
-    \end{itemize}
-    
-    \item Logging:
-    \begin{itemize}
-        \item Structured logging
-        \item Correlation IDs
-        \item Log levels phù hợp
-        \item Centralized logging
-    \end{itemize}
-    
-    \item Tracing:
-    \begin{itemize}
-        \item Distributed tracing
-        \item Service maps
-        \item Performance analysis
-        \item Root cause analysis
-    \end{itemize}
-\end{itemize}
+Mỗi mẫu giao tiếp đều có những use cases phù hợp riêng và việc lựa chọn mẫu giao tiếp phù hợp phụ thuộc vào nhiều yếu tố như yêu cầu về độ trễ, tính nhất quán dữ liệu, khả năng mở rộng và độ phức tạp triển khai.
 
-\begin{itemize}
-    \item Authentication và Authorization:
-    \begin{itemize}
-        \item Sử dụng JWT/OAuth2
-        \item Implement role-based access control
-        \item Secure service-to-service communication
-        \item Regular security audits
-    \end{itemize}
-    
-    \item Data Protection:
-    \begin{itemize}
-        \item Encryption in transit và at rest
-        \item Data masking
-        \item Secure configuration management
-        \item Regular security updates
-    \end{itemize}
-\end{itemize}
+Trong thực tế, một hệ thống microservices hiệu quả thường kết hợp nhiều mẫu giao tiếp khác nhau, sử dụng mỗi mẫu cho những trường hợp phù hợp nhất. Hiểu rõ các mẫu giao tiếp và tiêu chí lựa chọn là nền tảng quan trọng để thiết kế một kiến trúc microservices thành công.
 
-\subsection{Khuyến nghị triển khai}
-\begin{itemize}
-    \item Planning:
-    \begin{itemize}
-        \item Đánh giá yêu cầu hệ thống
-        \item Chọn patterns phù hợp
-        \item Thiết kế kiến trúc
-        \item Lập kế hoạch scaling
-    \end{itemize}
-    
-    \item Implementation:
-    \begin{itemize}
-        \item Bắt đầu với MVP
-        \item Tích hợp monitoring sớm
-        \item Implement testing strategy
-        \item Document quy trình
-    \end{itemize}
-    
-    \item Operations:
-    \begin{itemize}
-        \item Continuous monitoring
-        \item Regular performance testing
-        \item Capacity planning
-        \item Incident response
-    \end{itemize}
-\end{itemize} 
+Ở chương tiếp theo, chúng ta sẽ tiến hành triển khai thử nghiệm các mẫu giao tiếp đã học trong một hệ thống microservices thực tế. Chúng ta sẽ xây dựng một ứng dụng mẫu với nhiều microservices khác nhau, triển khai các mẫu giao tiếp khác nhau, và đánh giá hiệu suất cũng như tính phù hợp của từng mẫu trong các tình huống cụ thể.

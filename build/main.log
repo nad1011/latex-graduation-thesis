@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  13 APR 2025 21:42
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  14 APR 2025 21:11
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -1073,24 +1073,34 @@ Underfull \hbox (badness 1383) in paragraph at lines 2--3
 [39]) (./chapters/chapter3/3.5.tex
 
 [40]
+Underfull \hbox (badness 5533) in paragraph at lines 4--5
+[]\TU/TimesNewRoman(0)/m/n/12 Với giao tiếp đồng bộ (synchronous) one-t
+o-one, chúng ta tập trung vào mẫu
+ []
 
-[41])) (./chapters/chapter4.tex
 
-[42]
+Underfull \hbox (badness 2359) in paragraph at lines 8--9
+[]\TU/TimesNewRoman(0)/m/n/12 Đối với giao tiếp bất đồng bộ one-to
+-many, chúng ta đã tìm hiểu các mẫu như
+ []
 
-[43
+)) (./chapters/chapter4.tex
+
+[41]
+
+[42
 
 ]
 
-[44]) (./chapters/chapter5.tex
+[43]) (./chapters/chapter5.tex
 
-[45]
+[44]
 
-[46
+[45
 
 ])
 
-[47]
+[46]
 Underfull \hbox (badness 1024) in paragraph at lines 95--99
 []\TU/TimesNewRoman(0)/m/n/12 Gartner, Inc., ``Gartner Identifies Key Trends in PaaS and Platform Architecture for
  []
@@ -1103,7 +1113,7 @@ sign of Network-based Software
 
 
 
-[48
+[47
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1118,15 +1128,15 @@ Here is how much of LuaTeX's memory you used:
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 2:604,3:232,4:146,5:265,6:92,7:9927,8:1,9:383,10:24,11:68
+   avail lists: 2:488,3:178,4:92,5:245,6:92,7:8729,8:1,9:383,10:22,11:68
  43802 multiletter control sequences out of 65536+600000
- 70 fonts using 37170975 bytes
+ 70 fonts using 37171311 bytes
  99i,14n,105p,1747b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/WINDOWS/Fonts/timesi.ttf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/tim
 es.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (59 pages, 358747 bytes).
+Output written on main.pdf (58 pages, 357963 bytes).
 
-PDF statistics: 218 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 215 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
