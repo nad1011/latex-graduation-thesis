@@ -1,6 +1,6 @@
 \section{Công nghệ và phương pháp đo lường hiệu năng}
 
-\subsection{Các công nghệ triển khai microservices}
+\subsection{Các công nghệ triển khai trong dự án}
 Trong triển khai kiến trúc microservices, việc lựa chọn công nghệ phù hợp đóng vai trò quan trọng, ảnh hưởng trực tiếp đến hiệu suất, khả năng mở rộng và bảo trì của hệ thống \cite{newman2015}. Đánh giá này sử dụng NestJS làm framework chính cho việc phát triển các microservices. NestJS là một framework Node.js tiến bộ, được phát triển dựa trên TypeScript, cung cấp kiến trúc ứng dụng được lấy cảm hứng từ Angular với các nguyên tắc SOLID và mô hình MVC. Framework này mang lại nhiều lợi ích trong phát triển microservices như hỗ trợ dependency injection, kiến trúc mô-đun hóa cao và tích hợp sẵn với nhiều công nghệ khác nhau.
 
 NestJS sử dụng kiến trúc module mạnh mẽ cho phép tổ chức mã nguồn thành các thành phần có thể tái sử dụng và dễ bảo trì. Mỗi microservice trong bài đánh giá được triển khai như một ứng dụng NestJS độc lập, với cấu trúc bao gồm controllers (xử lý các yêu cầu HTTP), services (chứa logic nghiệp vụ), modules (đóng gói các thành phần liên quan) và entities (đại diện cho các đối tượng dữ liệu). NestJS cũng cung cấp một module microservices chuyên dụng hỗ trợ các giao thức như TCP, Redis, MQTT, gRPC, và Kafka, giúp đơn giản hóa việc triển khai các mẫu giao tiếp khác nhau.

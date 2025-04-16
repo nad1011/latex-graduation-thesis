@@ -1,0 +1,33 @@
+\section{Mô tả bài toán và yêu cầu}
+
+\subsection{Giới thiệu bài toán}
+Trong dự án này, chúng tôi triển khai một hệ thống thương mại điện tử dựa trên kiến trúc microservice để đánh giá các mẫu giao tiếp khác nhau giữa các dịch vụ. Hệ thống được thiết kế để mô phỏng các tương tác thực tế giữa các microservice trong một ứng dụng thương mại điện tử, bao gồm quản lý đơn hàng, kiểm tra tồn kho, xử lý thanh toán và thông báo khách hàng. Mỗi quy trình nghiệp vụ này yêu cầu sự phối hợp giữa nhiều dịch vụ và đòi hỏi các mẫu giao tiếp khác nhau tùy thuộc vào tính chất của tác vụ.
+
+Bài toán tập trung vào việc đánh giá hiệu suất và độ tin cậy của các mẫu giao tiếp trong bốn kịch bản nghiệp vụ chính. Kịch bản thứ nhất là kiểm tra và cập nhật tồn kho khi khách hàng đặt hàng, hệ thống cần kiểm tra tồn kho và cập nhật số lượng sản phẩm khả dụng. Kịch bản thứ hai liên quan đến xử lý thanh toán sau khi xác nhận đơn hàng, hệ thống cần xử lý thanh toán thông qua dịch vụ thanh toán. Kịch bản thứ ba là thông báo kết quả đơn hàng, sau khi hoàn tất đơn hàng, hệ thống cần gửi thông báo qua nhiều kênh khác nhau như email, tin nhắn và cập nhật phân tích. Cuối cùng là kịch bản ghi nhận hoạt động người dùng, hệ thống ghi lại hoạt động của người dùng để phục vụ cho phân tích dữ liệu và phát hiện gian lận.
+
+Cho mỗi kịch bản, chúng tôi triển khai và so sánh các mẫu giao tiếp khác nhau, bao gồm giao tiếp đồng bộ (Synchronous), giao tiếp bất đồng bộ dạng một-một (Asynchronous One-to-One) và giao tiếp bất đồng bộ dạng một-nhiều (Asynchronous One-to-Many).
+
+\subsection{Yêu cầu hệ thống}
+Dự án này được phát triển với mục tiêu đánh giá các mẫu giao tiếp microservice dựa trên các yêu cầu cụ thể. Về yêu cầu chức năng, hệ thống phải hỗ trợ tạo và quản lý đơn hàng, bao gồm thêm sản phẩm vào đơn hàng và xử lý đơn hàng. Hệ thống cần thực hiện kiểm tra và cập nhật tồn kho khi có đơn hàng mới, đồng thời xử lý thanh toán cho đơn hàng và cập nhật trạng thái thanh toán. Ngoài ra, hệ thống phải gửi thông báo đến khách hàng thông qua nhiều kênh khác nhau như email và thông báo đẩy, đồng thời ghi lại hoạt động của người dùng cho mục đích phân tích và phát hiện gian lận.
+
+Về yêu cầu phi chức năng, hiệu suất là yếu tố quan trọng với thời gian phản hồi thấp cho các giao dịch quan trọng, đặc biệt là kiểm tra tồn kho và xử lý đơn hàng. Độ tin cậy đòi hỏi hệ thống phải đảm bảo tính nhất quán dữ liệu giữa các dịch vụ, đặc biệt là đối với tồn kho và trạng thái đơn hàng. Khả năng chịu lỗi yêu cầu hệ thống phải tiếp tục hoạt động ngay cả khi một hoặc nhiều dịch vụ không khả dụng. Khả năng mở rộng đòi hỏi các dịch vụ phải có thể mở rộng độc lập để đáp ứng nhu cầu tăng đột biến. Cuối cùng, tính linh hoạt yêu cầu kiến trúc phải cho phép thêm hoặc thay đổi dịch vụ mà không ảnh hưởng đến toàn bộ hệ thống.
+
+\subsection{Kiến trúc tổng thể hệ thống}
+Hệ thống được thiết kế theo kiến trúc microservice, trong đó mỗi dịch vụ chịu trách nhiệm cho một chức năng nghiệp vụ cụ thể. Kiến trúc tổng thể của hệ thống bao gồm tám dịch vụ chính, mỗi dịch vụ đóng vai trò riêng biệt trong quy trình xử lý đơn hàng và tương tác với người dùng.
+
+Dịch vụ Order Service đóng vai trò trung tâm, xử lý việc tạo và quản lý đơn hàng, đồng thời điều phối luồng xử lý giữa các dịch vụ khác nhau. Dịch vụ này tương tác trực tiếp với Inventory Service để kiểm tra và cập nhật tồn kho, và với Payment Service để xử lý thanh toán cho đơn hàng. Inventory Service quản lý tồn kho sản phẩm, hỗ trợ kiểm tra và cập nhật số lượng tồn kho khi có đơn hàng mới. Payment Service xử lý thanh toán cho đơn hàng và cập nhật trạng thái thanh toán, đảm bảo giao dịch tài chính được thực hiện an toàn và đáng tin cậy.
+
+Sau khi đơn hàng được xử lý, thông tin được chuyển đến ba dịch vụ khác nhau để thông báo cho khách hàng. Email Service gửi email thông báo đến khách hàng, trong khi Notification Service gửi thông báo đẩy trực tiếp đến các thiết bị của khách hàng. Analytics Service thu thập và phân tích dữ liệu từ các hoạt động của người dùng và đơn hàng, cung cấp thông tin chi tiết về hiệu suất kinh doanh và hành vi người dùng.
+
+Hai dịch vụ còn lại phục vụ cho việc ghi nhận và phân tích hoạt động người dùng. Fraud Service phát hiện các hoạt động đáng ngờ và ngăn chặn gian lận, bảo vệ hệ thống khỏi các hoạt động độc hại. Activity Service ghi lại hoạt động người dùng và định tuyến sự kiện đến các dịch vụ phù hợp, đóng vai trò quan trọng trong việc thu thập dữ liệu cho phân tích và phát hiện gian lận.
+
+Kiến trúc này cho phép các dịch vụ hoạt động độc lập, đồng thời cung cấp khả năng mở rộng và linh hoạt cao. Mỗi dịch vụ có thể được phát triển, triển khai và mở rộng độc lập, giúp tăng cường khả năng chịu lỗi và hiệu suất của hệ thống.
+
+\subsection{Các mẫu giao tiếp đánh giá}
+Trong dự án này, chúng tôi tập trung đánh giá ba mẫu giao tiếp chính trong kiến trúc microservice. Mẫu giao tiếp đầu tiên là giao tiếp đồng bộ (Synchronous Communication), sử dụng REST API, trong đó dịch vụ gọi gửi yêu cầu và chờ phản hồi từ dịch vụ được gọi. Mẫu này được triển khai thông qua giao thức HTTP và thường được sử dụng cho các tương tác yêu cầu phản hồi nhanh. Đây là mẫu đơn giản nhất và dễ triển khai, nhưng có thể gây ra vấn đề về hiệu suất và khả năng chịu lỗi khi hệ thống mở rộng.
+
+Mẫu giao tiếp thứ hai là giao tiếp bất đồng bộ dạng một-một (Asynchronous One-to-One Communication), sử dụng RabbitMQ message queue. Trong mẫu này, dịch vụ gửi đặt thông điệp vào hàng đợi và tiếp tục xử lý mà không cần chờ phản hồi, trong khi dịch vụ nhận sẽ xử lý thông điệp khi sẵn sàng. Mẫu này được sử dụng cho các tác vụ không yêu cầu phản hồi ngay lập tức, giúp cải thiện hiệu suất và khả năng chịu lỗi của hệ thống.
+
+Mẫu giao tiếp thứ ba là giao tiếp bất đồng bộ dạng một-nhiều (Asynchronous One-to-Many Communication), sử dụng Kafka event streaming. Trong mẫu này, dịch vụ xuất bản sự kiện cho nhiều dịch vụ đăng ký, cho phép nhiều dịch vụ xử lý cùng một sự kiện độc lập với nhau. Mẫu này đặc biệt hữu ích khi một sự kiện cần được xử lý bởi nhiều dịch vụ độc lập, giúp tăng cường tính linh hoạt và khả năng mở rộng của hệ thống.
+
+Việc đánh giá các mẫu giao tiếp này sẽ giúp chúng tôi xác định mẫu phù hợp nhất cho từng kịch bản nghiệp vụ dựa trên các tiêu chí như hiệu suất, độ tin cậy, khả năng chịu lỗi và khả năng mở rộng.

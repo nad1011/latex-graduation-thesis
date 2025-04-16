@@ -1,0 +1,680 @@
+\section{Cài đặt và triển khai}
+
+\subsection{Cấu trúc dự án}
+Dự án được tổ chức theo kiến trúc monorepo, cho phép quản lý nhiều microservice trong một repository duy nhất. Cấu trúc này tạo điều kiện thuận lợi cho việc chia sẻ mã nguồn và tài nguyên giữa các dịch vụ, đồng thời đơn giản hóa quá trình triển khai và kiểm thử. Cấu trúc thư mục chính của dự án bao gồm thư mục \texttt{apps} chứa mã nguồn cho từng microservice riêng biệt, thư mục \texttt{libs} chứa các module dùng chung, và thư mục \texttt{test-script} chứa các kịch bản kiểm thử hiệu suất.
+
+Trong thư mục \texttt{apps}, mỗi dịch vụ được tổ chức theo cấu trúc tiêu chuẩn của NestJS, bao gồm các module, controller, service và entity. Điều này giúp duy trì tính nhất quán và khả năng bảo trì trên toàn dự án. Thư mục \texttt{libs} chứa module \texttt{common} chia sẻ các định nghĩa, interface và utility dùng chung giữa các microservice, giúp tránh việc trùng lặp mã và đảm bảo tính nhất quán trong toàn hệ thống.
+
+Mỗi microservice được đóng gói thành một container Docker riêng biệt, cho phép triển khai độc lập và cô lập. File \texttt{Dockerfile} cho mỗi service được thiết kế để tối ưu hóa kích thước image và thời gian xây dựng. Tệp \texttt{Docker Compose} phối hợp việc triển khai tất cả các microservice cùng với các dịch vụ cơ sở hạ tầng như cơ sở dữ liệu, RabbitMQ và Kafka.
+
+\subsection{Triển khai các microservice chính}
+
+Order Service
+Order Service đóng vai trò trung tâm trong hệ thống, xử lý việc tạo và quản lý đơn hàng, đồng thời điều phối luồng xử lý giữa các dịch vụ khác. Service này được triển khai với các endpoint RESTful cho các hoạt động CRUD đơn hàng, cùng với các handlers cho các sự kiện từ các dịch vụ khác.
+
+Để xử lý đơn hàng, chúng tôi đã triển khai một thực thể Order với các trường như \texttt{id}, \texttt{productId}, \texttt{customerId}, \texttt{quantity}, \texttt{status}, \texttt{paymentId}, \texttt{paymentStatus}, và \texttt{paymentError}. Mỗi đơn hàng đi qua nhiều trạng thái khác nhau, bao gồm \texttt{pending}, \texttt{payment\_pending}, \texttt{paid}, \texttt{payment\_failed}, và \texttt{completed}, phản ánh quy trình xử lý đơn hàng đầy đủ.
+
+\begin{lstlisting}[language=Typescript]
+@Entity()
+export class Order {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  productId: string;
+
+  @Column({ nullable: true })
+  customerId: string;
+
+  @Column()
+  quantity: number;
+
+  @Column()
+  status: string; // pending, payment_pending, paid, payment_failed, completed
+
+  @Column({ nullable: true })
+  paymentId: string;
+
+  @Column({ nullable: true })
+  paymentStatus: string;
+
+  @Column({ nullable: true })
+  paymentError: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+}
+\end{lstlisting}
+
+Order Service cung cấp hai phương thức khác nhau để tạo đơn hàng: đồng bộ và bất đồng bộ. Trong phương thức đồng bộ (\texttt{createOrderSync}), service kiểm tra tồn kho bằng cách gửi yêu cầu HTTP đến Inventory Service và đợi phản hồi trước khi tiếp tục. Nếu tồn kho đủ, service cập nhật tồn kho và tạo đơn hàng mới với trạng thái \texttt{confirmed}.
+
+\begin{lstlisting}[language=Typescript]
+async createOrderSync(data: { productId: string; quantity: number }) {
+  this.validateQuantity(data.quantity);
+
+  try {
+    return await this.orderRepository.manager.transaction(async (manager) => {
+      const response = await firstValueFrom(
+        this.httpService
+          .get<InventoryResponse>(
+            `${this.inventoryBaseUrl}/inventory/check/${data.productId}`,
+            { ...HTTP_CONFIG },
+          )
+          .pipe(/* handling error */),
+      );
+
+      if (response.data.quantity < data.quantity) {
+        throw new BadRequestException('Insufficient inventory');
+      }
+
+      const order = manager.create(Order, {
+        productId: data.productId,
+        quantity: data.quantity,
+        status: 'created',
+      });
+
+      try {
+        await firstValueFrom(
+          this.httpService
+            .post<InventoryResponse>(
+              `${this.inventoryBaseUrl}/inventory/update`,
+              {
+                productId: data.productId,
+                quantity: data.quantity,
+                orderId: order.id,
+              },
+              { ...HTTP_CONFIG },
+            )
+            .pipe(retry(3)),
+        );
+        order.status = 'confirmed';
+      } catch (error) {
+        order.status = 'failed';
+        throw new ServiceUnavailableException('Failed to update inventory');
+      }
+      await manager.save(Order, order);
+
+      return order;
+    });
+  } catch (error) {
+    this.logger.error(`Order creation failed: ${(error as Error).message}`);
+  }
+}
+\end{lstlisting}
+
+Trong phương thức bất đồng bộ (\texttt{createOrderAsync}), service gửi một thông điệp đến Inventory Service thông qua RabbitMQ và không đợi phản hồi ngay lập tức. Order được tạo với trạng thái \texttt{pending} và sẽ được cập nhật khi nhận được phản hồi từ Inventory Service.
+
+\begin{lstlisting}[language=Typescript]
+async createOrderAsync(data: { productId: string; quantity: number }) {
+  this.validateQuantity(data.quantity);
+  const order = this.orderRepository.create({
+    productId: data.productId,
+    quantity: data.quantity,
+    status: 'pending',
+  });
+
+  await this.orderRepository.save(order);
+
+  try {
+    void firstValueFrom(
+      this.inventoryClient
+        .send<InventoryResponse>('check_update_inventory', {
+          productId: data.productId,
+          quantity: data.quantity,
+        })
+        .pipe(/* handling error */),
+    )
+      .then(response => {
+        if (!response.isAvailable) {
+          order.status = 'failed';
+          void this.orderRepository.save(order);
+          throw new BadRequestException('Insufficient inventory');
+        } else {
+          order.status = 'confirmed';
+          void this.orderRepository.save(order);
+        }
+      })
+      .catch(error => {
+        this.logger.error(`Async order failed: ${error}`);
+        order.status = 'failed';
+        void this.orderRepository.save;
+      });
+    return order;
+  } catch (error) {
+    this.logger.error(`Async order failed: ${error}`);
+    order.status = 'failed';
+    await this.orderRepository.save(order);
+    return order;
+  }
+}
+\end{lstlisting}
+
+Order Service cũng triển khai streaming API để client có thể theo dõi trạng thái đơn hàng theo thời gian thực. API này sử dụng Server-Sent Events (SSE) để gửi cập nhật cho client khi trạng thái đơn hàng thay đổi.
+
+Inventory Service
+Inventory Service quản lý tồn kho sản phẩm, cung cấp khả năng kiểm tra và cập nhật số lượng tồn kho. Service này cung cấp cả endpoint RESTful đồng bộ và handler bất đồng bộ cho RabbitMQ.
+
+Thực thể Inventory được định nghĩa với các trường như \texttt{id}, \texttt{productId}, \texttt{quantity}, và \texttt{isAvailable}. Trường \texttt{isAvailable} được sử dụng để đánh dấu nhanh xem sản phẩm có sẵn để đặt hàng hay không.
+
+\begin{lstlisting}[language=Typescript]
+@Entity()
+export class Inventory {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column({ name: 'product_id' })
+  productId: string;
+
+  @Column()
+  quantity: number;
+
+  @Column({ default: true, name: 'is_available' })
+  isAvailable: boolean;
+}
+\end{lstlisting}
+
+Trong giao tiếp đồng bộ, Inventory Service cung cấp endpoint \texttt{/inventory/check/{productId}} để kiểm tra tồn kho và endpoint \texttt{/inventory/update} để cập nhật tồn kho. Các endpoint này được gọi trực tiếp từ Order Service thông qua HTTP.
+
+\begin{lstlisting}[language=Typescript]
+@Get('check/:productId')
+async checkInventorySync(@Param('productId') productId: string) {
+  return this.inventoryService.checkInventory({ productId, quantity: 1 });
+}
+
+@Post('update')
+async updateInventorySync(@Body() updateInventoryDto: UpdateInventoryDto) {
+  return this.inventoryService.updateInventory(updateInventoryDto);
+}
+\end{lstlisting}
+
+Trong giao tiếp bất đồng bộ, Inventory Service xử lý thông điệp từ RabbitMQ thông qua handler \texttt{handleCheckInventory}. Handler này thực hiện cả việc kiểm tra và cập nhật tồn kho trong một giao dịch.
+
+\begin{lstlisting}[language=Typescript]
+@MessagePattern('check_update_inventory')
+async handleCheckInventory(data: CheckInventoryDto) {
+  const checkResult = await this.inventoryService.checkInventory(data);
+  if (checkResult.isAvailable) {
+    return this.inventoryService.updateInventory(data);
+  }
+  return checkResult;
+}
+\end{lstlisting}
+
+Payment Service
+Payment Service xử lý thanh toán cho đơn hàng và cập nhật trạng thái thanh toán. Service này mô phỏng tương tác với một cổng thanh toán bên ngoài, với thời gian xử lý từ 3 đến 5 giây và tỷ lệ thành công 90\%.
+
+Thực thể Payment được định nghĩa với các trường như \texttt{id}, \texttt{orderId}, \texttt{quantity}, \texttt{currency}, \texttt{status}, \texttt{transactionId}, và \texttt{errorMessage}. Trường \texttt{status} có thể là \texttt{pending}, \texttt{processing}, \texttt{completed}, hoặc \texttt{failed}, phản ánh trạng thái xử lý thanh toán.
+
+\begin{lstlisting}[language=Typescript]
+@Entity()
+export class Payment {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  orderId: string;
+
+  @Column()
+  quantity: number;
+
+  @Column({ default: 'USD' })
+  currency: string;
+
+  @Column()
+  status: string; // pending, processing, completed, failed
+
+  @Column({ nullable: true })
+  transactionId: string;
+
+  @Column({ nullable: true })
+  errorMessage: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+}
+\end{lstlisting}
+
+Payment Service cung cấp hai phương thức để xử lý thanh toán: đồng bộ và bất đồng bộ. Trong phương thức đồng bộ, client gửi yêu cầu đến endpoint \texttt{/payment/process} và đợi phản hồi. Trong phương thức bất đồng bộ, client gửi yêu cầu đến RabbitMQ và nhận phản hồi thông qua callback.
+
+\begin{lstlisting}[language=Typescript]
+@Post('process')
+async processPaymentSync(
+  @Body() processPaymentDto: ProcessPaymentDto,
+): Promise<PaymentResponseDto> {
+  return this.paymentService.processPayment(processPaymentDto, true);
+}
+
+@MessagePattern(PAYMENT_PATTERNS.PROCESS_PAYMENT)
+async processPaymentAsync(
+  processPaymentDto: ProcessPaymentDto,
+): Promise<PaymentResponseDto> {
+  return this.paymentService.processPayment(processPaymentDto, false);
+}
+\end{lstlisting}
+
+Việc xử lý thanh toán được thực hiện trong \texttt{processPayment}, mô phỏng tương tác với cổng thanh toán bên ngoài. Phương thức này tạo một bản ghi thanh toán, gọi mô phỏng cổng thanh toán, cập nhật trạng thái thanh toán, và gửi kết quả về client (trong trường hợp đồng bộ) hoặc gửi callback đến Order Service (trong trường hợp bất đồng bộ).
+
+\begin{lstlisting}[language=Typescript]
+async processPayment(
+  processPaymentDto: ProcessPaymentDto,
+  isSync: boolean,
+): Promise<PaymentResponseDto> {
+  const payment = this.paymentRepository.create({
+    orderId: processPaymentDto.orderId,
+    quantity: processPaymentDto.quantity,
+    currency: processPaymentDto.currency,
+    status: 'pending',
+  });
+
+  await this.paymentRepository.save(payment);
+
+  try {
+    const result = await this.processWithExternalGateway(payment);
+
+    payment.status = result.success ? 'completed' : 'failed';
+    payment.transactionId = result.transactionId;
+    payment.errorMessage = result.message;
+
+    await this.paymentRepository.save(payment);
+
+    const response = {
+      success: result.success,
+      transactionId: result.transactionId,
+      message: result.message,
+      paymentId: payment.id,
+      status: payment.status,
+    };
+
+    if (!isSync) {
+      try {
+        await firstValueFrom(
+          this.orderClient.emit(PAYMENT_PATTERNS.PAYMENT_CALLBACK, {
+            orderId: payment.orderId,
+            payload: response,
+          }),
+        );
+      } catch (error) {
+        console.error(
+          `Failed to send callback for order ${payment.orderId}: ${error}`,
+        );
+      }
+    }
+
+    return response;
+  } catch (error) {
+    payment.status = 'failed';
+    payment.errorMessage = (error as Error).message;
+    await this.paymentRepository.save(payment);
+
+    const response = {
+      success: false,
+      message: 'Payment processing failed',
+      paymentId: payment.id,
+      status: 'failed',
+    };
+
+    if (!isSync) {
+      await firstValueFrom(
+        this.orderClient.emit(PAYMENT_PATTERNS.PAYMENT_CALLBACK, {
+          orderId: payment.orderId,
+          payload: response,
+        }),
+      );
+    }
+
+    return response;
+  }
+}
+\end{lstlisting}
+
+Notification Services
+Nhóm các dịch vụ thông báo bao gồm Email Service, Notification Service và Analytics Service, đều nhận sự kiện từ Order Service và xử lý chúng theo cách riêng.
+
+Email Service gửi email thông báo đến khách hàng, mô phỏng tương tác với một dịch vụ email bên ngoài như SendGrid hoặc AWS SES. Service này cung cấp cả endpoint RESTful cho giao tiếp đồng bộ và handler cho Kafka cho giao tiếp bất đồng bộ.
+
+\begin{lstlisting}[language=Typescript]
+@Post()
+async sendEmail(
+  @Body()
+  emailData: {
+    orderId: string;
+    customerId: string;
+    subject: string;
+    body: string;
+  },
+) {
+  this.logger.log(
+    `Received sync email request for order: ${emailData.orderId}`,
+  );
+  // Simulate processing time
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return this.emailService.sendEmail(emailData);
+}
+
+@EventPattern('order_confirmed')
+async handleOrderConfirmed(data: {
+  orderId: string;
+  customerId: string;
+  status: string;
+  productId: string;
+  quantity: number;
+  timestamp: string;
+}) {
+  this.logger.log(`Received async event for order: ${data.orderId}`);
+
+  return this.emailService.sendEmail({
+    orderId: data.orderId,
+    customerId: data.customerId,
+    subject: `Order Confirmation: #${data.orderId}`,
+    body: `Thank you for your order #${data.orderId}...`,
+  });
+}
+\end{lstlisting}
+
+Tương tự, Notification Service gửi thông báo đẩy đến khách hàng, trong khi Analytics Service ghi lại và phân tích sự kiện đơn hàng. Cả hai service này cũng cung cấp cả endpoint RESTful và handler Kafka.
+
+\subsection{Triển khai các mẫu giao tiếp}
+
+Giao tiếp đồng bộ (REST API)
+Giao tiếp đồng bộ được triển khai thông qua REST API, sử dụng module \texttt{HttpModule} của NestJS. Trong mô hình này, một service gửi yêu cầu HTTP đến service khác và đợi phản hồi trước khi tiếp tục xử lý.
+
+Ví dụ, khi xử lý đơn hàng đồng bộ, Order Service gửi yêu cầu đến Inventory Service để kiểm tra tồn kho, đợi phản hồi, sau đó gửi yêu cầu khác để cập nhật tồn kho. Quá trình này đảm bảo tính nhất quán dữ liệu, nhưng có thể gây ra hiện tượng nghẽn cổ chai và điểm thất bại duy nhất.
+
+\begin{lstlisting}[language=Typescript]
+const response = await firstValueFrom(
+  this.httpService
+    .get<InventoryResponse>(
+      `${this.inventoryBaseUrl}/inventory/check/${data.productId}`,
+      { ...HTTP_CONFIG },
+    )
+    .pipe(/* error handling */),
+);
+
+if (response.data.quantity < data.quantity) {
+  throw new BadRequestException('Insufficient inventory');
+}
+
+// Update inventory
+await firstValueFrom(
+  this.httpService
+    .post<InventoryResponse>(
+      `${this.inventoryBaseUrl}/inventory/update`,
+      {
+        productId: data.productId,
+        quantity: data.quantity,
+        orderId: order.id,
+      },
+      { ...HTTP_CONFIG },
+    )
+    .pipe(retry(3)),
+);
+\end{lstlisting}
+
+Để cải thiện khả năng chịu lỗi, chúng tôi đã triển khai Circuit Breaker pattern sử dụng thư viện \texttt{opossum}. Pattern này ngăn chặn các yêu cầu đến service không khả dụng, giảm thiểu tác động của lỗi dịch vụ.
+
+\begin{lstlisting}[language=Typescript]
+createBreaker(name: string, options: CircuitBreaker.Options = {}) {
+  if (!this.breakers.has(name)) {
+    const defaultOptions: CircuitBreaker.Options = {
+      timeout: 5000,
+      errorThresholdPercentage: 50,
+      resetTimeout: 10000,
+      rollingCountTimeout: 10000,
+      rollingCountBuckets: 10,
+      ...options,
+    };
+
+    const breaker = new CircuitBreaker(async function 
+      T,
+      Args extends unknown[],
+    >(fn: (...args: Args) => Promise<T> | T, ...args: Args): Promise<T> {
+      return fn(...args) as Promise<T>;
+    }, defaultOptions);
+
+    breaker?.on('open', () => {
+      this.logger.warn(`Circuit Breaker '${name}' is open`);
+    });
+
+    // Other event handlers...
+
+    this.breakers.set(name, breaker);
+  }
+
+  return this.breakers.get(name);
+}
+
+async fire<T, Args extends unknown[]>(
+  name: string,
+  fn: (...args: Args) => Promise<T> | T,
+  ...args: Args
+): Promise<T> {
+  const breaker = this.createBreaker(name);
+  return (await breaker.fire(fn, ...args)) as T;
+}
+\end{lstlisting}
+
+Giao tiếp bất đồng bộ dạng một-một (RabbitMQ)
+Giao tiếp bất đồng bộ dạng một-một được triển khai sử dụng RabbitMQ thông qua module \texttt{ClientsModule} của NestJS với transport \texttt{Transport.RMQ}. Trong mô hình này, một service gửi thông điệp đến một hàng đợi, và một service khác tiêu thụ thông điệp từ hàng đợi đó.
+
+Ví dụ, khi xử lý đơn hàng bất đồng bộ, Order Service gửi thông điệp đến Inventory Service để kiểm tra và cập nhật tồn kho. Order Service không đợi phản hồi ngay lập tức, mà tiếp tục xử lý. Khi Inventory Service hoàn thành xử lý, nó gửi phản hồi thông qua một hàng đợi khác.
+
+\begin{lstlisting}[language=Typescript]
+// Order Service
+void firstValueFrom(
+  this.inventoryClient
+    .send<InventoryResponse>('check_update_inventory', {
+      productId: data.productId,
+      quantity: data.quantity,
+    })
+    .pipe(/* error handling */),
+)
+  .then(response => {
+    if (!response.isAvailable) {
+      order.status = 'failed';
+      void this.orderRepository.save(order);
+      throw new BadRequestException('Insufficient inventory');
+    } else {
+      order.status = 'confirmed';
+      void this.orderRepository.save(order);
+    }
+  })
+  .catch(error => {
+    this.logger.error(`Async order failed: ${error}`);
+    order.status = 'failed';
+    void this.orderRepository.save;
+  });
+
+// Inventory Service
+@MessagePattern('check_update_inventory')
+async handleCheckInventory(data: CheckInventoryDto) {
+  const checkResult = await this.inventoryService.checkInventory(data);
+  if (checkResult.isAvailable) {
+    return this.inventoryService.updateInventory(data);
+  }
+  return checkResult;
+}
+\end{lstlisting}
+
+Cấu hình RabbitMQ được đặt trong module của mỗi service, chỉ định URL kết nối, tên hàng đợi và các tùy chọn khác.
+
+\begin{lstlisting}[language=Typescript]
+ClientsModule.register([
+  {
+    name: 'INVENTORY_SERVICE',
+    transport: Transport.RMQ,
+    options: {
+      urls: [
+        process.env.RABBITMQ_URL || 'amqp://guest:guest@localhost:5672',
+      ],
+      queue: 'inventory_queue',
+      queueOptions: {
+        durable: true,
+      },
+    },
+  },
+  // Other clients...
+]),
+\end{lstlisting}
+
+Giao tiếp bất đồng bộ dạng một-nhiều (Kafka)
+Giao tiếp bất đồng bộ dạng một-nhiều được triển khai sử dụng Kafka thông qua module \texttt{ClientsModule} của NestJS với transport \texttt{Transport.KAFKA}. Trong mô hình này, một service xuất bản sự kiện lên một topic Kafka, và nhiều service đăng ký nhận sự kiện từ topic đó.
+
+Ví dụ, khi một đơn hàng được xác nhận, Order Service xuất bản sự kiện \texttt{order\_confirmed} lên Kafka. Email Service, Notification Service và Analytics Service đều đăng ký nhận sự kiện này và xử lý nó độc lập.
+
+\begin{lstlisting}[language=Typescript]
+// Order Service
+async notifyServicesAsync(order: Order) {
+  const startTime = Date.now();
+
+  try {
+    // Publish single event to Kafka
+    await firstValueFrom(
+      this.kafkaClient
+        .emit('order_confirmed', {
+          orderId: order.id,
+          customerId: order.customerId,
+          status: order.status,
+          productId: order.productId,
+          quantity: order.quantity,
+          timestamp: new Date().toISOString(),
+        })
+        .pipe(/* error handling */),
+    );
+
+    return {
+      success: true,
+      time: Date.now() - startTime,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      time: Date.now() - startTime,
+      error: error as string,
+    };
+  }
+}
+
+// Email Service
+@EventPattern('order_confirmed')
+async handleOrderConfirmed(data: {
+  orderId: string;
+  customerId: string;
+  status: string;
+  productId: string;
+  quantity: number;
+  timestamp: string;
+}) {
+  this.logger.log(`Received async event for order: ${data.orderId}`);
+
+  return this.emailService.sendEmail({
+    orderId: data.orderId,
+    customerId: data.customerId,
+    subject: `Order Confirmation: #${data.orderId}`,
+    body: `Thank you for your order...`,
+  });
+}
+\end{lstlisting}
+
+Cấu hình Kafka được đặt trong module của mỗi service, chỉ định thông tin broker, client ID và các tùy chọn khác.
+
+\begin{lstlisting}[language=Typescript]
+ClientsModule.register([
+  {
+    name: 'KAFKA_SERVICE',
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        clientId: 'order',
+        brokers: [process.env.KAFKA_BROKERS || 'localhost:9092'],
+      },
+      consumer: {
+        groupId: 'order-consumer',
+        allowAutoTopicCreation: true,
+        sessionTimeout: 30000,
+        maxInFlightRequests: 100,
+      },
+      producer: {
+        allowAutoTopicCreation: true,
+      },
+    },
+  },
+  // Other clients...
+]),
+\end{lstlisting}
+
+\subsection{Thiết lập môi trường kiểm thử}
+Để đánh giá hiệu suất và độ tin cậy của các mẫu giao tiếp, chúng tôi đã thiết lập một môi trường kiểm thử toàn diện. Các script kiểm thử được viết bằng k6, một công cụ kiểm thử hiệu suất mã nguồn mở, cho phép mô phỏng lượng truy cập cao và đo lường các chỉ số hiệu suất quan trọng.
+
+Chúng tôi đã phát triển các script kiểm thử riêng cho từng kịch bản nghiệp vụ, mỗi script đo lường hiệu suất của cả giao tiếp đồng bộ và bất đồng bộ. Các chỉ số được đo lường bao gồm thời gian phản hồi, thông lượng, tỷ lệ lỗi, và sử dụng tài nguyên.
+
+\begin{lstlisting}[language=Javascript]
+export const options = {
+  scenarios: {
+    sync_test: {
+      executor: 'ramping-arrival-rate',
+      startRate: 1,
+      timeUnit: '1s',
+      preAllocatedVUs: 5,
+      maxVUs: 10,
+      stages: [
+        { duration: '30s', target: 5 },
+        { duration: '1m', target: 5 },
+        { duration: '30s', target: 0 },
+      ],
+      exec: 'syncTest',
+    },
+    async_test: {
+      executor: 'ramping-arrival-rate',
+      startRate: 1,
+      timeUnit: '1s',
+      preAllocatedVUs: 5,
+      maxVUs: 10,
+      stages: [
+        { duration: '30s', target: 5 },
+        { duration: '1m', target: 5 },
+        { duration: '30s', target: 0 },
+      ],
+      exec: 'asyncTest',
+      startTime: '2m30s'
+    },
+    // Other scenarios...
+  },
+  thresholds: {
+    http_req_duration: ['p(95)<3000', 'p(99)<5000'],
+    http_req_failed: ['rate<0.01'],
+    // Other thresholds...
+  },
+};
+\end{lstlisting}
+
+Chúng tôi cũng đã thiết lập giám sát hệ thống sử dụng Prometheus và Grafana để thu thập và hiển thị dữ liệu hiệu suất theo thời gian thực. Điều này cho phép chúng tôi phân tích hành vi hệ thống dưới các mức tải khác nhau và xác định các điểm nghẽn có thể có.
+
+\begin{lstlisting}[language=Javascript]
+function getSystemMetrics(serviceName) {
+  try {
+    const cpuResponse = http.get(
+      `${MONITORING_URL}/api/v1/query?query=process_cpu_seconds_total{service="${serviceName}"}`,
+      { headers: { Accept: "application/json" }, timeout: "2s" }
+    );
+
+    const memoryResponse = http.get(
+      `${MONITORING_URL}/api/v1/query?query=process_resident_memory_bytes{service="${serviceName}"}`,
+      { headers: { Accept: "application/json" }, timeout: "2s" }
+    );
+
+    // Process and return metrics...
+  } catch (e) {
+    console.log(`Error fetching metrics: ${e}`);
+  }
+
+  return { cpu: 0, memory: 0 };
+}
+\end{lstlisting}
+
+Việc thiết lập này cho phép chúng tôi thu thập dữ liệu toàn diện về hiệu suất của các mẫu giao tiếp khác nhau trong các kịch bản thực tế, cung cấp cơ sở vững chắc cho việc đánh giá và so sánh.

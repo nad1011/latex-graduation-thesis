@@ -18,6 +18,9 @@
 \RequirePackage{siunitx}
 \RequirePackage{tikz}
 	\usetikzlibrary{calc}
+\RequirePackage{multirow}
+\RequirePackage{listings}
+\RequirePackage{xcolor}
 
 \directlua{
 function custom_math_constants(fontdata)
@@ -308,3 +311,62 @@ luatexbase.add_to_callback("mathfont.add_math_constants", custom_math_constants,
 	0<</S/r>>%
 	\the\numexpr\value{firstContentPageIndex}-1\relax<</S/D>>%
 ]>>/PageLayout/OneColumn>>}}}
+
+% Define colors for code listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Define TypeScript language
+\lstdefinelanguage{TypeScript}{
+    keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, class, export, import, interface, type, implements, extends, async, await, private, public, protected, static, readonly, abstract},
+    keywordstyle=\color{magenta},
+    ndkeywords={class, export, boolean, throw, implements, import, this},
+    ndkeywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{codegreen},
+    stringstyle=\color{codepurple},
+    morestring=[b]',
+    morestring=[b]"
+}
+
+% Define JavaScript language
+\lstdefinelanguage{JavaScript}{
+    keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+    keywordstyle=\color{magenta},
+    ndkeywords={class, export, boolean, throw, implements, import, this},
+    ndkeywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{codegreen},
+    stringstyle=\color{codepurple},
+    morestring=[b]',
+    morestring=[b]"
+}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
