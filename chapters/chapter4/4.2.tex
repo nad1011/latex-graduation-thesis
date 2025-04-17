@@ -12,7 +12,7 @@ Mỗi microservice được đóng gói thành một container Docker riêng bi�
 Order Service
 Order Service đóng vai trò trung tâm trong hệ thống, xử lý việc tạo và quản lý đơn hàng, đồng thời điều phối luồng xử lý giữa các dịch vụ khác. Service này được triển khai với các endpoint RESTful cho các hoạt động CRUD đơn hàng, cùng với các handlers cho các sự kiện từ các dịch vụ khác.
 
-Để xử lý đơn hàng, chúng tôi đã triển khai một thực thể Order với các trường như \texttt{id}, \texttt{productId}, \texttt{customerId}, \texttt{quantity}, \texttt{status}, \texttt{paymentId}, \texttt{paymentStatus}, và \texttt{paymentError}. Mỗi đơn hàng đi qua nhiều trạng thái khác nhau, bao gồm \texttt{pending}, \texttt{payment\_pending}, \texttt{paid}, \texttt{payment\_failed}, và \texttt{completed}, phản ánh quy trình xử lý đơn hàng đầy đủ.
+Để xử lý đơn hàng, khóa luận đã triển khai một thực thể Order với các trường như \texttt{id}, \texttt{productId}, \texttt{customerId}, \texttt{quantity}, \texttt{status}, \texttt{paymentId}, \texttt{paymentStatus}, và \texttt{paymentError}. Mỗi đơn hàng đi qua nhiều trạng thái khác nhau, bao gồm \texttt{pending}, \texttt{payment\_pending}, \texttt{paid}, \texttt{payment\_failed}, và \texttt{completed}, phản ánh quy trình xử lý đơn hàng đầy đủ.
 
 \begin{lstlisting}[language=Typescript]
 @Entity()
@@ -416,7 +416,7 @@ await firstValueFrom(
 );
 \end{lstlisting}
 
-Để cải thiện khả năng chịu lỗi, chúng tôi đã triển khai Circuit Breaker pattern sử dụng thư viện \texttt{opossum}. Pattern này ngăn chặn các yêu cầu đến service không khả dụng, giảm thiểu tác động của lỗi dịch vụ.
+Để cải thiện khả năng chịu lỗi, dự án đã triển khai Circuit Breaker pattern sử dụng thư viện \texttt{opossum}. Pattern này ngăn chặn các yêu cầu đến service không khả dụng, giảm thiểu tác động của lỗi dịch vụ.
 
 \begin{lstlisting}[language=Typescript]
 createBreaker(name: string, options: CircuitBreaker.Options = {}) {
@@ -609,9 +609,9 @@ ClientsModule.register([
 \end{lstlisting}
 
 \subsection{Thiết lập môi trường kiểm thử}
-Để đánh giá hiệu suất và độ tin cậy của các mẫu giao tiếp, chúng tôi đã thiết lập một môi trường kiểm thử toàn diện. Các script kiểm thử được viết bằng k6, một công cụ kiểm thử hiệu suất mã nguồn mở, cho phép mô phỏng lượng truy cập cao và đo lường các chỉ số hiệu suất quan trọng.
+Để đánh giá một cách khách quan và toàn diện hiệu suất của các mẫu giao tiếp trong kiến trúc microservice, nghiên cứu đã thiết lập một môi trường kiểm thử chuyên biệt. Môi trường này được xây dựng dựa trên các tiêu chuẩn và phương pháp luận trong lĩnh vực đánh giá hiệu suất hệ thống phân tán. sử dụng công cụ k6, một nền tảng kiểm thử hiệu suất mã nguồn mở được cộng đồng công nghệ đánh giá cao, để thực hiện các bài kiểm thử.
 
-Chúng tôi đã phát triển các script kiểm thử riêng cho từng kịch bản nghiệp vụ, mỗi script đo lường hiệu suất của cả giao tiếp đồng bộ và bất đồng bộ. Các chỉ số được đo lường bao gồm thời gian phản hồi, thông lượng, tỷ lệ lỗi, và sử dụng tài nguyên.
+Khóa luận đã phát triển các script kiểm thử riêng cho từng kịch bản nghiệp vụ, mỗi script đo lường hiệu suất của cả giao tiếp đồng bộ và bất đồng bộ. Các chỉ số được đo lường bao gồm thời gian phản hồi, thông lượng, tỷ lệ lỗi, và sử dụng tài nguyên.
 
 \begin{lstlisting}[language=Javascript]
 export const options = {
@@ -653,7 +653,7 @@ export const options = {
 };
 \end{lstlisting}
 
-Chúng tôi cũng đã thiết lập giám sát hệ thống sử dụng Prometheus và Grafana để thu thập và hiển thị dữ liệu hiệu suất theo thời gian thực. Điều này cho phép chúng tôi phân tích hành vi hệ thống dưới các mức tải khác nhau và xác định các điểm nghẽn có thể có.
+Bài đánh giá cũng đã thiết lập giám sát hệ thống sử dụng Prometheus và Grafana để thu thập và hiển thị dữ liệu hiệu suất theo thời gian thực. Điều này cho phép bài đánh giá phân tích hành vi hệ thống dưới các mức tải khác nhau và xác định các điểm nghẽn có thể có.
 
 \begin{lstlisting}[language=Javascript]
 function getSystemMetrics(serviceName) {
@@ -677,4 +677,4 @@ function getSystemMetrics(serviceName) {
 }
 \end{lstlisting}
 
-Việc thiết lập này cho phép chúng tôi thu thập dữ liệu toàn diện về hiệu suất của các mẫu giao tiếp khác nhau trong các kịch bản thực tế, cung cấp cơ sở vững chắc cho việc đánh giá và so sánh.
+Việc thiết lập này cho phép bài đánh giá thu thập dữ liệu toàn diện về hiệu suất của các mẫu giao tiếp khác nhau trong các kịch bản thực tế, cung cấp cơ sở vững chắc cho việc đánh giá và so sánh.

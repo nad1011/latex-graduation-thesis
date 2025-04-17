@@ -1,0 +1,140 @@
+\section{Kết quả triển khai}
+
+\subsection{Phương pháp đánh giá}
+Việc đánh giá các mẫu giao tiếp trong hệ thống microservice được thực hiện dựa trên bộ tiêu chí cụ thể, thiết kế để đo lường hiệu suất, độ tin cậy và khả năng mở rộng của từng phương pháp. Các kịch bản kiểm thử được thiết kế tương ứng với các tình huống thực tế phổ biến mà hệ thống microservice thường gặp phải.
+
+Tiêu chí đánh giá chính bao gồm độ trễ (thời gian phản hồi trung bình, P95 và thời gian xử lý end-to-end), thông lượng (số lượng yêu cầu xử lý được trong một đơn vị thời gian), sử dụng tài nguyên (CPU và bộ nhớ), tính nhất quán dữ liệu và khả năng chịu lỗi của hệ thống. Các công cụ được sử dụng trong quá trình đánh giá bao gồm k6 để mô phỏng lưu lượng người dùng và đo lường các chỉ số hiệu suất, Prometheus để thu thập và lưu trữ số liệu về hiệu suất hệ thống, và Grafana để trực quan hóa các số liệu thu thập.
+
+Các kịch bản kiểm thử được thiết kế đặc biệt để đánh giá hiệu suất của các mẫu giao tiếp trong bốn tình huống phổ biến: kiểm tra và cập nhật tồn kho, xử lý thanh toán, thông báo kết quả đơn hàng, và ghi nhận hoạt động người dùng. Mỗi kịch bản đều so sánh các mẫu giao tiếp khác nhau trong cùng một ngữ cảnh để đánh giá ưu nhược điểm của từng phương pháp.
+
+\subsection{Kết quả đánh giá Order-Inventory}
+Kết quả đo lường hiệu suất giữa phương pháp đồng bộ (REST) và bất đồng bộ (Message Queue) trong quá trình kiểm tra và cập nhật tồn kho cho thấy phương pháp bất đồng bộ có thời gian phản hồi ban đầu nhanh hơn đáng kể (72\%), với thời gian phản hồi trung bình chỉ 2.91ms so với 10.38ms của phương pháp đồng bộ. Tuy nhiên, về tổng thời gian xử lý end-to-end, phương pháp đồng bộ nhanh hơn 28\% (10.38ms so với 14.39ms).
+
+\begin{table}[h]{Kết quả đo lường hiệu suất Order-Inventory}
+    \centering
+    {\setlength{\arrayrulewidth}{1pt}
+    \renewcommand{\arraystretch}{1.5}
+    % \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tiêu chí}             & \textbf{Synchronous (REST)} & \textbf{Asynchronous (MQ)} & \textbf{Khác biệt}   \\
+        \hline
+        Average Response Time         & 10.38ms                     & 2.91ms                     & Async nhanh hơn 72\% \\
+        95th Percentile Response Time & 18.85ms                     & 4.27ms                     & Async nhanh hơn 77\% \\
+        End-to-End Processing Time    & 10.38ms                     & 14.39ms                    & Sync nhanh hơn 28\%  \\
+        Throughput                    & 106.64 req/s                & 89.64 msg/s                & Sync cao hơn 16\%    \\
+        CPU Usage                     & 0.0022\%                    & 0.00036\%                  & Async ít hơn 84\%    \\
+        Memory Usage                  & 142.59MB                    & 117.78MB                   & Async ít hơn 17\%    \\
+        \hline
+    \end{tabular}}
+\end{table}
+
+Về mặt thông lượng, phương pháp đồng bộ cho kết quả cao hơn một chút (106.64 req/s so với 89.64 msg/s), nhưng lại tiêu tốn nhiều tài nguyên CPU hơn đáng kể (cao hơn 84\%). Phương pháp bất đồng bộ cũng sử dụng ít bộ nhớ hơn (117.78MB so với 142.59MB).
+
+
+\begin{table}[h]{Kết quả đánh giá tính nhất quán dữ liệu}
+    \centering
+    {\setlength{\arrayrulewidth}{1pt}
+    \renewcommand{\arraystretch}{1.5}
+    % \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tiêu chí}               & \textbf{Synchronous} & \textbf{Asynchronous} & \textbf{Khác biệt}    \\
+        \hline
+        Data Consistency Rate           & 93.9\%               & 97.2\%                & Async tốt hơn 3.3\%   \\
+        Failed Requests                 & 61                   & 28                    & Async ít lỗi hơn 54\% \\
+        Data Lag                        & 0ms                  & 12.09ms               & Sync nhanh hơn        \\
+        Eventual Consistency Time (P95) & 0ms                  & 15ms                  & Sync nhanh hơn        \\
+        \hline
+    \end{tabular}}
+\end{table}
+
+Đánh giá tính nhất quán dữ liệu cho thấy phương pháp bất đồng bộ có tỷ lệ nhất quán dữ liệu cao hơn (97.2\% so với 93.9\%) và ít lỗi hơn (28 so với 61 trường hợp), mặc dù có độ trễ dữ liệu nhỏ (khoảng 12-15ms). Cả hai phương pháp đều cho thấy sự suy giảm hiệu suất khi tải tăng lên, nhưng phương pháp bất đồng bộ duy trì tỷ lệ nhất quán cao hơn ở tất cả các mức tải, từ 10 đến 100 người dùng đồng thời.
+
+\subsection{Kết quả đánh giá Order-Payment}
+Trong kịch bản xử lý thanh toán, sự khác biệt về hiệu suất giữa hai phương pháp càng trở nên rõ rệt. Phương pháp bất đồng bộ có thời gian phản hồi ban đầu nhanh hơn 99.8\% (2.25ms so với 1508.14ms) và thông lượng cao hơn 52 lần (90.04 msg/s so với 1.68 req/s). Về tổng thời gian xử lý end-to-end, phương pháp đồng bộ nhanh hơn một chút (4\%), đạt 1508.14ms so với 1571.71ms của phương pháp bất đồng bộ.
+
+\begin{table}[h]{Kết quả đo lường hiệu suất Order-Payment}
+    \centering
+    {\setlength{\arrayrulewidth}{1pt}
+    \renewcommand{\arraystretch}{1.5}
+    % \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tiêu chí}             & \textbf{Synchronous} & \textbf{Asynchronous} & \textbf{Khác biệt}     \\
+        \hline
+        Average Response Time         & 1508.14ms            & 2.25ms                & Async nhanh hơn 99.8\% \\
+        95th Percentile Response Time & 2856.27ms            & 4.77ms                & Async nhanh hơn 99.8\% \\
+        End-to-End Processing Time    & 1508.14ms            & 1571.71ms             & Sync nhanh hơn 4.0\%   \\
+        Throughput                    & 1.68 req/s           & 90.04 msg/s           & Async cao hơn 5259\%   \\
+        CPU Usage                     & 0.0083\%             & 0.0141\%              & Sync ít hơn 41.1\%     \\
+        Memory Usage                  & 114.70MB             & 109.67MB              & Async ít hơn 4.4\%     \\
+        \hline
+    \end{tabular}}
+\end{table}
+
+Phương pháp đồng bộ sử dụng ít CPU hơn 41.1\%, trong khi phương pháp bất đồng bộ sử dụng ít bộ nhớ hơn 4.4\%. Đáng chú ý là cả hai phương pháp đều có tỷ lệ lỗi tương đương, lần lượt là 4.71\% và 5.05\%.
+
+Đối với xử lý thanh toán thời gian dài, phương pháp bất đồng bộ vẫn duy trì thời gian phản hồi ban đầu rất nhanh (2.77ms so với 3773.11ms của phương pháp đồng bộ) và có thời gian xử lý end-to-end ngắn hơn 7.1\%. Cả hai phương pháp đều xử lý được các trường hợp timeout, với phương pháp đồng bộ ghi nhận tỷ lệ timeout 0\%, nhưng phương pháp bất đồng bộ có thời gian xử lý nhỏ hơn ở tất cả các mức tải, từ 10 đến tải tối đa.
+
+\subsection{Kết quả đánh giá Order-Notification}
+Trong kịch bản thông báo kết quả đơn hàng, mô hình Pub/Sub thể hiện hiệu suất vượt trội so với phương pháp gọi đồng bộ tuần tự. Thời gian broadcast trung bình của mô hình Pub/Sub chỉ là 11.53ms, nhanh hơn 97.8\% so với 520.55ms của phương pháp gọi đồng bộ tuần tự. Thời gian xử lý mỗi service cũng nhanh hơn đáng kể, chỉ 9.57ms so với 350.40ms.
+
+\begin{table}[h]{Kết quả đo lường hiệu suất Order-Notification}
+    \centering
+    {\setlength{\arrayrulewidth}{1pt}
+    \renewcommand{\arraystretch}{1.5}
+    % \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tiêu chí}              & \textbf{Multiple Sync Calls} & \textbf{Pub/Sub Event Bus} & \textbf{Khác biệt}       \\
+        \hline
+        Average Broadcast Time         & 520.55ms                     & 11.53ms                    & Pub/Sub nhanh hơn 97.8\% \\
+        95th Percentile Broadcast Time & 537.90ms                     & 6.10ms                     & Pub/Sub nhanh hơn 98.9\% \\
+        Maximum Broadcast Time         & 723ms                        & 204ms                      & Pub/Sub nhanh hơn 71.8\% \\
+        Per-Service Time (avg)         & 350.40ms                     & 9.57ms                     & Pub/Sub nhanh hơn 97.3\% \\
+        CPU Usage                      & 0.01173\%                    & 0.00311\%                  & Pub/Sub ít hơn 73.5\%    \\
+        Memory Usage                   & 22.98GB                      & 22.83GB                    & Pub/Sub ít hơn 0.7\%     \\
+        Success Rate                   & 100\%                        & 100\%                      & Ngang bằng               \\
+        \hline
+    \end{tabular}}
+\end{table}
+
+Mô hình Pub/Sub cũng sử dụng ít tài nguyên hơn, với mức tiêu thụ CPU thấp hơn 73.5\% và bộ nhớ thấp hơn nhẹ 0.7\%. Cả hai phương pháp đều đạt tỷ lệ thành công 100\% trong các bài kiểm thử.
+
+Về khả năng chịu lỗi khi một service thất bại, cả hai phương pháp đều đã được cải tiến để không còn hiện tượng lỗi lan truyền giữa các service. Tuy nhiên, mô hình Pub/Sub vẫn cho thấy ưu điểm vượt trội về thời gian phục hồi, chỉ 2.30ms so với 4793.46ms của phương pháp gọi đồng bộ tuần tự, nhanh hơn 99.95\%. Tỷ lệ phục hồi thành công của mô hình Pub/Sub cũng cao hơn, đạt 100\% so với 74.5\% của phương pháp gọi đồng bộ tuần tự.
+
+\subsection{Kết quả đánh giá User Activity Logging}
+Kết quả kiểm thử ghi nhận hoạt động người dùng cho thấy cả Kafka (mô hình một-nhiều) và RabbitMQ (mô hình một-một) đều có hiệu suất tương đương trong việc phân phối dữ liệu. Tổng thời gian phân phối của Kafka là 507.12ms, nhanh hơn nhẹ 0.3\% so với 508.56ms của RabbitMQ. Thời gian phản hồi P95 cũng rất tương đồng, 509ms so với 510ms.
+
+\begin{table}[h]{Kết quả đo lường hiệu suất User Activity Logging}
+    \centering
+    {\setlength{\arrayrulewidth}{1pt}
+    \renewcommand{\arraystretch}{1.5}
+    % \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tiêu chí}             & \textbf{Kafka (One-to-Many)} & \textbf{RabbitMQ (One-to-One)} & \textbf{Khác biệt}    \\
+        \hline
+        Total Distribution Time       & 507.12ms                     & 508.56ms                       & Kafka nhanh hơn 0.3\% \\
+        95th Percentile Response Time & 509ms                        & 510ms                          & Kafka nhanh hơn 0.2\% \\
+        Throughput                    & 1.97 msg/s                   & 1.97 msg/s                     & Không có sự khác biệt \\
+        CPU Usage                     & 0.016\%                      & 0.019\%                        & Kafka ít hơn 15.8\%   \\
+        Memory Usage                  & 282.44MB                     & 315.72MB                       & Kafka ít hơn 10.5\%   \\
+        Success Rate                  & 100\%                        & 100\%                          & Không có sự khác biệt \\
+        \hline
+    \end{tabular}}
+\end{table}
+
+Cả hai phương pháp đều đạt thông lượng 1.97 msg/s và tỷ lệ thành công 100\%. Tuy nhiên, Kafka sử dụng ít tài nguyên hơn, với mức tiêu thụ CPU thấp hơn 15.8\% và bộ nhớ thấp hơn 10.5\%.
+
+\subsection{Đánh giá tổng thể}
+Từ kết quả đánh giá các mẫu giao tiếp trong bốn kịch bản kiểm thử, có thể rút ra một số nhận xét tổng quát. Đối với Order-Inventory, mặc dù phương pháp đồng bộ có thời gian xử lý end-to-end nhỏ hơn và thông lượng cao hơn, phương pháp bất đồng bộ vẫn ưu việt hơn nhờ thời gian phản hồi nhanh, sử dụng ít tài nguyên và có tỷ lệ nhất quán dữ liệu cao hơn, đặc biệt khi tải tăng cao.
+
+Trong kịch bản Order-Payment, phương pháp bất đồng bộ thể hiện ưu thế vượt trội về thời gian phản hồi ban đầu và thông lượng, đặc biệt quan trọng cho trải nghiệm người dùng. Phương pháp này cũng xử lý tốt hơn các trường hợp thanh toán thời gian dài, duy trì thời gian phản hồi nhanh và hiệu suất tổng thể tốt hơn ở tất cả các mức tải.
+
+Đối với Order-Notification, mô hình Pub/Sub vượt trội hơn hẳn về mọi mặt, từ thời gian broadcast, thời gian xử lý mỗi service đến khả năng phục hồi khi có lỗi. Mô hình này cũng sử dụng ít tài nguyên hơn và dễ dàng mở rộng khi thêm các service nhận thông báo mới.
+
+Cuối cùng, trong kịch bản User Activity Logging, cả Kafka và RabbitMQ đều thể hiện hiệu suất tương đương, với Kafka có lợi thế nhỏ về thời gian phản hồi và sử dụng tài nguyên. Kafka phù hợp hơn cho các trường hợp có nhiều consumer, trong khi RabbitMQ có thể phù hợp hơn cho các trường hợp cần đảm bảo giao tiếp một-một chính xác.
+
+Nhìn chung, các mẫu giao tiếp bất đồng bộ (Message Queue, Pub/Sub, Kafka) cho thấy ưu thế về thời gian phản hồi, khả năng chịu lỗi và hiệu quả sử dụng tài nguyên trong hầu hết các kịch bản. Tuy nhiên, các mẫu giao tiếp đồng bộ vẫn có những ưu điểm nhất định về thời gian xử lý end-to-end và tính nhất quán dữ liệu tức thời, có thể phù hợp cho các tác vụ yêu cầu phản hồi nhanh và đảm bảo dữ liệu nhất quán ngay lập tức.
