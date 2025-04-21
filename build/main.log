@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  17 APR 2025 21:42
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  21 APR 2025 22:43
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -959,13 +959,15 @@ Package mathfont Info: Adjusting font Times New Roman-6.
 \openout4 = main.toc
 
 
-[7] (d:/Learn/thesis/uet-graduation-latex/build/main.lof)
+[7]
+
+[8] (d:/Learn/thesis/uet-graduation-latex/build/main.lof)
 \tf@lof=\write5
 
 \openout5 = main.lof
 
 
-[8
+[9
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.lot)
 \tf@lot=\write6
@@ -973,15 +975,15 @@ Package mathfont Info: Adjusting font Times New Roman-6.
 \openout6 = main.lot
 
 
-[9
+[10
 
 ]
 
-[10
+[11
 
 ] (./chapters/chapter1.tex
 
-[11
+[12
 
 
 ]
@@ -1211,26 +1213,34 @@ Overfull \hbox (49.70126pt too wide) in paragraph at lines 115--127
 
 [59]) (./chapters/chapter5.tex
 
-[60]
+[60] (./chapters/chapter5/5.1.tex
 
 [61
 
-])
+]) (./chapters/chapter5/5.2.tex
 
-[62]
-Underfull \hbox (badness 1024) in paragraph at lines 95--99
+[62]) (./chapters/chapter5/5.3.tex
+
+[63]
+
+[64]
+
+[65]))
+
+[66]
+Underfull \hbox (badness 1024) in paragraph at lines 86--90
 []\TU/TimesNewRoman(0)/m/n/12 Gartner, Inc., ``Gartner Identifies Key Trends in PaaS and Platform Architecture for
  []
 
 
-Underfull \hbox (badness 2261) in paragraph at lines 139--143
+Underfull \hbox (badness 2261) in paragraph at lines 130--134
 []\TU/TimesNewRoman(0)/m/n/12 Fielding, R. T., ``Architectural Styles and the De
 sign of Network-based Software
  []
 
 
 
-[63
+[67
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1240,22 +1250,22 @@ L3 programming layer <2025-01-18>
 )
 
 Here is how much of LuaTeX's memory you used:
- 23013 strings out of 475506
- 597208,1144653 words of node,token memory allocated
- 495 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
+ 23040 strings out of 475506
+ 597200,1144653 words of node,token memory allocated
+ 490 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 51 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:1,2:6205,3:163,4:9574,5:8698,6:112,7:20394,8:1,9:26061,10:41,1
+   avail lists: 1:1,2:6205,3:139,4:9574,5:8691,6:112,7:20394,8:1,9:26061,10:41,1
 1:1342
- 45390 multiletter control sequences out of 65536+600000
+ 45399 multiletter control sequences out of 65536+600000
  74 fonts using 39512559 bytes
  99i,14n,105p,1747b,726s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/miktex/fonts/opentype/public/lm/lmmono10-regular.otf><d:/miktex/fonts/openty
 pe/public/lm/lmmono12-regular.otf><C:/WINDOWS/Fonts/timesi.ttf><C:/WINDOWS/Fonts
 /timesbi.ttf><C:/WINDOWS/Fonts/times.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (74 pages, 451924 bytes).
+Output written on main.pdf (79 pages, 472263 bytes).
 
-PDF statistics: 279 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 294 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

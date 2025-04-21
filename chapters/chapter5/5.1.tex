@@ -1,0 +1,28 @@
+\section{Phương pháp và tiêu chí đánh giá}
+
+\subsection{Tổng quan phương pháp đánh giá}
+Phương pháp đánh giá trong dự án này được thiết kế để cung cấp một cái nhìn toàn diện về hiệu suất và độ tin cậy của các mẫu giao tiếp khác nhau trong kiến trúc microservice. Quá trình đánh giá tuân theo phương pháp luận khoa học nghiêm ngặt, bao gồm việc thiết lập các tiêu chí đánh giá rõ ràng, triển khai các kịch bản kiểm thử thực tế, và sử dụng các công cụ đo lường hiệu suất chuyên nghiệp.
+
+Dự án xác định bốn kịch bản nghiệp vụ chính trong hệ thống thương mại điện tử: kiểm tra và cập nhật tồn kho, xử lý thanh toán, thông báo kết quả đơn hàng, và ghi nhận hoạt động người dùng. Mỗi kịch bản này đại diện cho một loại tương tác phổ biến trong các hệ thống microservice, với các yêu cầu về hiệu suất và độ tin cậy khác nhau. Việc chọn các kịch bản đa dạng giúp đảm bảo kết quả đánh giá có tính đại diện cao và áp dụng được cho nhiều ngữ cảnh khác nhau.
+
+Dự án triển khai ba mẫu giao tiếp chính: giao tiếp đồng bộ sử dụng REST API, giao tiếp bất đồng bộ dạng một-một sử dụng RabbitMQ, và giao tiếp bất đồng bộ dạng một-nhiều sử dụng Kafka. Mỗi mẫu giao tiếp được triển khai trên cùng một nền tảng hạ tầng và được đánh giá trong cùng các kịch bản, đảm bảo tính công bằng và khách quan của quá trình so sánh.
+
+\subsection{Tiêu chí đánh giá cụ thể}
+Các tiêu chí đánh giá được xây dựng dựa trên các yêu cầu phi chức năng quan trọng của hệ thống microservice, phản ánh các khía cạnh chất lượng mà các kiến trúc microservice hiện đại cần đáp ứng. Các tiêu chí này được phân thành bốn nhóm chính: hiệu suất, tài nguyên hệ thống, độ tin cậy và khả năng chịu lỗi.
+
+Về hiệu suất, dự án đánh giá thời gian phản hồi (thời gian từ khi gửi yêu cầu đến khi nhận được phản hồi ban đầu), thời gian xử lý end-to-end (tổng thời gian để hoàn thành toàn bộ quy trình), thông lượng (số lượng yêu cầu xử lý trong một đơn vị thời gian), và thời gian phản hồi phân vị thứ 95 (P95).
+
+Về tài nguyên hệ thống, dự án đánh giá mức sử dụng CPU, bộ nhớ và lưu lượng mạng. Các chỉ số này phản ánh hiệu quả sử dụng tài nguyên của mỗi mẫu giao tiếp, yếu tố quan trọng ảnh hưởng đến chi phí vận hành hệ thống.
+
+Về độ tin cậy, dự án đánh giá tỷ lệ thành công, tỷ lệ lỗi và tỷ lệ nhất quán dữ liệu. Đặc biệt, tỷ lệ nhất quán dữ liệu đo lường khả năng duy trì tính nhất quán giữa các service, yếu tố quan trọng trong các hệ thống phân tán.
+
+Về khả năng chịu lỗi, dự án đánh giá tỷ lệ lan truyền lỗi, thời gian phục hồi và tỷ lệ thành công một phần. Các chỉ số này phản ánh khả năng của hệ thống trong việc duy trì hoạt động khi gặp sự cố.
+
+\subsection{Công cụ và môi trường đánh giá}
+Dự án sử dụng một bộ công cụ hiện đại để thực hiện đánh giá. Công cụ k6 được sử dụng để mô phỏng lưu lượng người dùng và đo lường các chỉ số hiệu suất. Prometheus được sử dụng để thu thập và lưu trữ các số liệu về hiệu suất hệ thống. Các công cụ này đều là mã nguồn mở và được sử dụng rộng rãi trong cộng đồng phát triển phần mềm, đảm bảo tính tin cậy và khả năng mở rộng của quá trình đánh giá.
+
+Môi trường kiểm thử được thiết kế để mô phỏng các điều kiện thực tế mà một hệ thống thương mại điện tử có thể gặp phải. Các kịch bản kiểm thử bao gồm các mức tải khác nhau, từ tải nhẹ đến tải nặng, để đánh giá hiệu suất của các mẫu giao tiếp trong nhiều điều kiện khác nhau. Các service được triển khai trên cùng một cấu hình phần cứng, và các bài kiểm thử được thực hiện nhiều lần để đảm bảo tính đại diện thống kê của kết quả.
+
+Kịch bản kiểm thử được thiết kế để tự động thực hiện các tác vụ như tạo đơn hàng, kiểm tra tồn kho, xử lý thanh toán và gửi thông báo. Mỗi kịch bản được thực hiện trên những mẫu giao tiếp thích hợp với kịch bản đấy, và các chỉ số hiệu suất được ghi lại để so sánh.
+
+Việc sử dụng các công cụ và môi trường đánh giá hiện đại giúp đảm bảo tính khách quan và chính xác của kết quả đánh giá. Điều này cho phép dự án đưa ra những kết luận đáng tin cậy về hiệu suất và độ tin cậy của các mẫu giao tiếp trong kiến trúc microservice.

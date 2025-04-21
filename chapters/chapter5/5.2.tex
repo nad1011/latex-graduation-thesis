@@ -1,0 +1,36 @@
+\section{Kết quả đánh giá}
+
+\subsection{Mẫu giao tiếp trong kịch bản Order-Inventory}
+Kết quả đánh giá hiệu suất giữa giao tiếp đồng bộ và bất đồng bộ trong kịch bản kiểm tra và cập nhật tồn kho cho thấy những đặc điểm đáng chú ý về cách các mẫu giao tiếp ảnh hưởng đến trải nghiệm người dùng và hiệu quả hệ thống. Giao tiếp bất đồng bộ thể hiện thời gian phản hồi ban đầu nhanh hơn đáng kể, giúp người dùng nhận được phản hồi tức thì khi thực hiện thao tác. Tuy nhiên, giao tiếp đồng bộ lại cho thời gian xử lý end-to-end nhỉnh hơn, phản ánh đặc tính xử lý trực tiếp, không qua trung gian của phương pháp này.
+
+Về tính nhất quán dữ liệu, một phát hiện thú vị là giao tiếp bất đồng bộ đạt tỷ lệ nhất quán cao hơn, đặc biệt khi hệ thống chịu tải nặng. Điều này có vẻ trái ngược với quan niệm truyền thống rằng giao tiếp đồng bộ đảm bảo nhất quán dữ liệu tốt hơn. Nguyên nhân có thể do cơ chế hàng đợi giúp điều tiết luồng xử lý và tránh tình trạng quá tải, dẫn đến ít lỗi và nhất quán dữ liệu cao hơn.
+
+Về hiệu quả sử dụng tài nguyên, giao tiếp bất đồng bộ thể hiện rõ ràng lợi thế với mức tiêu thụ CPU và bộ nhớ thấp hơn đáng kể. Điều này đặc biệt quan trọng trong môi trường đám mây, nơi chi phí vận hành thường tỷ lệ thuận với tài nguyên tiêu thụ.
+
+\subsection{Mẫu giao tiếp trong kịch bản Order-Payment}
+Trong kịch bản xử lý thanh toán, sự khác biệt về hiệu suất giữa giao tiếp đồng bộ và bất đồng bộ trở nên rõ rệt hơn. Giao tiếp bất đồng bộ thể hiện thời gian phản hồi ban đầu gần như tức thì, cải thiện đáng kể trải nghiệm người dùng so với phương pháp đồng bộ. Điều này đặc biệt quan trọng trong bối cảnh thanh toán, nơi người dùng mong đợi phản hồi nhanh chóng để biết yêu cầu của họ đã được tiếp nhận.
+
+Thông lượng của giao tiếp bất đồng bộ vượt trội hơn hẳn so với giao tiếp đồng bộ, phản ánh khả năng tiếp nhận nhiều yêu cầu hơn trong cùng một khoảng thời gian. Điều này là do giao tiếp bất đồng bộ không bị chặn bởi thời gian xử lý của mỗi yêu cầu, cho phép hệ thống tiếp tục tiếp nhận yêu cầu mới trong khi các yêu cầu cũ đang được xử lý.
+
+Đối với các trường hợp thanh toán kéo dài, giao tiếp bất đồng bộ vẫn duy trì thời gian phản hồi ban đầu thấp, trong khi giao tiếp đồng bộ buộc người dùng phải đợi đến khi toàn bộ quá trình hoàn tất. Điều này làm cho giao tiếp bất đồng bộ trở thành lựa chọn ưu việt hơn cho các tác vụ có thời gian xử lý dài như thanh toán.
+
+\subsection{Mẫu giao tiếp trong kịch bản Order-Notification}
+Kết quả đánh giá cho kịch bản thông báo kết quả đơn hàng thể hiện rõ ràng ưu điểm của mô hình Pub/Sub so với phương pháp gọi đồng bộ tuần tự. Mô hình Pub/Sub cung cấp thời gian broadcast và thời gian xử lý mỗi service nhanh hơn đáng kể, giúp thông báo được gửi đến tất cả các kênh nhanh chóng và hiệu quả.
+
+Về khả năng chịu lỗi, mô hình Pub/Sub thể hiện thời gian phục hồi cực kỳ nhanh và tỷ lệ phục hồi thành công cao hơn so với phương pháp gọi đồng bộ tuần tự. Điều này phản ánh kiến trúc lỏng lẻo (loosely coupled) của mô hình Pub/Sub, nơi các subscriber hoạt động độc lập với nhau và với publisher, giúp hệ thống duy trì hoạt động ngay cả khi một số thành phần gặp sự cố.
+
+Hiệu quả sử dụng tài nguyên của mô hình Pub/Sub cũng vượt trội hơn, với mức tiêu thụ CPU thấp hơn đáng kể. Điều này làm cho mô hình Pub/Sub trở thành lựa chọn tiết kiệm chi phí và hiệu quả hơn cho các kịch bản thông báo đa kênh.
+
+\subsection{Mẫu giao tiếp trong kịch bản User Activity Logging}
+Đối với kịch bản ghi nhận hoạt động người dùng, cả Kafka (mô hình một-nhiều) và RabbitMQ (mô hình một-một) đều thể hiện hiệu suất tương đương về thời gian phân phối và thông lượng. Tuy nhiên, Kafka sử dụng ít tài nguyên hơn và có thể xử lý nhiều consumer hơn một cách hiệu quả, làm cho nó phù hợp hơn cho các kịch bản có nhiều service cần truy cập cùng một dữ liệu.
+
+Kafka cũng cung cấp khả năng lưu trữ dữ liệu dài hạn và phát lại các sự kiện, điều này đặc biệt hữu ích cho các kịch bản phân tích dữ liệu và học máy, nơi dữ liệu lịch sử có giá trị cao. RabbitMQ, mặt khác, phù hợp hơn cho các kịch bản yêu cầu điều hướng thông điệp phức tạp và định tuyến có điều kiện.
+
+\subsection{Ảnh hưởng của tải hệ thống đến các mẫu giao tiếp}
+Một khía cạnh quan trọng của dự án là đánh giá cách các mẫu giao tiếp hoạt động dưới các mức tải khác nhau. Kết quả cho thấy khi tải tăng, hiệu suất của cả giao tiếp đồng bộ và bất đồng bộ đều giảm, nhưng mức độ giảm khác nhau đáng kể.
+
+Giao tiếp đồng bộ thể hiện sự suy giảm hiệu suất mạnh hơn khi tải tăng, với tỷ lệ nhất quán dữ liệu và thông lượng giảm nhanh. Điều này là do mô hình chặn (blocking model) của giao tiếp đồng bộ, nơi mỗi yêu cầu phải đợi đến khi yêu cầu trước đó hoàn thành. Khi số lượng yêu cầu tăng lên, điều này dẫn đến tình trạng nghẽn cổ chai và suy giảm hiệu suất.
+
+Giao tiếp bất đồng bộ, mặt khác, duy trì hiệu suất ổn định hơn dưới tải nặng, nhờ vào khả năng đệm các yêu cầu và xử lý chúng theo tốc độ phù hợp với tài nguyên có sẵn. Đặc biệt, thời gian phản hồi ban đầu của giao tiếp bất đồng bộ vẫn duy trì ở mức thấp ngay cả khi tải tăng cao, giúp duy trì trải nghiệm người dùng tốt.
+
+Mô hình Pub/Sub cũng thể hiện khả năng mở rộng tốt, với hiệu suất ổn định khi số lượng subscriber tăng lên. Điều này làm cho mô hình Pub/Sub trở thành lựa chọn phù hợp cho các hệ thống cần khả năng mở rộng theo chiều ngang.
