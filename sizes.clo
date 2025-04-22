@@ -5,10 +5,10 @@
 ]
 
 \newlength\@ptsize
-\setlength\@ptsize{12pt}
+\setlength\@ptsize{13pt}
 
 \renewcommand\normalsize{%
-	\@setfontsize\normalsize\@xiipt{14.5}%
+	\@setfontsize\normalsize{13pt}{16.9pt}%
 	\abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
 	\abovedisplayshortskip \z@ \@plus3\p@
 	\belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
@@ -18,7 +18,7 @@
 \normalsize
 
 \newcommand\small{%
-	\@setfontsize\small\@xipt{13.6}%
+	\@setfontsize\small{12pt}{15.6pt}%
 	\abovedisplayskip 11\p@ \@plus3\p@ \@minus6\p@
 	\abovedisplayshortskip \z@ \@plus3\p@
 	\belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
@@ -30,7 +30,7 @@
 }
 
 \newcommand\footnotesize{%
-	\@setfontsize\footnotesize\@xpt\@xiipt
+	\@setfontsize\footnotesize{11pt}{14.3pt}
 	\abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
 	\abovedisplayshortskip \z@ \@plus3\p@
 	\belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@

@@ -1,4 +1,4 @@
-\section{Cách phân loại các Communication pattern}
+\section{Cách phân loại các mẫu giao tiếp}
 Trong kiến trúc microservices, giao tiếp giữa các dịch vụ đóng vai trò quan trọng trong việc đảm bảo hiệu suất, khả năng mở rộng và độ tin cậy của hệ thống \cite{richardson2019}. Việc thiết kế giao tiếp giữa các microservices là một trong những thách thức quan trọng nhất, ảnh hưởng trực tiếp đến kiến trúc tổng thể và hiệu quả hoạt động của hệ thống. Để hiểu rõ và áp dụng hiệu quả các mẫu giao tiếp, việc phân loại chúng một cách có hệ thống là cần thiết.
 
 Các mẫu giao tiếp trong microservices có thể được phân loại dựa trên hai tiêu chí chính: phương thức giao tiếp (communication mode) và phạm vi giao tiếp (communication scope). Phương thức giao tiếp xác định cách thức tương tác giữa các dịch vụ, có thể là đồng bộ (synchronous) hoặc bất đồng bộ (asynchronous). Phạm vi giao tiếp xác định số lượng người nhận trong một lần giao tiếp, phổ biến nhất là one-to-one và one-to-many. Bảng 3.1 dưới đây tổng hợp các mẫu giao tiếp phổ biến dựa trên sự kết hợp của hai tiêu chí này.
