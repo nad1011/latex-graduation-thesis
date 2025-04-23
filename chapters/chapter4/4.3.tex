@@ -13,20 +13,25 @@ Kết quả đo lường hiệu suất giữa phương pháp đồng bộ (REST)
 \begin{table}[h]{Kết quả đo lường hiệu suất Order-Inventory}
     \centering
     {\setlength{\arrayrulewidth}{1pt}
-    \renewcommand{\arraystretch}{1.5}
-    % \setlength{\tabcolsep}{12pt}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        \textbf{Tiêu chí}             & \textbf{Synchronous (REST)} & \textbf{Asynchronous (MQ)} & \textbf{Khác biệt}   \\
-        \hline
-        Average Response Time         & 10.38ms                     & 2.91ms                     & Async nhanh hơn 72\% \\
-        95th Percentile Response Time & 18.85ms                     & 4.27ms                     & Async nhanh hơn 77\% \\
-        End-to-End Processing Time    & 10.38ms                     & 14.39ms                    & Sync nhanh hơn 28\%  \\
-        Throughput                    & 106.64 req/s                & 89.64 msg/s                & Sync cao hơn 16\%    \\
-        CPU Usage                     & 0.0022\%                    & 0.00036\%                  & Async ít hơn 84\%    \\
-        Memory Usage                  & 142.59MB                    & 117.78MB                   & Async ít hơn 17\%    \\
-        \hline
-    \end{tabular}}
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{6pt}
+        \begin{tabular}{|p{3.2cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
+            \hline
+            \textbf{Tiêu chí}             & \textbf{Synchronous (REST)} & \textbf{Asynchronous (MQ)} & \textbf{Khác biệt}   \\
+            \hline
+            Average Response Time         & 10.38ms                     & 2.91ms                     & Async nhanh hơn 72\% \\
+            \hline
+            95th Percentile Response Time & 18.85ms                     & 4.27ms                     & Async nhanh hơn 77\% \\
+            \hline
+            End-to-End Processing Time    & 10.38ms                     & 14.39ms                    & Sync nhanh hơn 28\%  \\
+            \hline
+            Throughput                    & 106.64 req/s                & 89.64 msg/s                & Sync cao hơn 16\%    \\
+            \hline
+            CPU Usage                     & 0.0022\%                    & 0.00036\%                  & Async ít hơn 84\%    \\
+            \hline
+            Memory Usage                  & 142.59MB                    & 117.78MB                   & Async ít hơn 17\%    \\
+            \hline
+        \end{tabular}}
 \end{table}
 
 Về mặt thông lượng, phương pháp đồng bộ cho kết quả cao hơn một chút (106.64 req/s so với 89.64 msg/s), nhưng lại tiêu tốn nhiều tài nguyên CPU hơn đáng kể (cao hơn 84\%). Phương pháp bất đồng bộ cũng sử dụng ít bộ nhớ hơn (117.78MB so với 142.59MB).
@@ -35,18 +40,21 @@ Về mặt thông lượng, phương pháp đồng bộ cho kết quả cao hơn
 \begin{table}[h]{Kết quả đánh giá tính nhất quán dữ liệu}
     \centering
     {\setlength{\arrayrulewidth}{1pt}
-    \renewcommand{\arraystretch}{1.5}
-    % \setlength{\tabcolsep}{12pt}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        \textbf{Tiêu chí}               & \textbf{Synchronous} & \textbf{Asynchronous} & \textbf{Khác biệt}    \\
-        \hline
-        Data Consistency Rate           & 93.9\%               & 97.2\%                & Async tốt hơn 3.3\%   \\
-        Failed Requests                 & 61                   & 28                    & Async ít lỗi hơn 54\% \\
-        Data Lag                        & 0ms                  & 12.09ms               & Sync nhanh hơn        \\
-        Eventual Consistency Time (P95) & 0ms                  & 15ms                  & Sync nhanh hơn        \\
-        \hline
-    \end{tabular}}
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{6pt}
+        \begin{tabular}{|p{3.2cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
+            \hline
+            \textbf{Tiêu chí}               & \textbf{Synchronous} & \textbf{Asynchronous} & \textbf{Khác biệt}    \\
+            \hline
+            Data Consistency Rate           & 93.9\%               & 97.2\%                & Async tốt hơn 3.3\%   \\
+            \hline
+            Failed Requests                 & 61                   & 28                    & Async ít lỗi hơn 54\% \\
+            \hline
+            Data Lag                        & 0ms                  & 12.09ms               & Sync nhanh hơn        \\
+            \hline
+            Eventual Consistency Time (P95) & 0ms                  & 15ms                  & Sync nhanh hơn        \\
+            \hline
+        \end{tabular}}
 \end{table}
 
 Đánh giá tính nhất quán dữ liệu cho thấy phương pháp bất đồng bộ có tỷ lệ nhất quán dữ liệu cao hơn (97.2\% so với 93.9\%) và ít lỗi hơn (28 so với 61 trường hợp), mặc dù có độ trễ dữ liệu nhỏ (khoảng 12-15ms). Cả hai phương pháp đều cho thấy sự suy giảm hiệu suất khi tải tăng lên, nhưng phương pháp bất đồng bộ duy trì tỷ lệ nhất quán cao hơn ở tất cả các mức tải, từ 10 đến 100 người dùng đồng thời.
@@ -57,20 +65,25 @@ Trong kịch bản xử lý thanh toán, sự khác biệt về hiệu suất gi
 \begin{table}[h]{Kết quả đo lường hiệu suất Order-Payment}
     \centering
     {\setlength{\arrayrulewidth}{1pt}
-    \renewcommand{\arraystretch}{1.5}
-    % \setlength{\tabcolsep}{12pt}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        \textbf{Tiêu chí}             & \textbf{Synchronous} & \textbf{Asynchronous} & \textbf{Khác biệt}     \\
-        \hline
-        Average Response Time         & 1508.14ms            & 2.25ms                & Async nhanh hơn 99.8\% \\
-        95th Percentile Response Time & 2856.27ms            & 4.77ms                & Async nhanh hơn 99.8\% \\
-        End-to-End Processing Time    & 1508.14ms            & 1571.71ms             & Sync nhanh hơn 4.0\%   \\
-        Throughput                    & 1.68 req/s           & 90.04 msg/s           & Async cao hơn 5259\%   \\
-        CPU Usage                     & 0.0083\%             & 0.0141\%              & Sync ít hơn 41.1\%     \\
-        Memory Usage                  & 114.70MB             & 109.67MB              & Async ít hơn 4.4\%     \\
-        \hline
-    \end{tabular}}
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{6pt}
+        \begin{tabular}{|p{3.2cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
+            \hline
+            \textbf{Tiêu chí}             & \textbf{Synchronous} & \textbf{Asynchronous} & \textbf{Khác biệt}     \\
+            \hline
+            Average Response Time         & 1508.14ms            & 2.25ms                & Async nhanh hơn 99.8\% \\
+            \hline
+            95th Percentile Response Time & 2856.27ms            & 4.77ms                & Async nhanh hơn 99.8\% \\
+            \hline
+            End-to-End Processing Time    & 1508.14ms            & 1571.71ms             & Sync nhanh hơn 4.0\%   \\
+            \hline
+            Throughput                    & 1.68 req/s           & 90.04 msg/s           & Async cao hơn 5259\%   \\
+            \hline
+            CPU Usage                     & 0.0083\%             & 0.0141\%              & Sync ít hơn 41.1\%     \\
+            \hline
+            Memory Usage                  & 114.70MB             & 109.67MB              & Async ít hơn 4.4\%     \\
+            \hline
+        \end{tabular}}
 \end{table}
 
 Phương pháp đồng bộ sử dụng ít CPU hơn 41.1\%, trong khi phương pháp bất đồng bộ sử dụng ít bộ nhớ hơn 4.4\%. Đáng chú ý là cả hai phương pháp đều có tỷ lệ lỗi tương đương, lần lượt là 4.71\% và 5.05\%.
@@ -83,21 +96,27 @@ Trong kịch bản thông báo kết quả đơn hàng, mô hình Pub/Sub thể 
 \begin{table}[h]{Kết quả đo lường hiệu suất Order-Notification}
     \centering
     {\setlength{\arrayrulewidth}{1pt}
-    \renewcommand{\arraystretch}{1.5}
-    % \setlength{\tabcolsep}{12pt}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        \textbf{Tiêu chí}              & \textbf{Multiple Sync Calls} & \textbf{Pub/Sub Event Bus} & \textbf{Khác biệt}       \\
-        \hline
-        Average Broadcast Time         & 520.55ms                     & 11.53ms                    & Pub/Sub nhanh hơn 97.8\% \\
-        95th Percentile Broadcast Time & 537.90ms                     & 6.10ms                     & Pub/Sub nhanh hơn 98.9\% \\
-        Maximum Broadcast Time         & 723ms                        & 204ms                      & Pub/Sub nhanh hơn 71.8\% \\
-        Per-Service Time (avg)         & 350.40ms                     & 9.57ms                     & Pub/Sub nhanh hơn 97.3\% \\
-        CPU Usage                      & 0.01173\%                    & 0.00311\%                  & Pub/Sub ít hơn 73.5\%    \\
-        Memory Usage                   & 22.98GB                      & 22.83GB                    & Pub/Sub ít hơn 0.7\%     \\
-        Success Rate                   & 100\%                        & 100\%                      & Ngang bằng               \\
-        \hline
-    \end{tabular}}
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{6pt}
+        \begin{tabular}{|p{3.2cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
+            \hline
+            \textbf{Tiêu chí}              & \textbf{Multiple Sync Calls} & \textbf{Pub/Sub Event Bus} & \textbf{Khác biệt}       \\
+            \hline
+            Average Broadcast Time         & 520.55ms                     & 11.53ms                    & Pub/Sub nhanh hơn 97.8\% \\
+            \hline
+            95th Percentile Broadcast Time & 537.90ms                     & 6.10ms                     & Pub/Sub nhanh hơn 98.9\% \\
+            \hline
+            Maximum Broadcast Time         & 723ms                        & 204ms                      & Pub/Sub nhanh hơn 71.8\% \\
+            \hline
+            Per-Service Time (avg)         & 350.40ms                     & 9.57ms                     & Pub/Sub nhanh hơn 97.3\% \\
+            \hline
+            CPU Usage                      & 0.01173\%                    & 0.00311\%                  & Pub/Sub ít hơn 73.5\%    \\
+            \hline
+            Memory Usage                   & 22.98GB                      & 22.83GB                    & Pub/Sub ít hơn 0.7\%     \\
+            \hline
+            Success Rate                   & 100\%                        & 100\%                      & Ngang bằng               \\
+            \hline
+        \end{tabular}}
 \end{table}
 
 Mô hình Pub/Sub cũng sử dụng ít tài nguyên hơn, với mức tiêu thụ CPU thấp hơn 73.5\% và bộ nhớ thấp hơn nhẹ 0.7\%. Cả hai phương pháp đều đạt tỷ lệ thành công 100\% trong các bài kiểm thử.
@@ -110,20 +129,25 @@ Kết quả kiểm thử ghi nhận hoạt động người dùng cho thấy c�
 \begin{table}[h]{Kết quả đo lường hiệu suất User Activity Logging}
     \centering
     {\setlength{\arrayrulewidth}{1pt}
-    \renewcommand{\arraystretch}{1.5}
-    % \setlength{\tabcolsep}{12pt}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        \textbf{Tiêu chí}             & \textbf{Kafka (One-to-Many)} & \textbf{RabbitMQ (One-to-One)} & \textbf{Khác biệt}    \\
-        \hline
-        Total Distribution Time       & 507.12ms                     & 508.56ms                       & Kafka nhanh hơn 0.3\% \\
-        95th Percentile Response Time & 509ms                        & 510ms                          & Kafka nhanh hơn 0.2\% \\
-        Throughput                    & 1.97 msg/s                   & 1.97 msg/s                     & Không có sự khác biệt \\
-        CPU Usage                     & 0.016\%                      & 0.019\%                        & Kafka ít hơn 15.8\%   \\
-        Memory Usage                  & 282.44MB                     & 315.72MB                       & Kafka ít hơn 10.5\%   \\
-        Success Rate                  & 100\%                        & 100\%                          & Không có sự khác biệt \\
-        \hline
-    \end{tabular}}
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{6pt}
+        \begin{tabular}{|p{3.2cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
+            \hline
+            \textbf{Tiêu chí}             & \textbf{Kafka (One-to-Many)} & \textbf{RabbitMQ (One-to-One)} & \textbf{Khác biệt}    \\
+            \hline
+            Total Distribution Time       & 507.12ms                     & 508.56ms                       & Kafka nhanh hơn 0.3\% \\
+            \hline
+            95th Percentile Response Time & 509ms                        & 510ms                          & Kafka nhanh hơn 0.2\% \\
+            \hline
+            Throughput                    & 1.97 msg/s                   & 1.97 msg/s                     & Không có sự khác biệt \\
+            \hline
+            CPU Usage                     & 0.016\%                      & 0.019\%                        & Kafka ít hơn 15.8\%   \\
+            \hline
+            Memory Usage                  & 282.44MB                     & 315.72MB                       & Kafka ít hơn 10.5\%   \\
+            \hline
+            Success Rate                  & 100\%                        & 100\%                          & Không có sự khác biệt \\
+            \hline
+        \end{tabular}}
 \end{table}
 
 Cả hai phương pháp đều đạt thông lượng 1.97 msg/s và tỷ lệ thành công 100\%. Tuy nhiên, Kafka sử dụng ít tài nguyên hơn, với mức tiêu thụ CPU thấp hơn 15.8\% và bộ nhớ thấp hơn 10.5\%.

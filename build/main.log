@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  22 APR 2025 23:00
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  23 APR 2025 21:53
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -922,6 +922,12 @@ df>]
 Package mathfont Info: Adjusting font Times New Roman Bold.
 Package mathfont Info: Adjusting font Times New Roman Italic.
 Package mathfont Info: Adjusting font Times New Roman Bold Italic.
+Underfull \hbox (badness 1946) in paragraph at lines 28--30
+[]\TU/TimesNewRoman(0)/b/it/12 Từ khóa: \TU/TimesNewRoman(0)/m/it/12 Microser
+vice, Mẫu giao tiếp, Kiến trúc phần mềm, REST, Message Queue,
+ []
+
+
 
 [4
 
@@ -933,9 +939,27 @@ Underfull \hbox (badness 1308) in paragraph at lines 32--33
  []
 
 
-Underfull \hbox (badness 2726) in paragraph at lines 32--33
+Underfull \hbox (badness 1527) in paragraph at lines 32--33
 \TU/TimesNewRoman(0)/m/n/12 One of the main challenges in this architecture is 
-managing communication between
+selecting and implementing suitable
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 32--33
+\TU/TimesNewRoman(0)/m/n/12 communication patterns between microservices. This 
+thesis focuses on researching and
+ []
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 32--33
+\TU/TimesNewRoman(0)/m/n/12 communication pattern through implementation and tes
+ting of real-world scenarios such
+ []
+
+
+Underfull \hbox (badness 1609) in paragraph at lines 32--33
+\TU/TimesNewRoman(0)/m/n/12 patterns for different business contexts, contributi
+ng to improving the performance and
  []
 
 
@@ -1010,14 +1034,10 @@ Package mathfont Info: Adjusting font Times New Roman-6.
 [10
 
 ]
-
-[11
-
-]
 Package mathfont Info: Adjusting font Times New Roman Italic. (./chapters/chapt
 er1.tex
 
-[12
+[11
 
 
 ]
@@ -1197,15 +1217,142 @@ Underfull \hbox (badness 1953) in paragraph at lines 528--529
 [55]) (./chapters/chapter4/4.3.tex
 
 [56]
-Overfull \hbox (59.57431pt too wide) in paragraph at lines 18--30
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]|\TU/TimesNewRoman(0)/b/n/13 Synchronous
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]|\TU/TimesNewRoman(0)/b/n/13 Asynchronous
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]|\TU/TimesNewRoman(0)/m/n/13 Average
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--26
+[]|\TU/TimesNewRoman(0)/m/n/13 End-to-End
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+[]|\TU/TimesNewRoman(0)/m/n/13 Sync cao hơn
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+[]|\TU/TimesNewRoman(0)/m/n/13 Async tốt hơn
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+[]|\TU/TimesNewRoman(0)/m/n/13 Eventual
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+\TU/TimesNewRoman(0)/m/n/13 Consistency
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--74
+[]|\TU/TimesNewRoman(0)/m/n/13 Average
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--76
+[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--78
+[]|\TU/TimesNewRoman(0)/m/n/13 End-to-End
+ []
+
+
+Underfull \hbox (badness 7030) in paragraph at lines 80--81
+[]|\TU/TimesNewRoman(0)/m/n/13 Async cao hơn
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
+[]|\TU/TimesNewRoman(0)/m/n/13 Sync ít hơn
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--85
+[]|\TU/TimesNewRoman(0)/m/n/13 Async ít hơn
  []
 
 
 
 [57]
-Overfull \hbox (69.08945pt too wide) in paragraph at lines 88--101
- [][] 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--103
+[]|\TU/TimesNewRoman(0)/b/n/13 Multiple Sync
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--103
+[]|\TU/TimesNewRoman(0)/b/n/13 Pub/Sub Event
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--105
+[]|\TU/TimesNewRoman(0)/m/n/13 Average
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--107
+[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--109
+[]|\TU/TimesNewRoman(0)/m/n/13 Maximum
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
+[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 113--114
+[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub ít hơn
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 115--116
+[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub ít hơn
  []
 
 
@@ -1214,55 +1361,90 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 [58]
-Overfull \hbox (91.36337pt too wide) in paragraph at lines 115--127
- [][] 
+Underfull \hbox (badness 5548) in paragraph at lines 136--136
+[]|\TU/TimesNewRoman(0)/b/n/13 Kafka (One-to-
  []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--136
+[]|\TU/TimesNewRoman(0)/b/n/13 RabbitMQ
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--138
+[]|\TU/TimesNewRoman(0)/m/n/13 Total
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--138
+\TU/TimesNewRoman(0)/m/n/13 Distribution
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
+[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
+[]|\TU/TimesNewRoman(0)/m/n/13 Kafka ít hơn
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
+[]|\TU/TimesNewRoman(0)/m/n/13 Kafka ít hơn
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
 [59])) (./chapters/chapter5.tex
 
-[60] (./chapters/chapter5/5.1.tex
+[60]
 
-[61
+[61] (./chapters/chapter5/5.1.tex
+
+[62
 
 ]) (./chapters/chapter5/5.2.tex
 
-[62]
+[63]
 
-[63]) (./chapters/chapter5/5.3.tex
-
-[64]
+[64]) (./chapters/chapter5/5.3.tex
 
 [65]
 
-[66]))
+[66]
 
-[67]
-Underfull \hbox (badness 10000) in paragraph at lines 112--115
+[67]))
+
+[68]
+Underfull \hbox (badness 10000) in paragraph at lines 110--113
 []\TU/TimesNewRoman(0)/m/n/13 Wolff, E., \TU/TimesNewRoman(0)/m/it/13 Microservi
 ces: Flexible Software Architecture\TU/TimesNewRoman(0)/m/n/13 , Addison-Wesley
  []
 
 
-Overfull \hbox (0.59705pt too wide) in paragraph at lines 117--121
+Overfull \hbox (0.59705pt too wide) in paragraph at lines 115--119
 []\TU/TimesNewRoman(0)/m/n/13 Fowler, M., ``Microservices'', \TU/TimesNewRoman(
 0)/m/it/13 https://martinfowler.com/articles/microservices.html\TU/TimesNewRoma
 n(0)/m/n/13 ,
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 169--172
+Underfull \hbox (badness 1009) in paragraph at lines 167--170
 []\TU/TimesNewRoman(0)/m/n/13 Fowler, M., \TU/TimesNewRoman(0)/m/it/13 Patterns of Enterprise Application Architecture\TU/TimesNewRoman(0)/m/n/13 , Addison-Wesley
  []
 
 
 
-[68
+[69
 
 ]
 
-[69] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
+[70] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1276,19 +1458,19 @@ LaTeX Font Warning: Size substitutions with differences
 
 Here is how much of LuaTeX's memory you used:
  23051 strings out of 475506
- 477751,1144653 words of node,token memory allocated
+ 477755,1144653 words of node,token memory allocated
  490 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 51 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:1,2:5516,3:131,4:8476,5:7844,6:94,7:18493,8:2,9:23541,10:35,11
-:1220
+   avail lists: 2:5516,3:332,4:8476,5:7844,6:137,7:18493,8:1,9:23541,10:35,11:12
+20
  45410 multiletter control sequences out of 65536+600000
- 84 fonts using 40787199 bytes
+ 84 fonts using 40787387 bytes
  99i,14n,105p,1747b,670s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/miktex/fonts/opentype/public/lm/lmmono12-regular.otf><C:/WINDOWS/Fonts/times
 i.ttf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/times.ttf><C:/WINDOWS/Font
 s/timesbd.ttf>
-Output written on main.pdf (81 pages, 432339 bytes).
+Output written on main.pdf (81 pages, 433922 bytes).
 
 PDF statistics: 294 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
