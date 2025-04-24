@@ -1,9 +1,9 @@
 \section{Công nghệ và phương pháp đo lường hiệu năng}
 
 \subsection{Các công nghệ triển khai trong dự án}
-Trong triển khai kiến trúc microservices, việc lựa chọn công nghệ phù hợp đóng vai trò quan trọng, ảnh hưởng trực tiếp đến hiệu suất, khả năng mở rộng và bảo trì của hệ thống \cite{newman2015}. Khóa luận sử dụng NestJS làm framework chính cho việc phát triển microservices, một framework Node.js tiến bộ dựa trên TypeScript, cung cấp kiến trúc ứng dụng lấy cảm hứng từ Angular với các nguyên tắc SOLID và mô hình MVC. Framework này mang lại lợi ích như hỗ trợ dependency injection, kiến trúc mô-đun hóa cao và tích hợp sẵn với nhiều công nghệ khác.
+Trong triển khai kiến trúc vi dịch vụ, việc lựa chọn công nghệ phù hợp đóng vai trò quan trọng, ảnh hưởng trực tiếp đến hiệu suất, khả năng mở rộng và bảo trì của hệ thống \cite{newman2015}. Khóa luận sử dụng NestJS làm framework chính cho việc phát triển microservices, một framework Node.js tiến bộ dựa trên TypeScript, cung cấp kiến trúc ứng dụng lấy cảm hứng từ Angular với các nguyên tắc SOLID và mô hình MVC. Framework này mang lại lợi ích như hỗ trợ dependency injection, kiến trúc mô-đun hóa cao và tích hợp sẵn với nhiều công nghệ khác.
 
-Mỗi microservice được triển khai như một ứng dụng NestJS độc lập, với cấu trúc gồm controllers (xử lý yêu cầu HTTP), services (chứa logic nghiệp vụ), modules (đóng gói thành phần liên quan) và entities (đại diện đối tượng dữ liệu). NestJS cung cấp module microservices chuyên dụng hỗ trợ các giao thức như TCP, Redis, MQTT, gRPC, và Kafka, giúp đơn giản hóa việc triển khai các mẫu giao tiếp.
+Mỗi dịch vụ được triển khai như một ứng dụng NestJS độc lập, với cấu trúc gồm controllers (xử lý yêu cầu HTTP), services (chứa logic nghiệp vụ), modules (đóng gói thành phần liên quan) và entities (đại diện đối tượng dữ liệu). NestJS cung cấp module microservices chuyên dụng hỗ trợ các giao thức như TCP, Redis, MQTT, gRPC, và Kafka, giúp đơn giản hóa việc triển khai các mẫu giao tiếp.
 
 TypeScript được chọn làm ngôn ngữ lập trình chính với ưu điểm hệ thống kiểu dữ liệu tĩnh, giúp phát hiện lỗi sớm, tăng cường khả năng đọc hiểu và bảo trì mã nguồn. Trong môi trường microservices, TypeScript giúp đảm bảo tính nhất quán của dữ liệu được truyền giữa các dịch vụ thông qua các contract rõ ràng.
 

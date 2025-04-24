@@ -1,6 +1,6 @@
-\section{Communication trong Microservices}
+\section{Giao tiếp trong kiến trúc vi dịch vụ}
 
-\subsection{Vai trò của giao tiếp trong kiến trúc microservice}
+\subsection{Vai trò của giao tiếp trong kiến trúc vi dịch vụ}
 Giao tiếp đóng vai trò then chốt trong kiến trúc microservice. Khác với các ứng
 dụng nguyên khối, các microservice giao tiếp qua mạng, thường thông qua HTTP, gRPC hoặc middleware messaging.
 
@@ -14,7 +14,7 @@ Giao tiếp hỗ trợ khả năng chịu lỗi thông qua các cơ chế như C
 
 Cuối cùng, thiết kế giao tiếp tốt cho phép mở rộng hệ thống, thêm dịch vụ mới hoặc phiên bản mới mà không ảnh hưởng đến dịch vụ khác.
 
-\subsection{Các thuộc tính quan trọng của giao tiếp microservice}
+\subsection{Các thuộc tính quan trọng của giao tiếp vi dịch vụ}
 Khi thiết kế giao tiếp cho microservice, cần xem xét một số thuộc tính quan trọng:
 
 Độ tin cậy đảm bảo thông điệp được gửi và nhận thành công trong hệ thống phân tán. Các cơ chế như xác nhận, thử lại và hàng đợi bền vững giúp tăng độ tin cậy \cite{hohpe2004}.
@@ -62,7 +62,7 @@ Pub/Sub là mẫu bất đồng bộ với nhà xuất bản gửi thông điệ
 
 GraphQL là ngôn ngữ truy vấn và thao tác dữ liệu hiệu quả, cho phép chỉ định chính xác dữ liệu cần thiết, tránh over-fetching và under-fetching \cite{richardson2019}. Hữu ích cho ứng dụng di động với băng thông hạn chế.
  
-\subsection{Thách thức trong giao tiếp microservice}
+\subsection{Thách thức trong giao tiếp vi dịch vụ}
 Giao tiếp microservice đặt ra nhiều thách thức:
 
 Network Reliability là thách thức quan trọng khi mạng không đáng tin cậy, gây mất thông điệp hoặc độ trễ cao. Giải pháp bao gồm retry, timeout và circuit breaker.

@@ -31,29 +31,6 @@ Tuy nhiên, mẫu này cũng có những thách thức như độ phức tạp c
 
 PayPal đã áp dụng mô hình Event Sourcing kết hợp với kiến trúc microservice để xây dựng nền tảng thanh toán mới. Mỗi giao dịch thanh toán được mô hình hóa như một chuỗi các sự kiện (payment\_initiated, payment\_authorized, payment\_captured, v.v.), và nhiều dịch vụ khác nhau đăng ký để nhận thông báo về các sự kiện mới để thực hiện các chức năng như phát hiện gian lận, thông báo cho người dùng, và cập nhật báo cáo tài chính \cite{raman2016}.
 
-\subsection{Message Broker với Exchange Routing}
-
-Message Broker với Exchange Routing là một mô hình giao tiếp không đồng bộ one-to-many, trong đó một thành phần trung gian (exchange) chịu trách nhiệm định tuyến thông điệp từ nhà xuất bản đến người đăng ký dựa trên các quy tắc định tuyến cụ thể \cite{hohpe2004}.
-
-Theo Jun et al. \cite{jun2018}, kiến trúc của mô hình này bao gồm: Publisher (dịch vụ gửi thông điệp đến exchange), Exchange (thành phần định tuyến thông điệp dựa trên các quy tắc khác nhau), Bindings (quy tắc kết nối exchange với các hàng đợi), Queues (nơi lưu trữ thông điệp cho đến khi được xử lý), và Consumers (dịch vụ nhận và xử lý thông điệp từ hàng đợi).
-
-RabbitMQ, một trong những message broker phổ biến, hỗ trợ bốn loại exchange chính: Direct Exchange (định tuyến thông điệp dựa trên khóa định tuyến chính xác), Topic Exchange (định tuyến thông điệp dựa trên mẫu khóa định tuyến), Fanout Exchange (định tuyến thông điệp đến tất cả các hàng đợi được liên kết), và Headers Exchange (định tuyến thông điệp dựa trên các thuộc tính header).
-
-Message Broker với Exchange Routing cung cấp nhiều ưu điểm như định tuyến linh hoạt, khả năng lọc thông điệp dựa trên nội dung hoặc metadata, cân bằng tải giữa nhiều instance của cùng một dịch vụ, và hỗ trợ các cấp độ Quality of Service khác nhau. Tuy nhiên, mô hình này cũng có những thách thức như khả năng trở thành điểm lỗi đơn, độ phức tạp cao trong vận hành, và khó khăn trong việc gỡ lỗi luồng thông điệp.
-
-LinkedIn sử dụng kết hợp Apache Kafka và một hệ thống message broker tùy chỉnh để xây dựng Data Pipeline - một nền tảng xử lý dữ liệu thời gian thực xử lý hàng trăm tỷ sự kiện mỗi ngày. Họ sử dụng các mẫu exchange khác nhau để định tuyến dữ liệu: Fanout exchange để phân phối tất cả sự kiện đến các hệ thống phân tích, Topic exchange để định tuyến sự kiện cụ thể đến các dịch vụ chuyên biệt, và Direct exchange để cân bằng tải giữa nhiều instance của cùng một dịch vụ \cite{goodhope2012}.
-
-\subsection{Streaming Platform}
-Streaming Platform là một mô hình giao tiếp không đồng bộ one-to-many, tập trung vào việc xử lý luồng dữ liệu liên tục và quy mô lớn. Khác với các mô hình truyền thống, nền tảng streaming không chỉ chuyển thông điệp mà còn cung cấp khả năng xử lý và phân tích luồng dữ liệu thời gian thực \cite{richardson2019}.
-
-Theo Aksakalli et al. \cite{aksakalli2021}, một nền tảng streaming điển hình bao gồm các thành phần sau: Stream Producers (dịch vụ tạo ra dữ liệu và đẩy vào luồng), Stream Storage (lưu trữ luồng dữ liệu, thường với khả năng lưu trữ lâu dài), Stream Processors (xử lý và biến đổi dữ liệu trong luồng), và Stream Consumers (dịch vụ đọc và phản ứng với dữ liệu từ luồng).
-
-Apache Kafka là một trong những nền tảng streaming phổ biến nhất, cung cấp khả năng lưu trữ và xử lý luồng dữ liệu với tốc độ, quy mô và độ tin cậy cao. Các nền tảng khác bao gồm Apache Flink, Apache Spark Streaming, và Amazon Kinesis.
-
-Streaming Platform đặc biệt hữu ích cho các trường hợp như xử lý dữ liệu lớn thời gian thực, đường ống dữ liệu (data pipeline), phát hiện bất thường và gian lận, và theo dõi và phân tích hành vi người dùng.
-
-Netflix sử dụng Apache Kafka làm nền tảng cho Keystone - hệ thống xử lý luồng dữ liệu thời gian thực xử lý hơn 700 tỷ sự kiện mỗi ngày (hơn 8 triệu sự kiện mỗi giây) từ người dùng và dịch vụ nội bộ trên toàn cầu. Dữ liệu từ Keystone được tiêu thụ bởi hàng trăm dịch vụ khác nhau, bao gồm hệ thống đề xuất nội dung cá nhân hóa, giám sát chất lượng dịch vụ theo thời gian thực, và phân tích hành vi người dùng \cite{idc2021}.
-
 \subsection{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-many)}
 Giao tiếp bất đồng bộ one-to-many mang lại nhiều ưu điểm đáng kể so với các mô hình giao tiếp khác trong kiến trúc microservice, nhưng cũng đi kèm với một số hạn chế cần được xem xét kỹ lưỡng.
 
