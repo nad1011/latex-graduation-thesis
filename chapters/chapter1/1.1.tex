@@ -1,23 +1,23 @@
 \section{Bối cảnh và sự cần thiết của đề tài}
 Trong bối cảnh phát triển phần mềm hiện đại, các hệ thống ngày càng trở nên
 phức tạp và đòi hỏi khả năng mở rộng cao để đáp ứng nhu cầu kinh doanh không
-ngừng thay đổi. Kiến trúc microservice đã nổi lên như một giải pháp hiệu quả,
+ngừng thay đổi. Kiến trúc vi dịch vụ đã nổi lên như một giải pháp hiệu quả,
 cho phép các nhóm phát triển độc lập tạo ra, triển khai và mở rộng các dịch vụ
 nhỏ, tập trung vào một chức năng cụ thể của hệ thống. Sự phân tách này tạo điều
 kiện cho việc phát triển nhanh chóng và linh hoạt, giúp các tổ chức thích ứng
 tốt hơn với các yêu cầu thay đổi của thị trường.
 
 Theo một báo cáo của IDC, đến năm 2025, hơn 80\% các tổ chức doanh nghiệp sẽ
-chuyển đổi sang kiến trúc phân tán như microservice để tăng tốc độ phát triển
+chuyển đổi sang kiến trúc phân tán như vi dịch vụ để tăng tốc độ phát triển
 và triển khai ứng dụng \cite{idc2021}. Xu hướng này phản ánh nhu cầu ngày càng tăng về khả
 năng mở rộng, tính linh hoạt và tốc độ phát triển trong môi trường kinh doanh
 cạnh tranh. Tuy nhiên, việc phân tách một hệ thống thành nhiều dịch vụ nhỏ cũng
 đặt ra thách thức lớn về cách thức các dịch vụ này giao tiếp với nhau.
 
-Trong kiến trúc microservice, giao tiếp giữa các dịch vụ là một yếu tố then
+Trong kiến trúc vi dịch vụ, giao tiếp giữa các dịch vụ là một yếu tố then
 chốt quyết định đến hiệu suất tổng thể của hệ thống. Mô hình giao tiếp không
 phù hợp có thể tạo ra các điểm nghẽn, làm tăng độ trễ và giảm khả năng đáp ứng
-của hệ thống. Khi nhiều microservice phải tương tác với nhau để hoàn thành một
+của hệ thống. Khi nhiều vi dịch vụ phải tương tác với nhau để hoàn thành một
 nhiệm vụ, hiệu suất của toàn bộ chuỗi dịch vụ có thể bị ảnh hưởng bởi thời gian
 phản hồi của dịch vụ chậm nhất hoặc khả năng xử lý thấp nhất trong chuỗi.
 
@@ -36,7 +36,7 @@ với sự tăng trưởng trong tương lai.
 
 Thực tế cho thấy, việc lựa chọn cơ chế giao tiếp không phù hợp có thể dẫn đến
 các vấn đề nghiêm trọng. Theo nghiên cứu của Gartner, hơn 70\% các dự án
-microservice gặp khó khăn trong giai đoạn đầu triển khai do thiếu hiểu biết về
+vi dịch vụ gặp khó khăn trong giai đoạn đầu triển khai do thiếu hiểu biết về
 các mô hình giao tiếp và cách thức áp dụng chúng hiệu quả \cite{gartner2019}. Nhiều tổ chức đã
 phải thiết kế lại kiến trúc của họ sau khi gặp phải các vấn đề về hiệu suất, độ
 tin cậy và khả năng quản lý.
@@ -50,13 +50,13 @@ năng mở rộng và chịu lỗi, nhưng làm tăng độ phức tạp trong v
 thái và đảm bảo tính nhất quán của dữ liệu \cite{newman2015}.
 
 Do đó, việc phân tích và đánh giá các mẫu giao tiếp (communication patterns)
-trong kiến trúc microservice là vô cùng cần thiết, giúp các nhà phát triển và
+trong kiến trúc vi dịch vụ là vô cùng cần thiết, giúp các nhà phát triển và
 kiến trúc sư hệ thống hiểu rõ các lựa chọn có sẵn và những đánh đổi liên quan.
 Thông qua việc phân tích có hệ thống, các nhà phát triển có thể áp dụng các mẫu
 phù hợp với bối cảnh cụ thể, tối ưu hóa hiệu suất và độ tin cậy của hệ thống,
 đồng thời đảm bảo khả năng mở rộng trong tương lai.
 
 Bài đánh giá này nhằm cung cấp một cái nhìn toàn diện về các mẫu giao tiếp
-trong kiến trúc microservice, phân tích ưu nhược điểm của từng mẫu, và đưa ra
+trong kiến trúc vi dịch vụ, phân tích ưu nhược điểm của từng mẫu, và đưa ra
 các hướng dẫn thực tiễn cho việc lựa chọn và triển khai các mẫu giao tiếp phù
 hợp.

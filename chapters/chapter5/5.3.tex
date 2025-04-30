@@ -1,7 +1,7 @@
 \section{Thảo luận}
 
 \subsection{Lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản}
-Dựa trên kết quả đánh giá toàn diện, có thể đưa ra những khuyến nghị về việc lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản nghiệp vụ trong kiến trúc microservice.
+Dựa trên kết quả đánh giá toàn diện, có thể đưa ra những khuyến nghị về việc lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản nghiệp vụ trong kiến trúc vi dịch vụ.
 
 Đối với kịch bản kiểm tra và cập nhật tồn kho, giao tiếp bất đồng bộ sử dụng Message Queue (RabbitMQ) được khuyến nghị vì thời gian phản hồi ban đầu nhanh, tỷ lệ nhất quán dữ liệu cao và hiệu quả sử dụng tài nguyên tốt. Mặc dù có thời gian xử lý end-to-end dài hơn một chút, nhưng ưu điểm này được bù đắp bởi khả năng duy trì hiệu suất ổn định dưới tải cao và trải nghiệm người dùng tốt hơn. Độ trễ dữ liệu nhỏ (12-15ms) không đáng kể trong hầu hết các trường hợp sử dụng.
 
@@ -12,7 +12,7 @@ Dựa trên kết quả đánh giá toàn diện, có thể đưa ra những khu
 Đối với kịch bản ghi nhận hoạt động người dùng, Kafka được khuyến nghị nhẹ so với RabbitMQ vì hiệu quả sử dụng tài nguyên tốt hơn và mô hình một-nhiều phù hợp hơn cho việc phân phối dữ liệu hoạt động đến nhiều service phân tích khác nhau. Khả năng lưu trữ dữ liệu lâu dài và phát lại các sự kiện cũng là những ưu điểm quan trọng trong bối cảnh phân tích dữ liệu.
 
 \subsection{Mô hình tích hợp các mẫu giao tiếp}
-Trong thực tế, việc kết hợp các mẫu giao tiếp khác nhau thường mang lại kết quả tốt nhất cho hệ thống microservice. Mỗi mẫu giao tiếp có những ưu điểm và nhược điểm riêng, phù hợp với những tình huống cụ thể. Một mô hình tích hợp hiệu quả có thể tận dụng ưu điểm của từng phương pháp để tối ưu hóa hiệu suất tổng thể của hệ thống.
+Trong thực tế, việc kết hợp các mẫu giao tiếp khác nhau thường mang lại kết quả tốt nhất cho hệ thống vi dịch vụ. Mỗi mẫu giao tiếp có những ưu điểm và nhược điểm riêng, phù hợp với những tình huống cụ thể. Một mô hình tích hợp hiệu quả có thể tận dụng ưu điểm của từng phương pháp để tối ưu hóa hiệu suất tổng thể của hệ thống.
 
 Một chiến lược tích hợp hiệu quả là sử dụng giao tiếp đồng bộ cho các tác vụ yêu cầu phản hồi tức thời và có thời gian xử lý ngắn, như truy vấn thông tin đơn giản. Giao tiếp bất đồng bộ dạng một-một được sử dụng cho các tác vụ có thời gian xử lý dài nhưng cần phản hồi nhanh cho người dùng, như xử lý đơn hàng và thanh toán. Giao tiếp bất đồng bộ dạng một-nhiều được sử dụng cho các tác vụ cần phân phối thông tin đến nhiều service, như thông báo sự kiện và ghi nhận hoạt động.
 

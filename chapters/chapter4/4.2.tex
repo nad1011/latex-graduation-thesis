@@ -1,13 +1,13 @@
 \section{Cài đặt và triển khai}
 
 \subsection{Cấu trúc dự án}
-Dự án được tổ chức theo kiến trúc monorepo, cho phép quản lý nhiều microservice trong một repository duy nhất. Cấu trúc này tạo điều kiện thuận lợi cho việc chia sẻ mã nguồn và tài nguyên giữa các dịch vụ, đồng thời đơn giản hóa quá trình triển khai và kiểm thử. Cấu trúc thư mục chính của dự án bao gồm thư mục \texttt{apps} chứa mã nguồn cho từng microservice riêng biệt, thư mục \texttt{libs} chứa các module dùng chung, và thư mục \texttt{test-script} chứa các kịch bản kiểm thử hiệu suất.
+Dự án được tổ chức theo kiến trúc monorepo, cho phép quản lý nhiều vi dịch vụ trong một repository duy nhất. Cấu trúc này tạo điều kiện thuận lợi cho việc chia sẻ mã nguồn và tài nguyên giữa các dịch vụ, đồng thời đơn giản hóa quá trình triển khai và kiểm thử. Cấu trúc thư mục chính của dự án bao gồm thư mục \texttt{apps} chứa mã nguồn cho từng vi dịch vụ riêng biệt, thư mục \texttt{libs} chứa các module dùng chung, và thư mục \texttt{test-script} chứa các kịch bản kiểm thử hiệu suất.
 
-Trong thư mục \texttt{apps}, mỗi dịch vụ được tổ chức theo cấu trúc tiêu chuẩn của NestJS, bao gồm các module, controller, service và entity. Điều này giúp duy trì tính nhất quán và khả năng bảo trì trên toàn dự án. Thư mục \texttt{libs} chứa module \texttt{common} chia sẻ các định nghĩa, interface và utility dùng chung giữa các microservice, giúp tránh việc trùng lặp mã và đảm bảo tính nhất quán trong toàn hệ thống.
+Trong thư mục \texttt{apps}, mỗi dịch vụ được tổ chức theo cấu trúc tiêu chuẩn của NestJS, bao gồm các module, controller, service và entity. Điều này giúp duy trì tính nhất quán và khả năng bảo trì trên toàn dự án. Thư mục \texttt{libs} chứa module \texttt{common} chia sẻ các định nghĩa, interface và utility dùng chung giữa các vi dịch vụ, giúp tránh việc trùng lặp mã và đảm bảo tính nhất quán trong toàn hệ thống.
 
-Mỗi microservice được đóng gói thành một container Docker riêng biệt, cho phép triển khai độc lập và cô lập. File \texttt{Dockerfile} cho mỗi service được thiết kế để tối ưu hóa kích thước image và thời gian xây dựng. Tệp \texttt{Docker Compose} phối hợp việc triển khai tất cả các microservice cùng với các dịch vụ cơ sở hạ tầng như cơ sở dữ liệu, RabbitMQ và Kafka.
+Mỗi vi dịch vụ được đóng gói thành một container Docker riêng biệt, cho phép triển khai độc lập và cô lập. File \texttt{Dockerfile} cho mỗi service được thiết kế để tối ưu hóa kích thước image và thời gian xây dựng. Tệp \texttt{Docker Compose} phối hợp việc triển khai tất cả các vi dịch vụ.
 
-\subsection{Triển khai các microservice chính}
+\subsection{Triển khai các vi dịch vụ chính}
 
 Order Service
 Order Service đóng vai trò trung tâm trong hệ thống, xử lý việc tạo và quản lý đơn hàng, đồng thời điều phối luồng xử lý giữa các dịch vụ khác. Service này được triển khai với các endpoint RESTful cho các hoạt động CRUD đơn hàng, cùng với các handlers cho các sự kiện từ các dịch vụ khác.
@@ -518,7 +518,6 @@ ClientsModule.register([
       },
     },
   },
-  // Other clients...
 ]),
 \end{lstlisting}
 
@@ -604,12 +603,11 @@ ClientsModule.register([
       },
     },
   },
-  // Other clients...
 ]),
 \end{lstlisting}
 
 \subsection{Thiết lập môi trường kiểm thử}
-Để đánh giá một cách khách quan và toàn diện hiệu suất của các mẫu giao tiếp trong kiến trúc microservice, nghiên cứu đã thiết lập một môi trường kiểm thử chuyên biệt. Môi trường này được xây dựng dựa trên các tiêu chuẩn và phương pháp luận trong lĩnh vực đánh giá hiệu suất hệ thống phân tán. sử dụng công cụ k6, một nền tảng kiểm thử hiệu suất mã nguồn mở được cộng đồng công nghệ đánh giá cao, để thực hiện các bài kiểm thử.
+Để đánh giá một cách khách quan và toàn diện hiệu suất của các mẫu giao tiếp trong kiến trúc vi dịch vụ, nghiên cứu đã thiết lập một môi trường kiểm thử chuyên biệt. Môi trường này được xây dựng dựa trên các tiêu chuẩn và phương pháp luận trong lĩnh vực đánh giá hiệu suất hệ thống phân tán. sử dụng công cụ k6, một nền tảng kiểm thử hiệu suất mã nguồn mở được cộng đồng công nghệ đánh giá cao, để thực hiện các bài kiểm thử.
 
 Khóa luận đã phát triển các script kiểm thử riêng cho từng kịch bản nghiệp vụ, mỗi script đo lường hiệu suất của cả giao tiếp đồng bộ và bất đồng bộ. Các chỉ số được đo lường bao gồm thời gian phản hồi, thông lượng, tỷ lệ lỗi, và sử dụng tài nguyên.
 
@@ -653,7 +651,7 @@ export const options = {
 };
 \end{lstlisting}
 
-Bài đánh giá cũng đã thiết lập giám sát hệ thống sử dụng Prometheus và Grafana để thu thập và hiển thị dữ liệu hiệu suất theo thời gian thực. Điều này cho phép bài đánh giá phân tích hành vi hệ thống dưới các mức tải khác nhau và xác định các điểm nghẽn có thể có.
+Bài đánh giá cũng đã thiết lập giám sát hệ thống sử dụng Prometheus để thu thập dữ liệu hiệu suất theo thời gian thực. Điều này cho phép bài đánh giá phân tích hành vi hệ thống dưới các mức tải khác nhau và xác định các điểm nghẽn có thể có.
 
 \begin{lstlisting}[language=Javascript]
 function getSystemMetrics(serviceName) {

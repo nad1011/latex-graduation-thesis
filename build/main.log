@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  24 APR 2025 21:35
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  30 APR 2025 13:08
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -922,9 +922,9 @@ df>]
 Package mathfont Info: Adjusting font Times New Roman Bold.
 Package mathfont Info: Adjusting font Times New Roman Italic.
 Package mathfont Info: Adjusting font Times New Roman Bold Italic.
-Underfull \hbox (badness 1946) in paragraph at lines 28--30
-[]\TU/TimesNewRoman(0)/b/it/12 Từ khóa: \TU/TimesNewRoman(0)/m/it/12 Microser
-vice, Mẫu giao tiếp, Kiến trúc phần mềm, REST, Message Queue,
+Underfull \hbox (badness 2762) in paragraph at lines 28--30
+[]\TU/TimesNewRoman(0)/b/it/12 Từ khóa: \TU/TimesNewRoman(0)/m/it/12 Vi d
+ịch vụ, Mẫu giao tiếp, Kiến trúc phần mềm, REST, Message Queue,
  []
 
 
@@ -1110,9 +1110,9 @@ Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
 
 [23]
 
-[24]
+[24]) (./chapters/chapter3/3.3.tex
 
-[25]) (./chapters/chapter3/3.3.tex
+[25]
 
 [26]
 
@@ -1120,21 +1120,9 @@ Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
 
 [28]
 
-[29]
+[29]) (./chapters/chapter3/3.4.tex
 
-[30]) (./chapters/chapter3/3.4.tex
-Underfull \hbox (badness 1377) in paragraph at lines 81--1
-\TU/TimesNewRoman(0)/m/n/13 và reactive programming, tương lai của giao ti
-ếp bất đồng bộ one-to-one trong
- []
-
-
-Underfull \hbox (badness 1817) in paragraph at lines 2--3
-[]\TU/TimesNewRoman(0)/m/n/13 Giao tiếp bất đồng bộ one-to-many là m
-ô hình quan trọng trong kiến trúc
- []
-
-
+[30]
 
 [31]
 
@@ -1142,31 +1130,29 @@ Underfull \hbox (badness 1817) in paragraph at lines 2--3
 
 [33]
 
-[34]
+[34]) (./chapters/chapter3/3.5.tex
 
-[35]) (./chapters/chapter3/3.5.tex
+[35])) (./chapters/chapter4.tex
 
-[36])) (./chapters/chapter4.tex
+[36] (./chapters/chapter4/4.1.tex
 
-[37] (./chapters/chapter4/4.1.tex
-
-[38
+[37
 
 ]
 
-[39]) (./chapters/chapter4/4.2.tex
+[38]) (./chapters/chapter4/4.2.tex
 Package mathfont Info: Adjusting font LMMono12-Regular.
+Package mathfont Info: Adjusting font LMMono12-Regular.
+Package mathfont Info: Adjusting font Times New Roman.
+Package mathfont Info: Adjusting font Times New Roman.
+
+[39]
 
 [40]
-Package mathfont Info: Adjusting font LMMono12-Regular.
-Package mathfont Info: Adjusting font Times New Roman.
-Package mathfont Info: Adjusting font Times New Roman.
 
 [41]
 
 [42]
-
-[43]
 Underfull \hbox (badness 10000) in paragraph at lines 179--180
 []\TU/TimesNewRoman(0)/m/n/13 Trong giao tiếp đồng bộ, Inventory Service cung c
 ấp endpoint
@@ -1174,17 +1160,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
 
 
+[43]
+
 [44]
 
 [45]
-
-[46]
 Underfull \hbox (badness 1527) in paragraph at lines 336--338
 []\TU/TimesNewRoman(0)/m/n/13 Notification Services Nhóm các dịch vụ th
 ông báo bao gồm Email Service,
  []
 
 
+
+[46]
 
 [47]
 
@@ -1193,22 +1181,20 @@ Underfull \hbox (badness 1527) in paragraph at lines 336--338
 [49]
 
 [50]
-
-[51]
-Underfull \hbox (badness 1953) in paragraph at lines 528--529
+Underfull \hbox (badness 1953) in paragraph at lines 527--528
 []\TU/TimesNewRoman(0)/m/n/13 Ví dụ, khi một đơn hàng được xác nh
 ận, Order Service xuất bản sự kiện
  []
 
 
 
+[51]
+
 [52]
 
-[53]
+[53]) (./chapters/chapter4/4.3.tex
 
-[54]) (./chapters/chapter4/4.3.tex
-
-[55]
+[54]
 Underfull \hbox (badness 10000) in paragraph at lines 20--20
 []|\TU/TimesNewRoman(0)/b/n/13 Synchronous
  []
@@ -1288,7 +1274,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--85
 
 
 
-[56]
+[55]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1352,7 +1338,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[57]
+[56]
 Underfull \hbox (badness 5548) in paragraph at lines 136--136
 []|\TU/TimesNewRoman(0)/b/n/13 Kafka (One-to-
  []
@@ -1392,27 +1378,27 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[58])) (./chapters/chapter5.tex
+[57])) (./chapters/chapter5.tex
 
-[59]
+[58]
 
-[60] (./chapters/chapter5/5.1.tex
+[59] (./chapters/chapter5/5.1.tex
 
-[61
+[60
 
 ]) (./chapters/chapter5/5.2.tex
 
-[62]
+[61]
 
-[63]) (./chapters/chapter5/5.3.tex
+[62]) (./chapters/chapter5/5.3.tex
+
+[63]
 
 [64]
 
-[65]
+[65]))
 
-[66]))
-
-[67]
+[66]
 Underfull \hbox (badness 10000) in paragraph at lines 110--113
 []\TU/TimesNewRoman(0)/m/n/13 Wolff, E., \TU/TimesNewRoman(0)/m/it/13 Microservi
 ces: Flexible Software Architecture\TU/TimesNewRoman(0)/m/n/13 , Addison-Wesley
@@ -1432,7 +1418,7 @@ Underfull \hbox (badness 1009) in paragraph at lines 161--164
 
 
 
-[68
+[67
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1448,21 +1434,21 @@ LaTeX Font Warning: Size substitutions with differences
 
 Here is how much of LuaTeX's memory you used:
  23050 strings out of 475506
- 477751,1144653 words of node,token memory allocated
+ 477742,1144653 words of node,token memory allocated
  490 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 51 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:1,2:5516,3:332,4:8476,5:7844,6:137,7:18493,8:2,9:23541,10:35,1
+   avail lists: 1:1,2:5516,3:332,4:8476,5:7844,6:137,7:18473,8:1,9:23541,10:35,1
 1:1220
  45409 multiletter control sequences out of 65536+600000
- 84 fonts using 40787575 bytes
- 99i,14n,105p,1747b,670s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84 fonts using 40787011 bytes
+ 99i,14n,105p,1747b,724s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/miktex/fonts/opentype/public/lm/lmmono12-regular.otf><C:/WINDOWS/Fonts/times
 i.ttf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/times.ttf><C:/WINDOWS/Font
 s/timesbd.ttf>
-Output written on main.pdf (79 pages, 427695 bytes).
+Output written on main.pdf (78 pages, 425351 bytes).
 
-PDF statistics: 287 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 284 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
