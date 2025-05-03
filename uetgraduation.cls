@@ -159,7 +159,11 @@ luatexbase.add_to_callback("mathfont.add_math_constants", custom_math_constants,
 }
 
 \newenvironment{preamble}[1]{%
-	\clearpage\setlength\parindent{0cm}{\centering\textbf{\MakeUppercase{#1}}\par}\vspace{1cm}\setfontsize{12pt}
+	\clearpage
+	\setlength\parindent{0cm}
+	\addcontentsline{toc}{chapter}{#1}
+	{\centering\textbf{\MakeUppercase{#1}}\par}
+	\vspace{1cm}\setfontsize{12pt}
 }{\normalsize}
 
 \newif\if@incontentlisting\@incontentlistingfalse
@@ -167,12 +171,13 @@ luatexbase.add_to_callback("mathfont.add_math_constants", custom_math_constants,
 
 \setcounter{tocdepth}{3}
 \newenvironment{contentlistingsection}[1]{%
-	\if@incontentlisting\else\PackageError{uetgraduation}{
-		Content listing section not in \`contentlisting\` environment.
-	}{
-		To ensure consistency, place all content listing sections into the \`contentlisting\` environment.
-	}\fi%
-	\noindent\Large\textbf{#1}\par\vspace{1cm}\normalsize
+    \if@incontentlisting\else\PackageError{uetgraduation}{
+        Content listing section not in \`contentlisting\` environment.
+    }{
+        To ensure consistency, place all content listing sections into the \`contentlisting\` environment.
+    }\fi%
+    \addcontentsline{toc}{chapter}{#1}
+    \noindent\Large\textbf{#1}\par\vspace{1cm}\normalsize
 }{\clearpage}
 \newcommand\tableofcontents{\begin{contentlistingsection}{Mục lục}\@starttoc{toc}\end{contentlistingsection}}
 \renewcommand\numberline[2]{#1 #2}

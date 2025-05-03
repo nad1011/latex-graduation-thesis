@@ -14,12 +14,45 @@
 \englishtitle{Study of Communication Mechanisms in Microservice Architecture}
 \englishmajor{Computer Science}
 \englishsupervisor{Assoc. Prof., Dr. Vo Dinh Hieu}
-% \englishcosupervisor{Your Co-supervisor's Name in English} % Uncomment if you have a co-supervisor
 
 \begin{document}
 
 % Cover pages
 \makecovers
+
+% Thanks page
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \textbf{LỜI CẢM ƠN}
+\end{center}
+\addcontentsline{toc}{chapter}{Lời cảm ơn}
+
+Lời đầu tiên, em xin gửi lời cảm ơn chân thành và sâu sắc nhất tới thầy TS. Võ Đình Hiếu - người đã tận tình hướng dẫn, chỉ bảo, giúp đỡ em trong suốt quá trình thực hiện khóa luận. Sự nhiệt huyết, kiến thức chuyên môn và kinh nghiệm của thầy đã truyền cảm hứng và động lực lớn lao để em hoàn thành khóa luận này.
+Em xin gửi lời cảm ơn tới các thầy cô trong Khoa Công nghệ thông tin, đặc biệt là Bộ môn Công nghệ phần mềm, đã trang bị cho em những kiến thức nền tảng vững chắc, không chỉ về chuyên môn mà còn về kỹ năng nghiên cứu và giải quyết vấn đề.
+Em xin chân thành cảm ơn các thầy cô trong Hội đồng chấm khóa luận đã dành thời gian quý báu để đọc và đánh giá công trình nghiên cứu của em. Những nhận xét và góp ý của quý thầy cô là nguồn động viên to lớn giúp em hoàn thiện và phát triển bản thân.
+Em xin gửi lời cảm ơn tới gia đình, bạn bè và những người thân yêu đã luôn ở bên cạnh, động viên và ủng hộ em trong suốt quá trình học tập và hoàn thiện khóa luận.
+Cuối cùng, em xin gửi lời tri ân tới các tác giả, nhà nghiên cứu đã đóng góp vào lĩnh vực kiến trúc microservice và các mẫu giao tiếp liên quan. Những công trình nghiên cứu của họ là nguồn tài liệu quý giá, giúp em hiểu sâu hơn về lĩnh vực này và hoàn thành khóa luận một cách tốt nhất.
+
+% Declaration page
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \textbf{LỜI CAM ĐOAN}
+\end{center}
+\addcontentsline{toc}{chapter}{Lời cam đoan}
+
+Tôi là Nguyễn Hải Đan, Tôi xin cam đoan đây là công trình nghiên cứu của riêng tôi. Các số liệu, kết quả nêu trong khóa luận là trung thực và chưa từng được ai công bố trong bất kỳ công trình nào khác. Các tham khảo, trích dẫn trong khóa luận đều được chỉ rõ nguồn gốc. Nếu sai tôi xin hoàn toàn chịu trách nhiệm.
+
+\begin{flushright}
+    Hà Nội, ngày \ldots\ldots tháng \ldots\ldots năm 2025
+
+    \vspace{2cm}
+    \textit{Người cam đoan}
+
+    \vspace{1cm}
+    \textit{Nguyễn Hải Đan}
+\end{flushright}
 
 % Abstract
 \begin{preamble}{Tóm tắt}
@@ -39,27 +72,7 @@
     \tableofcontents
     \listoffigures
     \listoftables
-
 \end{contentlisting}
-
-% Declaration page
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \textbf{LỜI CAM ĐOAN}
-\end{center}
-
-Tôi xin cam đoan đây là công trình nghiên cứu của riêng tôi. Các số liệu, kết quả nêu trong khóa luận là trung thực và chưa từng được ai công bố trong bất kỳ công trình nào khác. Các tham khảo, trích dẫn trong khóa luận đều được chỉ rõ nguồn gốc. Nếu sai tôi xin hoàn toàn chịu trách nhiệm.
-
-\begin{flushright}
-    Hà Nội, ngày \ldots\ldots tháng \ldots\ldots năm 2025
-
-    \vspace{2cm}
-    \textit{Người cam đoan}
-
-    \vspace{1cm}
-    \textit{Nguyễn Hải Đan}
-\end{flushright}
 
 % Main content
 \input{chapters/chapter1}
