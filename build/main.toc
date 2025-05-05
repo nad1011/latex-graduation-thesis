@@ -18,78 +18,77 @@
 \contentsline {subsection}{\numberline {2.1.2.}{So sánh với kiến trúc nguyên khối}}{6}{}%
 \contentsline {subsection}{\numberline {2.1.3.}{Lợi ích và thách thức của kiến trúc vi dịch vụ}}{7}{}%
 \contentsline {subsection}{\numberline {2.1.4.}{Các nguyên tắc thiết kế}}{8}{}%
-\contentsline {section}{\numberline {2.2.}{Giao tiếp trong kiến trúc vi dịch vụ}}{8}{}%
+\contentsline {section}{\numberline {2.2.}{Giao tiếp trong kiến trúc vi dịch vụ}}{9}{}%
 \contentsline {subsection}{\numberline {2.2.1.}{Vai trò của giao tiếp trong kiến trúc vi dịch vụ}}{9}{}%
 \contentsline {subsection}{\numberline {2.2.2.}{Các thuộc tính quan trọng của giao tiếp vi dịch vụ}}{9}{}%
-\contentsline {subsection}{\numberline {2.2.3.}{Các mô hình giao tiếp cơ bản}}{9}{}%
-\contentsline {subsection}{\numberline {2.2.4.}{Kiểu tương tác}}{10}{}%
-\contentsline {subsection}{\numberline {2.2.5.}{Các công nghệ và giao thức phổ biến}}{10}{}%
-\contentsline {subsection}{\numberline {2.2.6.}{Thách thức trong giao tiếp vi dịch vụ}}{11}{}%
-\contentsline {subsection}{\numberline {2.2.7.}{Các mẫu giao tiếp}}{11}{}%
-\contentsline {section}{\numberline {2.3.}{Công nghệ và phương pháp đo lường hiệu năng}}{12}{}%
-\contentsline {subsection}{\numberline {2.3.1.}{Các công nghệ triển khai trong dự án}}{12}{}%
-\contentsline {subsection}{\numberline {2.3.2.}{Các thông số đo lường chính}}{13}{}%
-\contentsline {subsection}{\numberline {2.3.3.}{Phương pháp đo lường}}{14}{}%
-\contentsline {subsection}{\numberline {2.3.4.}{Công cụ đo lường hiệu năng}}{14}{}%
-\contentsline {section}{\numberline {2.4.}{Tổng kết}}{15}{}%
-\contentsline {chapter}{\numberline {Chương\ 3.}{Phân tích các mẫu giao tiếp}}{17}{}%
-\contentsline {section}{\numberline {3.1.}{Cách phân loại các mẫu giao tiếp}}{17}{}%
-\contentsline {subsection}{\numberline {3.1.1.}{Tiêu chí phân loại theo communication mode (sync/async)}}{17}{}%
-\contentsline {subsection}{\numberline {3.1.2.}{Tiêu chí phân loại theo communication scope (one-to-one/one-to-many)}}{18}{}%
-\contentsline {subsection}{\numberline {3.1.3.}{Các yếu tố ảnh hưởng đến việc lựa chọn pattern}}{19}{}%
-\contentsline {section}{\numberline {3.2.}{Synchronous Communication Patterns (one-to-one)}}{20}{}%
-\contentsline {subsection}{\numberline {3.2.1.}{Request/Response Pattern}}{20}{}%
-\contentsline {subsection}{\numberline {3.2.2.}{Ưu điểm và Hạn chế của Synchronous Communication}}{22}{}%
-\contentsline {subsection}{\numberline {3.2.3.}{Use cases phù hợp cho Synchronous Communication}}{23}{}%
-\contentsline {subsection}{\numberline {3.2.4.}{Case studies}}{24}{}%
-\contentsline {subsection}{\numberline {3.2.5.}{Tương lai của Synchronous Communication trong vi dịch vụ}}{24}{}%
-\contentsline {section}{\numberline {3.3.}{Asynchronous Communication Patterns (one-to-one)}}{25}{}%
-\contentsline {subsection}{\numberline {3.3.1.}{Cơ chế hoạt động}}{25}{}%
-\contentsline {subsection}{\numberline {3.3.2.}{One-way Notifications Pattern}}{26}{}%
-\contentsline {subsection}{\numberline {3.3.3.}{Message Queue Pattern}}{27}{}%
-\contentsline {subsection}{\numberline {3.3.4.}{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-one)}}{28}{}%
-\contentsline {subsection}{\numberline {3.3.5.}{Use cases phù hợp cho Asynchronous Communication (one-to-one)}}{29}{}%
-\contentsline {subsection}{\numberline {3.3.6.}{Case studies}}{29}{}%
-\contentsline {section}{\numberline {3.4.}{Asynchronous Communication Patterns (one-to-many)}}{30}{}%
-\contentsline {subsection}{\numberline {3.4.1.}{Cơ chế hoạt động}}{31}{}%
-\contentsline {subsection}{\numberline {3.4.2.}{Publish/Subscribe Pattern}}{31}{}%
-\contentsline {subsection}{\numberline {3.4.3.}{Event Sourcing Pattern}}{32}{}%
-\contentsline {subsection}{\numberline {3.4.4.}{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-many)}}{32}{}%
-\contentsline {subsection}{\numberline {3.4.5.}{Use cases phù hợp cho Asynchronous Communication (one-to-many)}}{33}{}%
-\contentsline {subsection}{\numberline {3.4.6.}{Kết luận}}{34}{}%
-\contentsline {section}{\numberline {3.5.}{Tổng kết}}{35}{}%
-\contentsline {chapter}{\numberline {Chương\ 4.}{Triển khai thử nghiệm}}{37}{}%
-\contentsline {section}{\numberline {4.1.}{Mô tả bài toán và yêu cầu}}{37}{}%
-\contentsline {subsection}{\numberline {4.1.1.}{Giới thiệu bài toán}}{37}{}%
-\contentsline {subsection}{\numberline {4.1.2.}{Yêu cầu hệ thống}}{37}{}%
-\contentsline {subsection}{\numberline {4.1.3.}{Kiến trúc tổng thể hệ thống}}{38}{}%
-\contentsline {subsection}{\numberline {4.1.4.}{Các mẫu giao tiếp đánh giá}}{38}{}%
-\contentsline {section}{\numberline {4.2.}{Cài đặt và triển khai}}{39}{}%
-\contentsline {subsection}{\numberline {4.2.1.}{Cấu trúc dự án}}{39}{}%
-\contentsline {subsection}{\numberline {4.2.2.}{Triển khai các vi dịch vụ chính}}{39}{}%
-\contentsline {subsection}{\numberline {4.2.3.}{Triển khai các mẫu giao tiếp}}{46}{}%
-\contentsline {subsection}{\numberline {4.2.4.}{Thiết lập môi trường kiểm thử}}{51}{}%
-\contentsline {section}{\numberline {4.3.}{Kết quả triển khai}}{53}{}%
-\contentsline {subsection}{\numberline {4.3.1.}{Phương pháp đánh giá}}{53}{}%
-\contentsline {subsection}{\numberline {4.3.2.}{Kết quả đánh giá Order-Inventory}}{53}{}%
-\contentsline {subsection}{\numberline {4.3.3.}{Kết quả đánh giá Order-Payment}}{54}{}%
-\contentsline {subsection}{\numberline {4.3.4.}{Kết quả đánh giá Order-Notification}}{55}{}%
-\contentsline {subsection}{\numberline {4.3.5.}{Kết quả đánh giá User Activity Logging}}{56}{}%
-\contentsline {subsection}{\numberline {4.3.6.}{Đánh giá tổng thể}}{56}{}%
-\contentsline {chapter}{\numberline {Chương\ 5.}{Đánh giá và thảo luận}}{59}{}%
-\contentsline {section}{\numberline {5.1.}{Phương pháp và tiêu chí đánh giá}}{59}{}%
-\contentsline {subsection}{\numberline {5.1.1.}{Tổng quan phương pháp đánh giá}}{59}{}%
-\contentsline {subsection}{\numberline {5.1.2.}{Tiêu chí đánh giá cụ thể}}{59}{}%
-\contentsline {subsection}{\numberline {5.1.3.}{Công cụ và môi trường đánh giá}}{60}{}%
-\contentsline {section}{\numberline {5.2.}{Kết quả đánh giá}}{60}{}%
-\contentsline {subsection}{\numberline {5.2.1.}{Mẫu giao tiếp trong kịch bản Order-Inventory}}{60}{}%
-\contentsline {subsection}{\numberline {5.2.2.}{Mẫu giao tiếp trong kịch bản Order-Payment}}{61}{}%
-\contentsline {subsection}{\numberline {5.2.3.}{Mẫu giao tiếp trong kịch bản Order-Notification}}{61}{}%
-\contentsline {subsection}{\numberline {5.2.4.}{Mẫu giao tiếp trong kịch bản User Activity Logging}}{61}{}%
-\contentsline {subsection}{\numberline {5.2.5.}{Ảnh hưởng của tải hệ thống đến các mẫu giao tiếp}}{61}{}%
-\contentsline {section}{\numberline {5.3.}{Thảo luận}}{62}{}%
-\contentsline {subsection}{\numberline {5.3.1.}{Lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản}}{62}{}%
-\contentsline {subsection}{\numberline {5.3.2.}{Mô hình tích hợp các mẫu giao tiếp}}{63}{}%
-\contentsline {subsection}{\numberline {5.3.3.}{Tối ưu hóa hiệu suất trong thực tế}}{63}{}%
-\contentsline {subsection}{\numberline {5.3.4.}{Xu hướng phát triển và nghiên cứu tiếp theo}}{64}{}%
-\contentsline {subsection}{\numberline {5.3.5.}{Các hạn chế của dự án và hướng cải thiện}}{64}{}%
+\contentsline {subsection}{\numberline {2.2.3.}{Các mô hình giao tiếp cơ bản}}{10}{}%
+\contentsline {subsection}{\numberline {2.2.4.}{Kiểu tương tác}}{11}{}%
+\contentsline {subsection}{\numberline {2.2.5.}{Các công nghệ và giao thức phổ biến}}{11}{}%
+\contentsline {subsection}{\numberline {2.2.6.}{Thách thức trong giao tiếp vi dịch vụ}}{12}{}%
+\contentsline {subsection}{\numberline {2.2.7.}{Các mẫu giao tiếp}}{14}{}%
+\contentsline {section}{\numberline {2.3.}{Công nghệ và phương pháp đo lường hiệu năng}}{14}{}%
+\contentsline {subsection}{\numberline {2.3.1.}{Các công nghệ triển khai trong dự án}}{14}{}%
+\contentsline {subsection}{\numberline {2.3.2.}{Các thông số đo lường chính}}{15}{}%
+\contentsline {subsection}{\numberline {2.3.3.}{Phương pháp đo lường}}{16}{}%
+\contentsline {subsection}{\numberline {2.3.4.}{Công cụ đo lường hiệu năng}}{16}{}%
+\contentsline {section}{\numberline {2.4.}{Tổng kết}}{17}{}%
+\contentsline {chapter}{\numberline {Chương\ 3.}{Phân tích các mẫu giao tiếp}}{18}{}%
+\contentsline {section}{\numberline {3.1.}{Cách phân loại các mẫu giao tiếp}}{18}{}%
+\contentsline {subsection}{\numberline {3.1.1.}{Tiêu chí phân loại theo communication mode (sync/async)}}{18}{}%
+\contentsline {subsection}{\numberline {3.1.2.}{Tiêu chí phân loại theo communication scope (one-to-one/one-to-many)}}{19}{}%
+\contentsline {subsection}{\numberline {3.1.3.}{Các yếu tố ảnh hưởng đến việc lựa chọn pattern}}{20}{}%
+\contentsline {section}{\numberline {3.2.}{Synchronous Communication Patterns (one-to-one)}}{21}{}%
+\contentsline {subsection}{\numberline {3.2.1.}{Request/Response Pattern}}{21}{}%
+\contentsline {subsection}{\numberline {3.2.2.}{Ưu điểm và Hạn chế của Synchronous Communication}}{23}{}%
+\contentsline {subsection}{\numberline {3.2.3.}{Use cases phù hợp cho Synchronous Communication}}{24}{}%
+\contentsline {subsection}{\numberline {3.2.4.}{Case studies}}{25}{}%
+\contentsline {subsection}{\numberline {3.2.5.}{Tương lai của Synchronous Communication trong vi dịch vụ}}{26}{}%
+\contentsline {section}{\numberline {3.3.}{Asynchronous Communication Patterns (one-to-one)}}{26}{}%
+\contentsline {subsection}{\numberline {3.3.1.}{Cơ chế hoạt động}}{27}{}%
+\contentsline {subsection}{\numberline {3.3.2.}{One-way Notifications Pattern}}{27}{}%
+\contentsline {subsection}{\numberline {3.3.3.}{Message Queue Pattern}}{28}{}%
+\contentsline {subsection}{\numberline {3.3.4.}{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-one)}}{29}{}%
+\contentsline {subsection}{\numberline {3.3.5.}{Use cases phù hợp cho Asynchronous Communication (one-to-one)}}{30}{}%
+\contentsline {subsection}{\numberline {3.3.6.}{Case studies}}{30}{}%
+\contentsline {section}{\numberline {3.4.}{Asynchronous Communication Patterns (one-to-many)}}{31}{}%
+\contentsline {subsection}{\numberline {3.4.1.}{Cơ chế hoạt động}}{32}{}%
+\contentsline {subsection}{\numberline {3.4.2.}{Publish/Subscribe Pattern}}{32}{}%
+\contentsline {subsection}{\numberline {3.4.3.}{Event Sourcing Pattern}}{33}{}%
+\contentsline {subsection}{\numberline {3.4.4.}{Ưu điểm và Hạn chế của Asynchronous Communication (one-to-many)}}{34}{}%
+\contentsline {subsection}{\numberline {3.4.5.}{Use cases phù hợp cho Asynchronous Communication (one-to-many)}}{34}{}%
+\contentsline {subsection}{\numberline {3.4.6.}{Kết luận}}{35}{}%
+\contentsline {section}{\numberline {3.5.}{Tổng kết}}{36}{}%
+\contentsline {chapter}{\numberline {Chương\ 4.}{Triển khai thử nghiệm}}{38}{}%
+\contentsline {section}{\numberline {4.1.}{Mô tả bài toán và yêu cầu}}{38}{}%
+\contentsline {subsection}{\numberline {4.1.1.}{Giới thiệu bài toán}}{38}{}%
+\contentsline {subsection}{\numberline {4.1.2.}{Yêu cầu hệ thống}}{39}{}%
+\contentsline {subsection}{\numberline {4.1.3.}{Kiến trúc tổng thể hệ thống}}{39}{}%
+\contentsline {subsection}{\numberline {4.1.4.}{Các mẫu giao tiếp đánh giá}}{40}{}%
+\contentsline {section}{\numberline {4.2.}{Cài đặt và triển khai}}{40}{}%
+\contentsline {subsection}{\numberline {4.2.1.}{Cấu trúc dự án}}{40}{}%
+\contentsline {subsection}{\numberline {4.2.2.}{Triển khai các vi dịch vụ chính}}{41}{}%
+\contentsline {subsection}{\numberline {4.2.3.}{Triển khai các mẫu giao tiếp}}{47}{}%
+\contentsline {subsection}{\numberline {4.2.4.}{Thiết lập môi trường kiểm thử}}{52}{}%
+\contentsline {section}{\numberline {4.3.}{Kết quả triển khai}}{54}{}%
+\contentsline {subsection}{\numberline {4.3.1.}{Phương pháp đánh giá}}{54}{}%
+\contentsline {subsection}{\numberline {4.3.2.}{Kết quả đánh giá Order-Inventory}}{54}{}%
+\contentsline {subsection}{\numberline {4.3.3.}{Kết quả đánh giá Order-Payment}}{55}{}%
+\contentsline {subsection}{\numberline {4.3.4.}{Kết quả đánh giá Order-Notification}}{56}{}%
+\contentsline {subsection}{\numberline {4.3.5.}{Kết quả đánh giá User Activity Logging}}{57}{}%
+\contentsline {subsection}{\numberline {4.3.6.}{Đánh giá tổng thể}}{57}{}%
+\contentsline {chapter}{\numberline {Chương\ 5.}{Đánh giá và thảo luận}}{60}{}%
+\contentsline {section}{\numberline {5.1.}{Phương pháp và tiêu chí đánh giá}}{60}{}%
+\contentsline {subsection}{\numberline {5.1.1.}{Tổng quan phương pháp đánh giá}}{60}{}%
+\contentsline {subsection}{\numberline {5.1.2.}{Tiêu chí đánh giá cụ thể}}{60}{}%
+\contentsline {subsection}{\numberline {5.1.3.}{Công cụ và môi trường đánh giá}}{61}{}%
+\contentsline {section}{\numberline {5.2.}{Kết quả đánh giá}}{61}{}%
+\contentsline {subsection}{\numberline {5.2.1.}{Mẫu giao tiếp trong kịch bản Order-Inventory}}{62}{}%
+\contentsline {subsection}{\numberline {5.2.2.}{Mẫu giao tiếp trong kịch bản Order-Payment}}{62}{}%
+\contentsline {subsection}{\numberline {5.2.3.}{Mẫu giao tiếp trong kịch bản Order-Notification}}{62}{}%
+\contentsline {subsection}{\numberline {5.2.4.}{Mẫu giao tiếp trong kịch bản User Activity Logging}}{63}{}%
+\contentsline {subsection}{\numberline {5.2.5.}{Ảnh hưởng của tải hệ thống đến các mẫu giao tiếp}}{63}{}%
+\contentsline {section}{\numberline {5.3.}{Thảo luận}}{63}{}%
+\contentsline {subsection}{\numberline {5.3.1.}{Lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản}}{63}{}%
+\contentsline {subsection}{\numberline {5.3.2.}{Mô hình tích hợp các mẫu giao tiếp}}{65}{}%
+\contentsline {subsection}{\numberline {5.3.3.}{Tối ưu hóa hiệu suất trong thực tế}}{65}{}%
+\contentsline {chapter}{\numberline {Chương\ 6.}{Kết luận}}{67}{}%

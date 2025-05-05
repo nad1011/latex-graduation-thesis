@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  3 MAY 2025 17:19
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  4 MAY 2025 18:01
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -1064,46 +1064,40 @@ Package mathfont Info: Adjusting font Times New Roman Bold.
 
 ]
 
-[7]) (./chapters/chapter2/2.2.tex
+[7]
 
-[8]
+[8]) (./chapters/chapter2/2.2.tex
 
 [9]
 
 [10]
 
-[11]) (./chapters/chapter2/2.3.tex
+[11]
 
 [12]
 
-[13]) (./chapters/chapter2/2.4.tex
+[13]) (./chapters/chapter2/2.3.tex
 
 [14]
-Underfull \hbox (badness 2065) in paragraph at lines 13--14
-\TU/TimesNewRoman(0)/m/n/13 Request-Response, Event-Driven, Publish-Subscribe, 
-Point-to-Point Messaging, và
- []
 
+[15]
 
+[16]) (./chapters/chapter2/2.4.tex)) (./chapters/chapter3.tex
 
-[15])) (./chapters/chapter3.tex
-
-[16] (./chapters/chapter3/3.1.tex
+[17] (./chapters/chapter3/3.1.tex
 Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
  [][] 
  []
 
 
 
-[17
+[18
 
 ]
 
-[18]
+[19]
 
-[19]) (./chapters/chapter3/3.2.tex
-
-[20]
+[20]) (./chapters/chapter3/3.2.tex
 
 [21]
 
@@ -1111,9 +1105,9 @@ Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
 
 [23]
 
-[24]) (./chapters/chapter3/3.3.tex
+[24]
 
-[25]
+[25]) (./chapters/chapter3/3.3.tex
 
 [26]
 
@@ -1121,9 +1115,9 @@ Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
 
 [28]
 
-[29]) (./chapters/chapter3/3.4.tex
+[29]
 
-[30]
+[30]) (./chapters/chapter3/3.4.tex
 
 [31]
 
@@ -1131,29 +1125,31 @@ Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
 
 [33]
 
-[34]) (./chapters/chapter3/3.5.tex
+[34]
 
-[35])) (./chapters/chapter4.tex
+[35]) (./chapters/chapter3/3.5.tex
 
-[36] (./chapters/chapter4/4.1.tex
+[36])) (./chapters/chapter4.tex
 
-[37
+[37] (./chapters/chapter4/4.1.tex
+
+[38
 
 ]
 
-[38]) (./chapters/chapter4/4.2.tex
+[39]) (./chapters/chapter4/4.2.tex
 Package mathfont Info: Adjusting font LMMono12-Regular.
+
+[40]
 Package mathfont Info: Adjusting font Times New Roman.
 Package mathfont Info: Adjusting font LMMono8-Regular.
 Package mathfont Info: Adjusting font Times New Roman.
 
-[39]
-
-[40]
-
 [41]
 
 [42]
+
+[43]
 Underfull \hbox (badness 10000) in paragraph at lines 199--200
 []\TU/TimesNewRoman(0)/m/n/13 Trong giao tiếp đồng bộ, Inventory Service cung c
 ấp endpoint
@@ -1161,17 +1157,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
 
 
-[43]
-
 [44]
+
+[45]
 Underfull \hbox (badness 1527) in paragraph at lines 356--358
 []\TU/TimesNewRoman(0)/m/n/13 Notification Services Nhóm các dịch vụ th
 ông báo bao gồm Email Service,
  []
 
 
-
-[45]
 
 [46]
 
@@ -1180,6 +1174,8 @@ Underfull \hbox (badness 1527) in paragraph at lines 356--358
 [48]
 
 [49]
+
+[50]
 Underfull \hbox (badness 1953) in paragraph at lines 571--572
 []\TU/TimesNewRoman(0)/m/n/13 Ví dụ, khi một đơn hàng được xác nh
 ận, Order Service xuất bản sự kiện
@@ -1187,13 +1183,13 @@ Underfull \hbox (badness 1953) in paragraph at lines 571--572
 
 
 
-[50]
-
 [51]
 
-[52]) (./chapters/chapter4/4.3.tex
+[52]
 
-[53]
+[53]) (./chapters/chapter4/4.3.tex
+
+[54]
 Underfull \hbox (badness 10000) in paragraph at lines 20--20
 []|\TU/TimesNewRoman(0)/b/n/13 Synchronous
  []
@@ -1273,7 +1269,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--85
 
 
 
-[54]
+[55]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1337,7 +1333,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[55]
+[56]
 Underfull \hbox (badness 5548) in paragraph at lines 136--136
 []|\TU/TimesNewRoman(0)/b/n/13 Kafka (One-to-
  []
@@ -1377,47 +1373,93 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[56])) (./chapters/chapter5.tex
+[57])) (./chapters/chapter5.tex
 
-[57]
+[58]
 
-[58] (./chapters/chapter5/5.1.tex
+[59] (./chapters/chapter5/5.1.tex
 
-[59
+[60
 
 ]) (./chapters/chapter5/5.2.tex
 
-[60]
+[61]
 
-[61]) (./chapters/chapter5/5.3.tex
-
-[62]
+[62]) (./chapters/chapter5/5.3.tex
 
 [63]
+Underfull \hbox (badness 10000) in paragraph at lines 21--21
+[]|\TU/TimesNewRoman(0)/b/n/13 Kịch bản áp
+ []
 
-[64]))
 
-[65]
-Underfull \hbox (badness 10000) in paragraph at lines 123--126
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|\TU/TimesNewRoman(0)/m/n/13 Đồng bộ
+ []
+
+
+Overfull \hbox (2.82042pt too wide) in paragraph at lines 23--23
+\TU/TimesNewRoman(0)/m/n/13 (REST/GraphQL)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|\TU/TimesNewRoman(0)/m/n/13 Truy vấn đơn
+ []
+
+
+Underfull \hbox (badness 1406) in paragraph at lines 25--25
+[]|\TU/TimesNewRoman(0)/m/n/13 Xử lý thời gian
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+[]|\TU/TimesNewRoman(0)/m/n/13 Phân phối sự
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+\TU/TimesNewRoman(0)/m/n/13 kiện đến nhiều
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[]|\TU/TimesNewRoman(0)/m/n/13 Thời gian broadcast
+ []
+
+
+
+[64]
+
+[65])) (./chapters/chapter6.tex
+
+[66]
+
+[67
+
+])
+
+[68]
+Underfull \hbox (badness 10000) in paragraph at lines 124--127
 []\TU/TimesNewRoman(0)/m/n/13 Wolff, E., \TU/TimesNewRoman(0)/m/it/13 Microservi
 ces: Flexible Software Architecture\TU/TimesNewRoman(0)/m/n/13 , Addison-Wesley
  []
 
 
-Overfull \hbox (0.59705pt too wide) in paragraph at lines 128--132
+Overfull \hbox (0.59705pt too wide) in paragraph at lines 129--133
 []\TU/TimesNewRoman(0)/m/n/13 Fowler, M., ``Microservices'', \TU/TimesNewRoman(
 0)/m/it/13 https://martinfowler.com/articles/microservices.html\TU/TimesNewRoma
 n(0)/m/n/13 ,
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 174--177
+Underfull \hbox (badness 1009) in paragraph at lines 175--178
 []\TU/TimesNewRoman(0)/m/n/13 Fowler, M., \TU/TimesNewRoman(0)/m/it/13 Patterns of Enterprise Application Architecture\TU/TimesNewRoman(0)/m/n/13 , Addison-Wesley
  []
 
 
 
-[66
+[69
 
 ] (d:/Learn/thesis/uet-graduation-latex/build/main.aux)
  ***********
@@ -1432,22 +1474,22 @@ LaTeX Font Warning: Size substitutions with differences
 )
 
 Here is how much of LuaTeX's memory you used:
- 23053 strings out of 475506
- 746499,1144653 words of node,token memory allocated
+ 23065 strings out of 475506
+ 746497,1144653 words of node,token memory allocated
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:2,2:12068,3:332,4:14312,5:13159,6:153,7:28243,8:1,9:39566,10:3
+   avail lists: 1:1,2:12068,3:332,4:14312,5:13159,6:153,7:28243,8:2,9:39566,10:3
 5,11:2050
- 45412 multiletter control sequences out of 65536+600000
- 84 fonts using 40786635 bytes
+ 45418 multiletter control sequences out of 65536+600000
+ 84 fonts using 40786823 bytes
  99i,14n,105p,1747b,819s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/miktex/fonts/opentype/public/lm/lmmono8-regular.otf><d:/miktex/fonts/opentyp
 e/public/lm/lmmono12-regular.otf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts
 /timesi.ttf><C:/WINDOWS/Fonts/times.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (78 pages, 433001 bytes).
+Output written on main.pdf (81 pages, 445853 bytes).
 
-PDF statistics: 291 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 301 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

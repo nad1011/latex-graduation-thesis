@@ -1,18 +1,18 @@
-\contentsline {a@figure}{\numberline {4.1.}{\ignorespaces Thực thể Order trong dự án microservice}}{40}{}%
-\contentsline {a@figure}{\numberline {4.2.}{\ignorespaces Phương thức createOrderSync trong Order Service}}{41}{}%
-\contentsline {a@figure}{\numberline {4.3.}{\ignorespaces Phương thức createOrderAsync trong Order Service}}{42}{}%
-\contentsline {a@figure}{\numberline {4.4.}{\ignorespaces Thực thể Inventory trong dự án microservice}}{43}{}%
-\contentsline {a@figure}{\numberline {4.5.}{\ignorespaces Các endpoint đồng bộ trong Inventory Controller}}{43}{}%
-\contentsline {a@figure}{\numberline {4.6.}{\ignorespaces Handler bất đồng bộ trong Inventory Service}}{43}{}%
-\contentsline {a@figure}{\numberline {4.7.}{\ignorespaces Thực thể Payment trong dự án microservice}}{44}{}%
-\contentsline {a@figure}{\numberline {4.8.}{\ignorespaces Các endpoint đồng bộ và bất đồng bộ trong Payment Controller}}{44}{}%
-\contentsline {a@figure}{\numberline {4.9.}{\ignorespaces Phương thức processPayment trong Payment Service}}{45}{}%
-\contentsline {a@figure}{\numberline {4.10.}{\ignorespaces Giao tiếp đồng bộ và bất đồng bộ trong Email Service}}{46}{}%
-\contentsline {a@figure}{\numberline {4.11.}{\ignorespaces Gọi REST API đồng bộ từ Order Service đến Inventory Service}}{47}{}%
-\contentsline {a@figure}{\numberline {4.12.}{\ignorespaces Triển khai Circuit Breaker pattern để tăng khả năng chịu lỗi}}{48}{}%
-\contentsline {a@figure}{\numberline {4.13.}{\ignorespaces Giao tiếp bất đồng bộ giữa Order Service và Inventory Service qua RabbitMQ}}{49}{}%
-\contentsline {a@figure}{\numberline {4.14.}{\ignorespaces Cấu hình RabbitMQ trong NestJS}}{49}{}%
-\contentsline {a@figure}{\numberline {4.15.}{\ignorespaces Giao tiếp bất đồng bộ dạng một-nhiều thông qua Kafka}}{50}{}%
-\contentsline {a@figure}{\numberline {4.16.}{\ignorespaces Cấu hình Kafka trong NestJS}}{51}{}%
-\contentsline {a@figure}{\numberline {4.17.}{\ignorespaces Cấu hình kiểm thử hiệu suất sử dụng K6}}{52}{}%
-\contentsline {a@figure}{\numberline {4.18.}{\ignorespaces Thu thập metrics hệ thống từ Prometheus}}{53}{}%
+\contentsline {a@figure}{\numberline {4.1.}{\ignorespaces Thực thể Order trong dự án microservice}}{41}{}%
+\contentsline {a@figure}{\numberline {4.2.}{\ignorespaces Phương thức createOrderSync trong Order Service}}{42}{}%
+\contentsline {a@figure}{\numberline {4.3.}{\ignorespaces Phương thức createOrderAsync trong Order Service}}{43}{}%
+\contentsline {a@figure}{\numberline {4.4.}{\ignorespaces Thực thể Inventory trong dự án microservice}}{44}{}%
+\contentsline {a@figure}{\numberline {4.5.}{\ignorespaces Các endpoint đồng bộ trong Inventory Controller}}{44}{}%
+\contentsline {a@figure}{\numberline {4.6.}{\ignorespaces Handler bất đồng bộ trong Inventory Service}}{44}{}%
+\contentsline {a@figure}{\numberline {4.7.}{\ignorespaces Thực thể Payment trong dự án microservice}}{45}{}%
+\contentsline {a@figure}{\numberline {4.8.}{\ignorespaces Các endpoint đồng bộ và bất đồng bộ trong Payment Controller}}{45}{}%
+\contentsline {a@figure}{\numberline {4.9.}{\ignorespaces Phương thức processPayment trong Payment Service}}{46}{}%
+\contentsline {a@figure}{\numberline {4.10.}{\ignorespaces Giao tiếp đồng bộ và bất đồng bộ trong Email Service}}{47}{}%
+\contentsline {a@figure}{\numberline {4.11.}{\ignorespaces Gọi REST API đồng bộ từ Order Service đến Inventory Service}}{48}{}%
+\contentsline {a@figure}{\numberline {4.12.}{\ignorespaces Triển khai Circuit Breaker pattern để tăng khả năng chịu lỗi}}{49}{}%
+\contentsline {a@figure}{\numberline {4.13.}{\ignorespaces Giao tiếp bất đồng bộ giữa Order Service và Inventory Service qua RabbitMQ}}{50}{}%
+\contentsline {a@figure}{\numberline {4.14.}{\ignorespaces Cấu hình RabbitMQ trong NestJS}}{50}{}%
+\contentsline {a@figure}{\numberline {4.15.}{\ignorespaces Giao tiếp bất đồng bộ dạng một-nhiều thông qua Kafka}}{51}{}%
+\contentsline {a@figure}{\numberline {4.16.}{\ignorespaces Cấu hình Kafka trong NestJS}}{52}{}%
+\contentsline {a@figure}{\numberline {4.17.}{\ignorespaces Cấu hình kiểm thử hiệu suất sử dụng K6}}{53}{}%
+\contentsline {a@figure}{\numberline {4.18.}{\ignorespaces Thu thập metrics hệ thống từ Prometheus}}{54}{}%

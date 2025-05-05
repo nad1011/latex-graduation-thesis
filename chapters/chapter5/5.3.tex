@@ -1,15 +1,39 @@
 \section{Thảo luận}
 
 \subsection{Lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản}
-Dựa trên kết quả đánh giá toàn diện, có thể đưa ra những khuyến nghị về việc lựa chọn mẫu giao tiếp phù hợp cho từng kịch bản nghiệp vụ trong kiến trúc vi dịch vụ.
+Dựa trên kết quả đánh giá toàn diện, có thể đưa ra những khuyến nghị về việc lựa chọn mẫu giao tiếp phù hợp trong kiến trúc vi dịch vụ.
 
-Đối với kịch bản kiểm tra và cập nhật tồn kho, giao tiếp bất đồng bộ sử dụng Message Queue (RabbitMQ) được khuyến nghị vì thời gian phản hồi ban đầu nhanh, tỷ lệ nhất quán dữ liệu cao và hiệu quả sử dụng tài nguyên tốt. Mặc dù có thời gian xử lý end-to-end dài hơn một chút, nhưng ưu điểm này được bù đắp bởi khả năng duy trì hiệu suất ổn định dưới tải cao và trải nghiệm người dùng tốt hơn. Độ trễ dữ liệu nhỏ (12-15ms) không đáng kể trong hầu hết các trường hợp sử dụng.
+Đối với kịch bản kiểm tra và cập nhật tồn kho, giao tiếp bất đồng bộ sử dụng Message Queue (RabbitMQ) được khuyến nghị vì thời gian phản hồi ban đầu nhanh (2.91ms so với 10.38ms), tỷ lệ nhất quán dữ liệu cao (97.2\% so với 93.9\%) và sử dụng tài nguyên hiệu quả (sử dụng CPU ít hơn 84\%). Mặc dù có thời gian xử lý end-to-end dài hơn một chút, nhưng ưu điểm này được bù đắp bởi khả năng duy trì hiệu suất ổn định dưới tải cao.
 
-Đối với kịch bản xử lý thanh toán, giao tiếp bất đồng bộ cũng là lựa chọn ưu việt với thời gian phản hồi ban đầu nhanh và thông lượng cao. Trong bối cảnh thanh toán, việc phản hồi nhanh cho người dùng rằng yêu cầu đã được tiếp nhận là rất quan trọng, ngay cả khi quá trình xử lý thực sự có thể kéo dài. Giao tiếp bất đồng bộ cho phép xác nhận ngay lập tức, trong khi vẫn đảm bảo việc xử lý được hoàn thành đúng cách ở phía sau. Đặc biệt với các giao dịch thanh toán thời gian dài, mô hình này giúp giữ trải nghiệm người dùng mượt mà và phản hồi nhanh.
+Đối với kịch bản xử lý thanh toán, giao tiếp bất đồng bộ sử dụng Message Queue cũng là lựa chọn ưu việt với thời gian phản hồi ban đầu nhanh hơn 99.8\% (2.25ms so với 1508.14ms) và thông lượng cao hơn 52 lần (90.04 msg/s so với 1.68 req/s). Trong bối cảnh thanh toán, việc phản hồi nhanh cho người dùng rằng yêu cầu đã được tiếp nhận là rất quan trọng, ngay cả khi quá trình xử lý thực sự có thể kéo dài.
 
-Đối với kịch bản thông báo kết quả đơn hàng, mô hình Pub/Sub sử dụng Kafka là lựa chọn vượt trội với thời gian broadcast nhanh, khả năng phục hồi tốt khi có service gặp lỗi, và hiệu quả sử dụng tài nguyên cao. Mô hình này đặc biệt phù hợp khi một sự kiện cần được xử lý bởi nhiều service độc lập, như gửi email, thông báo đẩy và cập nhật phân tích. Khả năng mở rộng dễ dàng bằng cách thêm các subscriber mới mà không ảnh hưởng đến publisher là một lợi thế lớn của mô hình này.
+Đối với kịch bản thông báo kết quả đơn hàng, mô hình Pub/Sub sử dụng Kafka là lựa chọn vượt trội với thời gian broadcast nhanh hơn 97.8\% (11.53ms so với 520.55ms), khả năng phục hồi tốt khi có service gặp lỗi (thời gian phục hồi 2.30ms so với 4793.46ms), và sử dụng tài nguyên hiệu quả (CPU thấp hơn 73.5\%). Mô hình này đặc biệt phù hợp khi một sự kiện cần được xử lý bởi nhiều service độc lập.
 
-Đối với kịch bản ghi nhận hoạt động người dùng, Kafka được khuyến nghị nhẹ so với RabbitMQ vì hiệu quả sử dụng tài nguyên tốt hơn và mô hình một-nhiều phù hợp hơn cho việc phân phối dữ liệu hoạt động đến nhiều service phân tích khác nhau. Khả năng lưu trữ dữ liệu lâu dài và phát lại các sự kiện cũng là những ưu điểm quan trọng trong bối cảnh phân tích dữ liệu.
+Đối với kịch bản ghi nhận hoạt động người dùng, Kafka (mô hình một-nhiều) được khuyến nghị vì hiệu quả sử dụng tài nguyên tốt hơn (CPU thấp hơn 15.8\% và bộ nhớ thấp hơn 10.5\%) và mô hình một-nhiều phù hợp hơn cho việc phân phối dữ liệu hoạt động đến nhiều service phân tích khác nhau.
+
+\begin{table}[H]{Khuyến nghị mẫu giao tiếp phù hợp cho các kịch bản}
+    \centering
+    {\setlength{\arrayrulewidth}{1pt}
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{6pt}
+        \begin{tabular}{|p{3.2cm}|p{3.2cm}|p{4.6cm}|}
+            \hline
+            \textbf{Mẫu giao tiếp}         & \textbf{Kịch bản áp dụng}                                       & \textbf{Lý do chính}                                                     \\
+            \hline
+            Đồng bộ (REST/GraphQL)         & Truy vấn đơn giản, thời gian xử lý ngắn, cần phản hồi trực tiếp & Tính nhất quán dữ liệu tức thì, dễ triển khai, thời gian end-to-end ngắn \\
+            \hline
+            Bất đồng bộ một-một (RabbitMQ) & Xử lý thời gian dài, cần phản hồi nhanh cho người dùng          & Phản hồi ban đầu nhanh, quản lý tải hiệu quả, khả năng chịu lỗi tốt      \\
+            \hline
+            Bất đồng bộ một-nhiều (Kafka)  & Phân phối sự kiện đến nhiều dịch vụ, cần lưu trữ dữ liệu        & Thời gian broadcast nhanh, dễ mở rộng, lưu trữ và phát lại sự kiện       \\
+            \hline
+        \end{tabular}}
+\end{table}
+
+Giao tiếp đồng bộ thích hợp cho những trường hợp cần tính nhất quán dữ liệu tức thì và phản hồi trực tiếp. Mẫu này có thời gian xử lý end-to-end ngắn hơn và thông lượng cao hơn trong một số tình huống, nhưng tiêu tốn nhiều tài nguyên và khó duy trì hiệu suất khi tải cao. Giao tiếp đồng bộ nên được lựa chọn khi cần đảm bảo tính nhất quán dữ liệu ngay lập tức, thời gian xử lý tác vụ ngắn và đơn giản, client cần phản hồi trực tiếp để tiếp tục quy trình nghiệp vụ, và khối lượng yêu cầu vừa phải và có thể dự đoán được.
+
+Giao tiếp bất đồng bộ dạng một-một mang lại lợi thế về thời gian phản hồi ban đầu nhanh và sử dụng tài nguyên hiệu quả. Mẫu này giúp cải thiện trải nghiệm người dùng, đồng thời duy trì hiệu suất ổn định dưới tải cao. Mặc dù có thời gian xử lý end-to-end dài hơn một chút, nhưng ưu điểm này được bù đắp bởi khả năng chịu lỗi tốt hơn. Giao tiếp bất đồng bộ dạng một-một nên được lựa chọn khi cần phản hồi nhanh cho người dùng, thời gian xử lý tác vụ kéo dài, cần độ tin cậy cao trong xử lý message, cần quản lý tải và phân phối công việc hiệu quả, và hệ thống cần khả năng chịu lỗi và độ ổn định cao.
+
+Giao tiếp bất đồng bộ dạng một-nhiều thể hiện hiệu suất vượt trội trong các tình huống cần phân phối sự kiện đến nhiều service. Mẫu này có thời gian broadcast nhanh, sử dụng tài nguyên hiệu quả, và khả năng phục hồi tuyệt vời khi có service gặp lỗi. Đặc biệt, mẫu này rất dễ mở rộng khi thêm các service xử lý mới. Giao tiếp bất đồng bộ dạng một-nhiều nên được lựa chọn khi một sự kiện cần được xử lý bởi nhiều service độc lập, cần khả năng lưu trữ và phát lại các sự kiện, hệ thống yêu cầu khả năng mở rộng cao, cần xử lý dữ liệu theo thời gian thực với thông lượng lớn, và các service xử lý có thể bị thêm hoặc xóa linh hoạt.
 
 \subsection{Mô hình tích hợp các mẫu giao tiếp}
 Trong thực tế, việc kết hợp các mẫu giao tiếp khác nhau thường mang lại kết quả tốt nhất cho hệ thống vi dịch vụ. Mỗi mẫu giao tiếp có những ưu điểm và nhược điểm riêng, phù hợp với những tình huống cụ thể. Một mô hình tích hợp hiệu quả có thể tận dụng ưu điểm của từng phương pháp để tối ưu hóa hiệu suất tổng thể của hệ thống.
@@ -28,27 +52,3 @@ Ngoài việc lựa chọn mẫu giao tiếp phù hợp, còn có nhiều chiế
 Đối với giao tiếp bất đồng bộ, việc điều chỉnh kích thước hàng đợi và số lượng consumer có thể giúp cân bằng giữa thông lượng và độ trễ. Tăng số lượng consumer giúp cải thiện thông lượng, nhưng cũng làm tăng chi phí tài nguyên. Việc triển khai cơ chế retry với exponential backoff giúp xử lý các lỗi tạm thời, trong khi Dead Letter Queues giúp xử lý các thông điệp không thể xử lý.
 
 Đối với mô hình Pub/Sub, việc phân vùng (partitioning) dữ liệu có thể giúp cải thiện khả năng mở rộng và hiệu suất. Việc chọn số lượng partition phù hợp với số lượng consumer giúp tối ưu hóa cân bằng tải và thông lượng. Việc duy trì kích thước thông điệp nhỏ và sử dụng định dạng nhị phân như Avro hoặc Protobuf thay vì JSON cũng giúp cải thiện hiệu suất.
-
-\subsection{Xu hướng phát triển và nghiên cứu tiếp theo}
-Dựa trên kết quả đánh giá và xu hướng hiện tại trong lĩnh vực, có thể thấy một số hướng phát triển và nghiên cứu tiếp theo đáng chú ý.
-
-Một xu hướng đang phát triển là server-less communication, nơi các hàm serverless được sử dụng để xử lý các sự kiện và thông điệp mà không cần quan tâm đến cơ sở hạ tầng bên dưới. Mô hình này hứa hẹn giảm chi phí vận hành và cải thiện khả năng mở rộng, đặc biệt cho các hệ thống có tải không đều. Tuy nhiên, cần nghiên cứu thêm về hiệu suất và độ tin cậy của mô hình này trong các kịch bản khác nhau.
-
-Một hướng nghiên cứu khác là Service Mesh, một lớp cơ sở hạ tầng chuyên dụng cho giao tiếp service-to-service, cung cấp các tính năng như service discovery, load balancing, encryption, observability, và authentication/authorization. Service Mesh có thể kết hợp các ưu điểm của cả giao tiếp đồng bộ và bất đồng bộ, đồng thời giải quyết một số thách thức về bảo mật và giám sát.
-
-Việc kết hợp các mẫu giao tiếp với các công nghệ stream processing như Apache Flink hoặc Kafka Streams cũng là một hướng nghiên cứu hứa hẹn. Các công nghệ này cho phép xử lý dữ liệu liên tục theo thời gian thực, mở ra khả năng cho các ứng dụng phản ứng nhanh với các sự kiện và thay đổi dữ liệu.
-
-Cuối cùng, việc áp dụng các kỹ thuật học máy và trí tuệ nhân tạo để tự động hóa việc lựa chọn và tối ưu hóa các mẫu giao tiếp dựa trên đặc điểm của tải và yêu cầu nghiệp vụ là một hướng nghiên cứu đầy tiềm năng. Các hệ thống tự thích ứng có thể điều chỉnh mẫu giao tiếp dựa trên các điều kiện hoạt động thực tế, tối ưu hóa hiệu suất và độ tin cậy một cách liên tục.
-
-\subsection{Các hạn chế của dự án và hướng cải thiện}
-Mặc dù dự án đã cung cấp những hiểu biết có giá trị về hiệu suất và độ tin cậy của các mẫu giao tiếp, vẫn có một số hạn chế cần được ghi nhận và cải thiện trong các nghiên cứu tương lai.
-
-Trước hết, các kịch bản kiểm thử được thực hiện trong môi trường kiểm thử có kiểm soát, có thể không hoàn toàn phản ánh các điều kiện hoạt động thực tế. Các yếu tố như độ trễ mạng không đồng đều, sự cố phần cứng, và các vấn đề về bảo mật có thể ảnh hưởng đáng kể đến hiệu suất của các mẫu giao tiếp trong môi trường sản xuất thực tế.
-
-Thứ hai, dự án tập trung chủ yếu vào hiệu suất và độ tin cậy, mà không đi sâu vào các khía cạnh khác như bảo mật, chi phí triển khai và vận hành, và khả năng tích hợp với các hệ thống hiện có. Những yếu tố này cũng là những cân nhắc quan trọng khi lựa chọn mẫu giao tiếp trong thực tế.
-
-Thứ ba, việc đánh giá chỉ bao gồm ba mẫu giao tiếp chính, trong khi có nhiều mẫu và biến thể khác cũng được sử dụng trong thực tế, như gRPC, GraphQL, và WebSockets. Các mẫu này có thể có những ưu điểm đặc thù trong một số kịch bản cụ thể.
-
-Cuối cùng, dự án không đánh giá hiệu suất của các mẫu giao tiếp trong thời gian dài, có thể làm thiếu sót các vấn đề như rò rỉ bộ nhớ, suy giảm hiệu suất theo thời gian, và khả năng phục hồi sau sự cố lớn.
-
-Để cải thiện, các nghiên cứu tương lai có thể mở rộng phạm vi đánh giá để bao gồm nhiều mẫu giao tiếp hơn, các kịch bản đa dạng hơn, và thời gian kiểm thử dài hơn. Việc thực hiện các bài kiểm thử trong các môi trường đám mây thực tế với các yếu tố nhiễu như bị phát giả, tấn công DDoS, và sự cố phần cứng cũng sẽ cung cấp những hiểu biết có giá trị về độ tin cậy của các mẫu giao tiếp trong điều kiện khắc nghiệt.

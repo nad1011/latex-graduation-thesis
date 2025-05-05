@@ -1,84 +1,80 @@
 \section{Giao tiếp trong kiến trúc vi dịch vụ}
 
 \subsection{Vai trò của giao tiếp trong kiến trúc vi dịch vụ}
-Giao tiếp đóng vai trò then chốt trong kiến trúc vi dịch vụ. Khác với các ứng
-dụng nguyên khối, các vi dịch vụ giao tiếp qua mạng, thường thông qua HTTP, gRPC hoặc middleware messaging.
+Giao tiếp trong kiến trúc vi dịch vụ vượt xa khái niệm đơn giản về việc truyền dữ liệu từ điểm A đến điểm B. Nó là xương sống kết nối các thành phần độc lập, định hình cách thức vận hành của toàn hệ thống và trực tiếp ảnh hưởng đến những thuộc tính quan trọng như tính khả dụng, hiệu suất và khả năng mở rộng.
 
-Giao tiếp không chỉ trao đổi dữ liệu, mà còn định hình toàn bộ kiến trúc và ảnh hưởng đến tính khả dụng, hiệu suất và khả năng mở rộng của hệ thống \cite{wolff2016}.
+Hãy tưởng tượng một quy trình đặt hàng trực tuyến. Để hoàn thành một đơn hàng, nhiều dịch vụ phải phối hợp: dịch vụ quản lý đơn hàng, dịch vụ thanh toán, dịch vụ kho hàng và dịch vụ vận chuyển. Chỉ khi các dịch vụ này giao tiếp hiệu quả, quy trình mới diễn ra suôn sẻ. Một lỗi giao tiếp duy nhất có thể dẫn đến vấn đề nghiêm trọng như đơn hàng không được xử lý, thanh toán không thành công, hoặc hàng hóa không được gửi đi.
 
-Giao tiếp tạo điều kiện cho các dịch vụ phối hợp hoàn thành các tác vụ nghiệp vụ phức tạp. Ví dụ, quy trình đặt hàng liên quan đến các dịch vụ quản lý đơn hàng, thanh toán, kho hàng và vận chuyển cần giao tiếp để đảm bảo xử lý chính xác.
+Trong môi trường dữ liệu phân tán của vi dịch vụ, mỗi dịch vụ quản lý một phần dữ liệu riêng biệt. Khi dữ liệu thay đổi, giao tiếp là phương tiện duy nhất để đảm bảo tính nhất quán trên toàn hệ thống. Ví dụ, khi thông tin khách hàng được cập nhật trong dịch vụ quản lý người dùng, các dịch vụ khác cần được thông báo để phản ánh thay đổi này.
 
-Giao tiếp đóng vai trò quan trọng trong việc đảm bảo tính nhất quán dữ liệu. Trong hệ thống dữ liệu phân tán, mỗi dịch vụ quản lý một phần dữ liệu, cần giao tiếp khi dữ liệu thay đổi để duy trì nhất quán.
-
-Giao tiếp hỗ trợ khả năng chịu lỗi thông qua các cơ chế như Circuit Breaker, giúp hệ thống phục hồi và tiếp tục hoạt động khi gặp lỗi.
-
-Cuối cùng, thiết kế giao tiếp tốt cho phép mở rộng hệ thống, thêm dịch vụ mới hoặc phiên bản mới mà không ảnh hưởng đến dịch vụ khác.
+Giao tiếp còn đóng vai trò quan trọng trong việc đảm bảo khả năng chịu lỗi của hệ thống. Các cơ chế như Circuit Breaker giúp ngăn chặn lỗi lan truyền, cho phép hệ thống tiếp tục hoạt động ngay cả khi một số thành phần gặp sự cố. Thiết kế giao tiếp tốt cũng tạo điều kiện để mở rộng hệ thống một cách linh hoạt, cho phép thêm dịch vụ mới hoặc nâng cấp phiên bản mà không ảnh hưởng đến các dịch vụ hiện có.
 
 \subsection{Các thuộc tính quan trọng của giao tiếp vi dịch vụ}
-Khi thiết kế giao tiếp cho vi dịch vụ, cần xem xét một số thuộc tính quan trọng:
+Khi thiết kế giao tiếp cho vi dịch vụ, chúng ta cần cân nhắc nhiều thuộc tính then chốt tạo nên một hệ thống mạnh mẽ và linh hoạt.
 
-Độ tin cậy đảm bảo thông điệp được gửi và nhận thành công trong hệ thống phân tán. Các cơ chế như xác nhận, thử lại và hàng đợi bền vững giúp tăng độ tin cậy \cite{hohpe2004}.
+Độ tin cậy là nền tảng của mọi hệ thống giao tiếp. Trong môi trường phân tán, thông điệp có thể bị mất, bị trễ hoặc bị trùng lặp. Các cơ chế như xác nhận, thử lại tự động và hàng đợi bền vững giúp đảm bảo mọi thông điệp đều được xử lý đúng cách, ngay cả khi có sự cố xảy ra. Không chỉ đơn thuần là "gửi và quên", giao tiếp đáng tin cậy đòi hỏi những giải pháp toàn diện để xử lý các tình huống không mong muốn.
 
-Độ trễ là thời gian thông điệp di chuyển từ nguồn đến đích. Các yếu tố ảnh hưởng bao gồm khoảng cách vật lý giữa dịch vụ, phương pháp tuần tự hóa và tải mạng.
+Độ trễ, hay thời gian từ khi thông điệp được gửi đến khi nhận, ảnh hưởng trực tiếp đến trải nghiệm người dùng và hiệu suất hệ thống. Khoảng cách vật lý giữa các dịch vụ, phương thức tuần tự hóa dữ liệu, và tải mạng đều là những yếu tố tác động đến độ trễ. Việc giảm thiểu độ trễ thường đòi hỏi sự đánh đổi với các thuộc tính khác, đặc biệt là độ tin cậy và tính nhất quán.
 
-Khả năng mở rộng giúp xử lý khối lượng thông điệp tăng khi hệ thống phát triển, thông qua việc thêm nhiều phiên bản dịch vụ.
+Khả năng mở rộng cho phép hệ thống xử lý khối lượng thông điệp ngày càng tăng khi doanh nghiệp phát triển. Một hệ thống mở rộng tốt không chỉ đơn giản là thêm nhiều máy chủ, mà còn phải thiết kế để phân phối tải một cách hiệu quả giữa các phiên bản dịch vụ, tránh nghẽn cổ chai và duy trì hiệu suất ổn định.
 
-Cách ly lỗi ngăn lỗi lan truyền giữa các dịch vụ. Các mẫu như Circuit Breaker và Bulkhead hạn chế ảnh hưởng của lỗi từ một dịch vụ đến các dịch vụ khác.
+Cách ly lỗi là khả năng ngăn chặn lỗi từ một dịch vụ lan truyền sang các dịch vụ khác, gây ra hiệu ứng domino. Các mẫu thiết kế như Circuit Breaker và Bulkhead giúp hạn chế phạm vi ảnh hưởng của lỗi, cho phép hệ thống tiếp tục hoạt động ngay cả khi một số thành phần gặp sự cố. Không chỉ là khả năng phục hồi sau lỗi, cách ly lỗi còn là khả năng duy trì chức năng cốt lõi trong điều kiện không lý tưởng.
 
-Tính nhất quán liên quan đến cách đảm bảo dữ liệu nhất quán. Trong hệ thống phân tán, có sự đánh đổi giữa tính nhất quán, khả năng sẵn sàng và khả năng chịu đựng phân vùng.
+Tính nhất quán liên quan đến cách thức đảm bảo dữ liệu nhất quán trong một hệ thống phân tán. Theo định lý CAP, không thể đồng thời đảm bảo tính nhất quán, khả năng sẵn sàng và khả năng chịu đựng phân vùng. Vi dịch vụ thường hy sinh tính nhất quán tức thời để đạt được khả năng sẵn sàng cao, áp dụng mô hình nhất quán cuối cùng (eventual consistency) thay vì giao dịch phân tán truyền thống.
 
-Định dạng dữ liệu đề cập cách dữ liệu được cấu trúc và tuần tự hóa. Các định dạng phổ biến như JSON, XML và Protocol Buffers có ưu nhược điểm riêng.
+Định dạng dữ liệu quyết định cách thông tin được cấu trúc và tuần tự hóa khi truyền giữa các dịch vụ. JSON và XML là các định dạng văn bản phổ biến, dễ đọc và linh hoạt, trong khi Protocol Buffers và Avro cung cấp hiệu suất cao hơn nhờ định dạng nhị phân. Việc lựa chọn định dạng cần cân nhắc giữa hiệu suất, khả năng tương tác và dễ sử dụng.
 
-Khả năng tương tác cho phép các dịch vụ sử dụng công nghệ khác nhau giao tiếp với nhau, quan trọng trong môi trường đa ngôn ngữ và đa nền tảng.
+Khả năng tương tác cho phép các dịch vụ sử dụng công nghệ khác nhau giao tiếp hiệu quả. Trong môi trường đa ngôn ngữ và đa nền tảng, khả năng tương tác trở nên đặc biệt quan trọng, đòi hỏi các giao thức chuẩn và định dạng dữ liệu được hỗ trợ rộng rãi. Điều này tạo điều kiện cho các đội phát triển độc lập lựa chọn công nghệ phù hợp nhất cho từng dịch vụ.
 
-Bảo mật bảo vệ thông điệp khỏi truy cập trái phép qua mã hóa, xác thực và ủy quyền khi dịch vụ giao tiếp qua mạng.
+Bảo mật luôn là mối quan tâm hàng đầu trong bất kỳ hệ thống nào. Khi dịch vụ giao tiếp qua mạng, thông điệp có thể bị đánh chặn, giả mạo hoặc thay đổi. Mã hóa bảo vệ tính bảo mật của dữ liệu, trong khi xác thực và ủy quyền đảm bảo chỉ các bên được phép mới có thể tham gia giao tiếp.
 
 \subsection{Các mô hình giao tiếp cơ bản}
-Có hai mô hình giao tiếp cơ bản trong vi dịch vụ: đồng bộ và bất đồng bộ.
+Hai mô hình giao tiếp cơ bản trong kiến trúc vi dịch vụ - đồng bộ và bất đồng bộ - định hình cách thức tương tác giữa các dịch vụ và ảnh hưởng sâu sắc đến thiết kế hệ thống tổng thể.
 
-Trong giao tiếp đồng bộ, người gửi đợi phản hồi trước khi tiếp tục xử lý. Ví dụ, một dịch vụ gửi yêu cầu HTTP đợi phản hồi trước khi tiếp tục. Mô hình này đơn giản, dễ hiểu và cung cấp phản hồi tức thì \cite{newman2015}. Tuy nhiên, có thể dẫn đến hiệu suất kém vì phải đợi phản hồi, hiệu ứng xung hồi khi dịch vụ chậm, và vấn đề khả năng mở rộng khi số yêu cầu tăng.
+Trong giao tiếp đồng bộ, dịch vụ gửi yêu cầu và chờ đợi phản hồi trước khi tiếp tục xử lý. Giống như cuộc đối thoại trực tiếp, người gửi tạm dừng hoạt động của mình để đợi phản hồi. Ví dụ, khi dịch vụ đơn hàng gửi yêu cầu kiểm tra tồn kho đến dịch vụ kho hàng, nó sẽ đợi xác nhận trước khi chấp nhận đơn hàng. Mô hình này đơn giản, dễ hiểu và cung cấp phản hồi tức thì, giúp duy trì tính nhất quán dữ liệu. Tuy nhiên, nó có thể dẫn đến hiệu suất kém vì dịch vụ phải chờ đợi trong trạng thái không hoạt động. Hơn nữa, nếu dịch vụ nhận yêu cầu chậm hoặc không phản hồi, có thể gây ra hiệu ứng dây chuyền ảnh hưởng đến toàn bộ hệ thống.
 
-Trong giao tiếp bất đồng bộ, người gửi không đợi phản hồi. Ví dụ, dịch vụ gửi thông điệp vào hàng đợi rồi tiếp tục xử lý. Mô hình này tạo coupling lỏng lẻo và khả năng đệm tốt \cite{hohpe2004}. Tuy nhiên, phức tạp hơn để triển khai, có thể có độ trễ cao, và gây khó khăn về tính nhất quán dữ liệu.
+Ngược lại, giao tiếp bất đồng bộ hoạt động như gửi email - người gửi không cần chờ đợi phản hồi ngay lập tức. Dịch vụ gửi thông điệp vào hàng đợi hoặc kênh rồi tiếp tục xử lý công việc khác. Dịch vụ nhận xử lý thông điệp khi có khả năng và có thể gửi phản hồi thông qua một kênh riêng biệt. Mô hình này tạo ra sự liên kết lỏng lẻo giữa các dịch vụ, cải thiện khả năng chịu lỗi và mở rộng. Nếu một dịch vụ tạm thời không khả dụng, các thông điệp vẫn được lưu trong hàng đợi để xử lý sau. Tuy nhiên, giao tiếp bất đồng bộ phức tạp hơn để triển khai, có thể dẫn đến độ trễ cao, và gây khó khăn trong việc theo dõi luồng xử lý cũng như đảm bảo tính nhất quán dữ liệu.
 
 \subsection{Kiểu tương tác}
-Ngoài mô hình giao tiếp đồng bộ và bất đồng bộ, các vi dịch vụ thường tương tác theo hai kiểu chính:
+Bên cạnh mô hình giao tiếp, kiểu tương tác giữa các dịch vụ cũng đóng vai trò quan trọng trong việc định hình kiến trúc tổng thể.
 
-Kiểu one-to-one (một-một): Trong mô hình này, một dịch vụ giao tiếp trực tiếp với một dịch vụ khác. Đây là kiểu tương tác phổ biến nhất trong kiến trúc vi dịch vụ, thường được triển khai thông qua các REST API hoặc RPC. Ví dụ điển hình là dịch vụ đơn hàng gọi dịch vụ thanh toán để xử lý giao dịch, hoặc dịch vụ người dùng truy vấn dịch vụ xác thực để kiểm tra quyền truy cập. Mô hình này đơn giản, dễ triển khai và quản lý, nhưng có thể tạo ra sự phụ thuộc chặt chẽ giữa các dịch vụ.
+Kiểu one-to-one (một-một) là hình thức giao tiếp trực tiếp giữa hai dịch vụ cụ thể. Giống như cuộc đối thoại riêng tư, thông điệp được gửi từ một nguồn đến một đích xác định. Ví dụ, khi dịch vụ đơn hàng cần xử lý thanh toán, nó gửi yêu cầu trực tiếp đến dịch vụ thanh toán và nhận phản hồi cụ thể. Kiểu tương tác này thường được triển khai thông qua REST API hoặc RPC, tạo ra mối quan hệ rõ ràng và trực tiếp giữa các dịch vụ. Mặc dù đơn giản và dễ quản lý, phương pháp này có thể dẫn đến sự phụ thuộc chặt chẽ và khó mở rộng khi số lượng dịch vụ tăng lên.
 
-Kiểu one-to-many (một-nhiều): Trong kiểu tương tác này, một dịch vụ gửi thông điệp hoặc sự kiện đến nhiều dịch vụ khác. Mô hình này thường được triển khai thông qua các cơ chế publish/subscribe (phát hành/đăng ký) sử dụng message broker hoặc event bus. Ví dụ tiêu biểu là khi dịch vụ đơn hàng phát hành sự kiện "đơn hàng đã tạo", các dịch vụ khác như kho hàng, vận chuyển, thông báo và phân tích đều nhận được thông báo này và xử lý tương ứng. Mô hình one-to-many tạo ra sự kết nối lỏng lẻo giữa các dịch vụ, cải thiện khả năng mở rộng và linh hoạt của hệ thống, nhưng cũng làm tăng độ phức tạp trong việc đảm bảo tính nhất quán và theo dõi luồng dữ liệu.
+Kiểu one-to-many (một-nhiều) là khi một dịch vụ cần truyền thông tin đến nhiều dịch vụ khác cùng một lúc. Tương tự như thông báo công khai, thông điệp được phát ra và bất kỳ dịch vụ quan tâm nào cũng có thể nhận. Ví dụ, khi dịch vụ đơn hàng xác nhận đơn hàng mới, nó có thể phát một sự kiện để thông báo cho nhiều dịch vụ như kho hàng, vận chuyển, thông báo khách hàng và phân tích dữ liệu. Kiểu này thường được triển khai thông qua mô hình publish/subscribe sử dụng message broker hoặc event bus. Phương pháp này tạo ra sự kết nối lỏng lẻo, cho phép thêm hoặc thay đổi người nhận mà không ảnh hưởng đến người gửi, tăng tính linh hoạt và khả năng mở rộng. Tuy nhiên, nó cũng làm tăng độ phức tạp trong việc theo dõi luồng dữ liệu và đảm bảo tính nhất quán.
 
-Sự kết hợp giữa mô hình giao tiếp (đồng bộ/bất đồng bộ) và kiểu tương tác (một-một/một-nhiều) tạo ra các mẫu giao tiếp khác nhau, mỗi mẫu phù hợp với các tình huống sử dụng cụ thể trong kiến trúc vi dịch vụ.
+Sự kết hợp giữa mô hình giao tiếp (đồng bộ/bất đồng bộ) và kiểu tương tác (một-một/một-nhiều) tạo ra các mẫu giao tiếp đa dạng, mỗi mẫu đều có các ưu nhược điểm riêng và phù hợp với các tình huống sử dụng cụ thể trong kiến trúc vi dịch vụ.
 
 \subsection{Các công nghệ và giao thức phổ biến}
-HTTP/REST là giao thức phổ biến nhất cho giao tiếp đồng bộ, sử dụng phương thức HTTP và tài nguyên đại diện. REST đơn giản, dễ hiểu và được hỗ trợ rộng rãi.
+Kiến trúc vi dịch vụ hiện đại cung cấp nhiều lựa chọn công nghệ, mỗi công nghệ đều có đặc điểm và ưu điểm riêng biệt phù hợp với các yêu cầu cụ thể.
 
-gRPC là framework RPC hiệu suất cao, sử dụng HTTP/2 và Protocol Buffers. Cung cấp hiệu suất tốt hơn REST nhờ multiplexing và định dạng tuần tự hóa hiệu quả, hỗ trợ streaming hai chiều.
+HTTP/REST là lựa chọn phổ biến nhất cho giao tiếp đồng bộ giữa các vi dịch vụ. Sử dụng các phương thức HTTP tiêu chuẩn (GET, POST, PUT, DELETE) và tài nguyên được định danh bằng URL, REST cung cấp một mô hình đơn giản và trực quan. Ví dụ, để truy vấn thông tin sản phẩm, dịch vụ có thể gửi yêu cầu GET đến đường dẫn /products/{id}. Đơn giản, được hỗ trợ rộng rãi và không trạng thái, REST là lựa chọn tự nhiên cho nhiều dự án. Tuy nhiên, nó không phải lúc nào cũng là giải pháp hiệu quả nhất về mặt hiệu suất, đặc biệt khi cần truyền dữ liệu lớn hoặc tương tác phức tạp.
 
-Message Queue là mẫu bất đồng bộ với dịch vụ gửi và nhận thông điệp qua hàng đợi như RabbitMQ, ActiveMQ và AWS SQS. Cung cấp coupling lỏng lẻo và khả năng đệm tốt, nhưng thêm độ phức tạp và độ trễ.
+gRPC là framework RPC hiệu suất cao phát triển bởi Google, sử dụng HTTP/2 làm giao thức vận chuyển và Protocol Buffers cho tuần tự hóa dữ liệu. Không như REST với các yêu cầu và phản hồi đơn giản, gRPC cho phép xác định các dịch vụ với nhiều phương thức có thể được gọi từ xa. Bằng cách tận dụng multiplexing trên một kết nối TCP duy nhất và định dạng nhị phân hiệu quả, gRPC cung cấp hiệu suất cao hơn đáng kể so với REST, đặc biệt trong môi trường độ trễ cao. Nó cũng hỗ trợ streaming hai chiều, lý tưởng cho các trường hợp như theo dõi dữ liệu thời gian thực. Mặc dù mạnh mẽ, gRPC có độ phức tạp cao hơn và không được hỗ trợ trực tiếp bởi tất cả các nền tảng, đặc biệt là trình duyệt web.
+Message Queue là nền tảng của giao tiếp bất đồng bộ, cho phép các dịch vụ gửi và nhận thông điệp thông qua hàng đợi. Các hệ thống phổ biến như RabbitMQ, ActiveMQ và AWS SQS cung cấp các cơ chế khác nhau cho việc định tuyến và xử lý thông điệp. Ví dụ, khi đơn hàng được tạo, dịch vụ đơn hàng có thể đặt thông điệp vào hàng đợi để dịch vụ kho hàng xử lý khi có sẵn tài nguyên. Message Queue cung cấp sự kết nối lỏng lẻo, khả năng đệm và độ tin cậy cao, nhưng cũng thêm độ phức tạp và độ trễ vào hệ thống.
 
-Pub/Sub là mẫu bất đồng bộ với nhà xuất bản gửi thông điệp mà không biết người nhận, thường qua Apache Kafka, AWS SNS/SQS, Google Pub/Sub hoặc NATS. Cung cấp coupling lỏng lẻo cao và khả năng mở rộng tốt.
+Publish/Subscribe (Pub/Sub) là mô hình giao tiếp bất đồng bộ nâng cao, trong đó người gửi (nhà xuất bản) không biết về người nhận cụ thể (người đăng ký). Thay vào đó, thông điệp được phát ra cho một chủ đề, và bất kỳ dịch vụ nào quan tâm đều có thể đăng ký để nhận. Giải pháp như Apache Kafka, AWS SNS/SQS, Google Pub/Sub và NATS mỗi hệ thống đều có đặc điểm riêng về khả năng mở rộng, độ trễ và độ bền. Pub/Sub đặc biệt phù hợp với các trường hợp một sự kiện cần được xử lý bởi nhiều dịch vụ độc lập, như khi một đơn hàng được xác nhận cần thông báo cho kho hàng, vận chuyển và thông báo khách hàng.
 
-GraphQL là ngôn ngữ truy vấn và thao tác dữ liệu hiệu quả, cho phép chỉ định chính xác dữ liệu cần thiết, tránh over-fetching và under-fetching \cite{richardson2019}. Hữu ích cho ứng dụng di động với băng thông hạn chế.
- 
+GraphQL là phương pháp tiếp cận mới hơn, hoạt động như một lớp truy vấn thống nhất trên nhiều dịch vụ. Không giống như REST với các endpoint cố định, GraphQL cho phép client chỉ định chính xác dữ liệu cần thiết, tránh over-fetching và under-fetching. Chẳng hạn, một ứng dụng di động có thể yêu cầu chỉ những trường cụ thể của thông tin sản phẩm thay vì toàn bộ đối tượng. Điều này đặc biệt hữu ích cho các ứng dụng di động với băng thông hạn chế, nhưng đòi hỏi thiết kế schema cẩn thận và có thể gặp khó khăn với các truy vấn phức tạp.
+
 \subsection{Thách thức trong giao tiếp vi dịch vụ}
-Giao tiếp vi dịch vụ đặt ra nhiều thách thức:
+Mặc dù mang lại nhiều lợi ích, giao tiếp vi dịch vụ cũng đặt ra những thách thức đáng kể cần được giải quyết để xây dựng hệ thống đáng tin cậy.
 
-Network Reliability là thách thức quan trọng khi mạng không đáng tin cậy, gây mất thông điệp hoặc độ trễ cao. Giải pháp bao gồm retry, timeout và circuit breaker.
+Network Reliability là thách thức nền tảng khi các dịch vụ phải giao tiếp qua mạng vốn không hoàn hảo. Mạng có thể chậm, không ổn định hoặc tạm thời không khả dụng, dẫn đến mất thông điệp, độ trễ cao hoặc timeout. Để đối phó, các hệ thống phải triển khai các cơ chế như retry với exponential backoff, timeout hợp lý và circuit breaker để ngăn lỗi lan truyền. Những giải pháp này cần được thiết kế cẩn thận để tránh tạo thêm vấn đề, như hiệu ứng "thundering herd" khi nhiều dịch vụ đồng loạt thử kết nối lại sau lỗi.
 
-Service Discovery giải quyết việc các dịch vụ tìm thấy nhau trong môi trường động. Các giải pháp gồm Client-side Discovery với service registry và Server-side Discovery qua load balancer hoặc API gateway.
+Service Discovery giải quyết câu hỏi làm thế nào các dịch vụ có thể tìm thấy nhau trong môi trường liên tục thay đổi. Với các dịch vụ được triển khai, di chuyển hoặc mở rộng thường xuyên, địa chỉ IP và cổng không còn cố định. Các giải pháp như Client-side Discovery sử dụng service registry (như Netflix Eureka, Consul) để lưu trữ thông tin về các instance khả dụng, trong khi Server-side Discovery dùng load balancer hoặc API gateway để định tuyến yêu cầu. Mỗi phương pháp đều có đánh đổi giữa độ phức tạp, hiệu suất và khả năng chịu lỗi.
 
-Load Balancing phân phối tải giữa các phiên bản dịch vụ, đảm bảo hiệu suất và độ tin cậy. Các cơ chế gồm Round Robin, Least Connections và Hash-based.
+Load Balancing đảm bảo rằng yêu cầu được phân phối hiệu quả giữa các instance của dịch vụ, tránh quá tải bất kỳ instance nào. Các thuật toán như Round Robin, Least Connections, và Hash-based Routing phân phối tải dựa trên các tiêu chí khác nhau. Hệ thống hiện đại thường kết hợp nhiều kỹ thuật, như Service Mesh (Istio, Linkerd) điều khiển traffic ở lớp network, cung cấp các tính năng nâng cao như phát hiện lỗi, retry tự động và canary deployment.
 
-Data Consistency là thách thức duy trì tính nhất quán dữ liệu trong giao tiếp vi dịch vụ. Các mẫu như Saga, Event Sourcing và CQRS \cite{richardson2019} giúp quản lý giao dịch phân tán, lưu trạng thái và tách biệt đọc/ghi.
+Data Consistency là một trong những thách thức phức tạp nhất trong kiến trúc phân tán. Khi không có cơ sở dữ liệu chung, làm thế nào để đảm bảo các thao tác trải rộng qua nhiều dịch vụ hoàn thành nhất quán? Các mẫu như Saga chia giao dịch thành các bước nhỏ hơn với cơ chế bù trừ, Event Sourcing lưu trữ chuỗi các sự kiện thay vì trạng thái hiện tại, và CQRS tách biệt mô hình đọc và ghi. Những giải pháp này cho phép tính nhất quán cuối cùng thay vì nhất quán tức thời, đánh đổi giữa tính nhất quán và khả năng sẵn sàng.
 
-Versioning quản lý thay đổi API giữa các dịch vụ. Các giải pháp gồm Semantic Versioning với hệ thống đánh số (MAJOR.MINOR.PATCH), API Versioning duy trì nhiều phiên bản API, và Backward Compatibility đảm bảo tương thích ngược.
+Versioning là thách thức đối với việc phát triển và triển khai các dịch vụ một cách độc lập. Khi API thay đổi, làm thế nào để tránh phá vỡ các dịch vụ khác phụ thuộc vào nó? Semantic Versioning với hệ thống đánh số rõ ràng (MAJOR.MINOR.PATCH) giúp truyền đạt mức độ thay đổi. API Versioning duy trì nhiều phiên bản API cùng lúc, cho phép client di chuyển dần dần sang phiên bản mới. Backward Compatibility đảm bảo các thay đổi không làm hỏng client hiện có, thường bằng cách thêm các trường tùy chọn thay vì loại bỏ hoặc thay đổi các trường hiện có.
 
-Error Handling xử lý lỗi trong hệ thống phân tán. Các cơ chế gồm Retry thử lại yêu cầu thất bại, Circuit Breaker ngăn yêu cầu đến dịch vụ không phản hồi, và Fallback cung cấp phản hồi thay thế.
+Error Handling trong hệ thống phân tán phức tạp hơn nhiều so với ứng dụng monolithic. Lỗi có thể xảy ra ở bất kỳ điểm nào trong chuỗi các dịch vụ, và hệ thống cần có cơ chế để phát hiện, xử lý và phục hồi từ các lỗi này. Retry thử lại các yêu cầu thất bại với backoff và jitter để tránh quá tải. Circuit Breaker ngăn yêu cầu đến dịch vụ không phản hồi, cho phép nó phục hồi và tránh hiệu ứng cascade. Fallback cung cấp phản hồi thay thế khi dịch vụ không khả dụng, như dữ liệu được cache hoặc giá trị mặc định.
 
-Monitoring and Debugging giám sát và gỡ lỗi trong hệ thống phức tạp. Các công cụ gồm Logging tập trung, Distributed Tracing theo dõi yêu cầu qua nhiều dịch vụ, và Metrics Collection thu thập chỉ số hiệu suất.
+Monitoring and Debugging trong hệ thống vi dịch vụ đòi hỏi phương pháp tiếp cận toàn diện. Một yêu cầu đơn lẻ có thể đi qua nhiều dịch vụ, làm cho việc theo dõi và gỡ lỗi trở nên phức tạp. Logging tập trung thu thập log từ tất cả dịch vụ vào một nơi để phân tích. Distributed Tracing (như Jaeger, Zipkin) theo dõi yêu cầu qua nhiều dịch vụ, cung cấp cái nhìn toàn cảnh về hiệu suất và lỗi. Metrics Collection thu thập dữ liệu về hiệu suất hệ thống, từ mức sử dụng tài nguyên đến thời gian phản hồi và tỷ lệ lỗi, cho phép phát hiện sớm vấn đề.
 
 \subsection{Các mẫu giao tiếp}
-Trong kiến trúc vi dịch vụ, các dịch vụ cần trao đổi thông tin để phối hợp và hoàn thành chức năng. Dưới đây là năm mẫu giao tiếp chính:
+Trong thực tế, kiến trúc vi dịch vụ thường sử dụng kết hợp các mẫu giao tiếp khác nhau để giải quyết các yêu cầu đa dạng của hệ thống.
 
 Request-Response là mẫu đồng bộ phổ biến nhất, dịch vụ gửi yêu cầu đến dịch vụ khác và đợi phản hồi. Dịch vụ gửi thiết lập kết nối HTTP/REST hoặc gRPC, chờ đợi phản hồi từ dịch vụ nhận. Mẫu này đơn giản, dễ hiểu và đảm bảo tính nhất quán dữ liệu cao. Tuy nhiên, tạo coupling chặt chẽ, hiệu suất kém khi độ trễ cao, và có nguy cơ lỗi cascade.
 
