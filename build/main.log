@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  8 MAY 2025 20:11
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.4.7)  8 MAY 2025 20:23
  system commands enabled.
  file:line:error style messages enabled.
 **d:/Learn/thesis/uet-graduation-latex/main
@@ -1192,82 +1192,8 @@ Underfull \hbox (badness 1953) in paragraph at lines 571--572
 [54]) (./chapters/chapter4/4.3.tex
 
 [55]
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-[]|\TU/TimesNewRoman(0)/b/n/13 Synchronous
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-[]|\TU/TimesNewRoman(0)/b/n/13 Asynchronous
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-[]|\TU/TimesNewRoman(0)/m/n/13 Average
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--26
-[]|\TU/TimesNewRoman(0)/m/n/13 End-to-End
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
-[]|\TU/TimesNewRoman(0)/m/n/13 Sync cao hơn
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
-[]|\TU/TimesNewRoman(0)/m/n/13 Async tốt hơn
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 55--55
-[]|\TU/TimesNewRoman(0)/m/n/13 Eventual
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 55--55
-\TU/TimesNewRoman(0)/m/n/13 Consistency
- []
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 74--74
-[]|\TU/TimesNewRoman(0)/m/n/13 Average
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
-[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 78--78
-[]|\TU/TimesNewRoman(0)/m/n/13 End-to-End
- []
-
-
-Underfull \hbox (badness 7030) in paragraph at lines 80--81
-[]|\TU/TimesNewRoman(0)/m/n/13 Async cao hơn
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 82--83
-[]|\TU/TimesNewRoman(0)/m/n/13 Sync ít hơn
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
-[]|\TU/TimesNewRoman(0)/m/n/13 Async ít hơn
- []
 
 
 
@@ -1276,100 +1202,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--85
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--103
-[]|\TU/TimesNewRoman(0)/b/n/13 Multiple Sync
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 103--103
-[]|\TU/TimesNewRoman(0)/b/n/13 Pub/Sub Event
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--105
-[]|\TU/TimesNewRoman(0)/m/n/13 Average
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
-[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--107
-[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
-[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 109--109
-[]|\TU/TimesNewRoman(0)/m/n/13 Maximum
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
-[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 111--112
-[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub nhanh
- []
-
-
-Underfull \hbox (badness 6961) in paragraph at lines 113--114
-[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub ít hơn
- []
-
-
-Underfull \hbox (badness 6961) in paragraph at lines 115--116
-[]|\TU/TimesNewRoman(0)/m/n/13 Pub/Sub ít hơn
- []
-
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
 [57]
-Underfull \hbox (badness 5548) in paragraph at lines 136--136
-[]|\TU/TimesNewRoman(0)/b/n/13 Kafka (One-to-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 136--136
-[]|\TU/TimesNewRoman(0)/b/n/13 RabbitMQ
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--138
-[]|\TU/TimesNewRoman(0)/m/n/13 Total
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--138
-\TU/TimesNewRoman(0)/m/n/13 Distribution
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 140--140
-[]|\TU/TimesNewRoman(0)/m/n/13 95th Percentile
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 144--145
-[]|\TU/TimesNewRoman(0)/m/n/13 Kafka ít hơn
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 146--147
-[]|\TU/TimesNewRoman(0)/m/n/13 Kafka ít hơn
- []
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1501,15 +1338,15 @@ Here is how much of LuaTeX's memory you used:
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:1,2:12068,3:332,4:14312,5:13159,6:153,7:28243,8:1,9:39566,10:3
+   avail lists: 1:1,2:12068,3:333,4:14312,5:13159,6:153,7:28243,8:1,9:39566,10:3
 5,11:2050
  45427 multiletter control sequences out of 65536+600000
- 84 fonts using 40787011 bytes
+ 84 fonts using 40787387 bytes
  99i,14n,105p,1747b,819s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/miktex/fonts/opentype/public/lm/lmmono8-regular.otf><d:/miktex/fonts/opentyp
 e/public/lm/lmmono12-regular.otf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts
 /timesi.ttf><C:/WINDOWS/Fonts/times.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (83 pages, 453207 bytes).
+Output written on main.pdf (83 pages, 453256 bytes).
 
 PDF statistics: 307 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
