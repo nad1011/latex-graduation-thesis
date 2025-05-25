@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.5.25)  25 MAY 2025 20:55
+This is LuaHBTeX, Version 1.21.0 (MiKTeX 25.3) (format=lualatex 2025.5.25)  25 MAY 2025 21:16
  system commands enabled.
  file:line:error style messages enabled.
 **"d:/Code Space/latex-graduation-thesis/main"
@@ -1197,35 +1197,27 @@ Overfull \hbox (1.86925pt too wide) in paragraph at lines 11--20
 
 [35]
 
-[36]) (./chapters/chapter3/3.5.tex
-Underfull \hbox (badness 4739) in paragraph at lines 3--4
-[]\TU/TimesNewRoman(0)/m/n/13 Đối với giao tiếp đồng bộ một đ
-ối một, trọng tâm được đặt vào mẫu
- []
+[36])) (./chapters/chapter4.tex
 
+[37] (./chapters/chapter4/4.1.tex
 
-
-[37])) (./chapters/chapter4.tex
-
-[38] (./chapters/chapter4/4.1.tex
-
-[39
+[38
 
 ]
 
-[40]) (./chapters/chapter4/4.2.tex
+[39]) (./chapters/chapter4/4.2.tex
 Package mathfont Info: Adjusting font LMMono12-Regular.
 
-[41]
+[40]
 Package mathfont Info: Adjusting font Times New Roman.
 Package mathfont Info: Adjusting font LMMono8-Regular.
 Package mathfont Info: Adjusting font Times New Roman.
 
+[41]
+
 [42]
 
 [43]
-
-[44]
 Underfull \hbox (badness 10000) in paragraph at lines 199--200
 []\TU/TimesNewRoman(0)/m/n/13 Trong giao tiếp đồng bộ, Inventory Service cung c
 ấp endpoint
@@ -1233,15 +1225,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
 
 
-[45]
+[44]
 
-[46]
+[45]
 Underfull \hbox (badness 1527) in paragraph at lines 356--358
 []\TU/TimesNewRoman(0)/m/n/13 Notification Services Nhóm các dịch vụ th
 ông báo bao gồm Email Service,
  []
 
 
+
+[46]
 
 [47]
 
@@ -1250,8 +1244,6 @@ Underfull \hbox (badness 1527) in paragraph at lines 356--358
 [49]
 
 [50]
-
-[51]
 Underfull \hbox (badness 1953) in paragraph at lines 571--572
 []\TU/TimesNewRoman(0)/m/n/13 Ví dụ, khi một đơn hàng được xác nh
 ận, Order Service xuất bản sự kiện
@@ -1259,13 +1251,22 @@ Underfull \hbox (badness 1953) in paragraph at lines 571--572
 
 
 
+[51]
+
 [52]
 
-[53]
+[53]) (./chapters/chapter4/4.3.tex
 
-[54]) (./chapters/chapter4/4.3.tex
+[54]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 
 [55]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1276,31 +1277,22 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
 
+[57])) (./chapters/chapter5.tex
 
+[58]
 
-[57]
+[59] (./chapters/chapter5/5.1.tex
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[58])) (./chapters/chapter5.tex
-
-[59]
-
-[60] (./chapters/chapter5/5.1.tex
-
-[61
+[60
 
 ]) (./chapters/chapter5/5.2.tex
 
-[62]
+[61]
 
-[63]) (./chapters/chapter5/5.3.tex
+[62]) (./chapters/chapter5/5.3.tex
 
-[64]
+[63]
 Underfull \hbox (badness 10000) in paragraph at lines 21--21
 []|\TU/TimesNewRoman(0)/b/n/13 Kịch bản áp
  []
@@ -1342,17 +1334,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--28
 
 
 
-[65]
+[64]
 
-[66])) (./chapters/chapter6.tex
+[65])) (./chapters/chapter6.tex
 
-[67]
+[66]
 
-[68
+[67
 
 ])
 
-[69]
+[68]
 Underfull \hbox (badness 10000) in paragraph at lines 124--127
 []\TU/TimesNewRoman(0)/m/n/13 Wolff, E., \TU/TimesNewRoman(0)/m/it/13 Microservi
 ces: Flexible Software Architecture\TU/TimesNewRoman(0)/m/n/13 , Addison-Wesley
@@ -1372,7 +1364,7 @@ Underfull \hbox (badness 1009) in paragraph at lines 175--178
 
 
 
-[70
+[69
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 186--190
@@ -1394,7 +1386,7 @@ m/it/13 RabbitMQ in Action: Distributed Messaging for
 
 
 
-[71] ("d:/Code Space/latex-graduation-thesis/build/main.aux")
+[70] ("d:/Code Space/latex-graduation-thesis/build/main.aux")
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1407,23 +1399,23 @@ LaTeX Font Warning: Size substitutions with differences
 )
 
 Here is how much of LuaTeX's memory you used:
- 23076 strings out of 475506
+ 23067 strings out of 475506
  746497,953878 words of node,token memory allocated
  500 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 53 glue_spec,
  8 attribute_list, 2 write nodes
    avail lists: 1:1,2:12068,3:333,4:14312,5:13159,6:153,7:28243,8:1,9:39566,10:3
 5,11:2050
- 45429 multiletter control sequences out of 65536+600000
- 84 fonts using 40791783 bytes
+ 45426 multiletter control sequences out of 65536+600000
+ 84 fonts using 40792159 bytes
  99i,14n,105p,1772b,819s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/users/admin/appdata/local/programs/miktex/fonts/opentype/public/lm/lmmono8-r
 egular.otf><c:/users/admin/appdata/local/programs/miktex/fonts/opentype/public/l
 m/lmmono12-regular.otf><C:/WINDOWS/Fonts/timesbi.ttf><C:/WINDOWS/Fonts/timesi.tt
 f><C:/WINDOWS/Fonts/times.ttf><C:/WINDOWS/Fonts/timesbd.ttf>
-Output written on main.pdf (83 pages, 449594 bytes).
+Output written on main.pdf (82 pages, 447096 bytes).
 
-PDF statistics: 307 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 304 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
