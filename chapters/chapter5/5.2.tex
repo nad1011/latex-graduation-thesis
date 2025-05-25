@@ -1,7 +1,7 @@
 \section{Kết quả đánh giá}
 
 \subsection{Mẫu giao tiếp trong kịch bản Order-Inventory}
-Kết quả đánh giá hiệu suất giữa giao tiếp đồng bộ và bất đồng bộ trong kịch bản kiểm tra và cập nhật tồn kho cho thấy những đặc điểm đáng chú ý về cách các mẫu giao tiếp ảnh hưởng đến trải nghiệm người dùng và hiệu quả hệ thống. Giao tiếp bất đồng bộ thể hiện thời gian phản hồi ban đầu nhanh hơn đáng kể, giúp người dùng nhận được phản hồi tức thì khi thực hiện thao tác. Tuy nhiên, giao tiếp đồng bộ lại cho thời gian xử lý end-to-end nhỉnh hơn, phản ánh đặc tính xử lý trực tiếp, không qua trung gian của phương pháp này.
+Kết quả đánh giá hiệu suất giữa giao tiếp đồng bộ và bất đồng bộ trong kịch bản kiểm tra và cập nhật tồn kho cho thấy những đặc điểm đáng chú ý về cách các mẫu giao tiếp ảnh hưởng đến trải nghiệm người dùng và hiệu quả hệ thống. Giao tiếp bất đồng bộ thể hiện thời gian phản hồi ban đầu nhanh hơn đáng kể, giúp người dùng nhận được phản hồi tức thì khi thực hiện thao tác. Tuy nhiên, giao tiếp đồng bộ lại cho thời gian xử lý đầu cuối nhỉnh hơn, phản ánh đặc tính xử lý trực tiếp, không qua trung gian của phương pháp này.
 
 Về tính nhất quán dữ liệu, một phát hiện thú vị là giao tiếp bất đồng bộ đạt tỷ lệ nhất quán cao hơn, đặc biệt khi hệ thống chịu tải nặng. Điều này có vẻ trái ngược với quan niệm truyền thống rằng giao tiếp đồng bộ đảm bảo nhất quán dữ liệu tốt hơn. Nguyên nhân có thể do cơ chế hàng đợi giúp điều tiết luồng xử lý và tránh tình trạng quá tải, dẫn đến ít lỗi và nhất quán dữ liệu cao hơn.
 
@@ -29,8 +29,8 @@ Kafka cũng cung cấp khả năng lưu trữ dữ liệu dài hạn và phát l
 \subsection{Ảnh hưởng của tải hệ thống đến các mẫu giao tiếp}
 Một khía cạnh quan trọng của dự án là đánh giá cách các mẫu giao tiếp hoạt động dưới các mức tải khác nhau. Kết quả cho thấy khi tải tăng, hiệu suất của cả giao tiếp đồng bộ và bất đồng bộ đều giảm, nhưng mức độ giảm khác nhau đáng kể.
 
-Giao tiếp đồng bộ thể hiện sự suy giảm hiệu suất mạnh hơn khi tải tăng, với tỷ lệ nhất quán dữ liệu và thông lượng giảm nhanh. Điều này là do mô hình chặn (blocking model) của giao tiếp đồng bộ, nơi mỗi yêu cầu phải đợi đến khi yêu cầu trước đó hoàn thành. Khi số lượng yêu cầu tăng lên, điều này dẫn đến tình trạng nghẽn cổ chai và suy giảm hiệu suất.
+Giao tiếp đồng bộ thể hiện sự suy giảm hiệu suất mạnh hơn khi tải tăng, với tỷ lệ nhất quán dữ liệu và thông lượng giảm nhanh. Điều này là do mô hình chặn của giao tiếp đồng bộ, nơi mỗi yêu cầu phải đợi đến khi yêu cầu trước đó hoàn thành. Khi số lượng yêu cầu tăng lên, điều này dẫn đến tình trạng nghẽn cổ chai và suy giảm hiệu suất.
 
 Giao tiếp bất đồng bộ, mặt khác, duy trì hiệu suất ổn định hơn dưới tải nặng, nhờ vào khả năng đệm các yêu cầu và xử lý chúng theo tốc độ phù hợp với tài nguyên có sẵn. Đặc biệt, thời gian phản hồi ban đầu của giao tiếp bất đồng bộ vẫn duy trì ở mức thấp ngay cả khi tải tăng cao, giúp duy trì trải nghiệm người dùng tốt.
 
-Mô hình Pub/Sub cũng thể hiện khả năng mở rộng tốt, với hiệu suất ổn định khi số lượng subscriber tăng lên. Điều này làm cho mô hình Pub/Sub trở thành lựa chọn phù hợp cho các hệ thống cần khả năng mở rộng theo chiều ngang.
+Mô hình Pub/Sub cũng thể hiện khả năng mở rộng tốt, với hiệu suất ổn định khi số lượng dịch vụ đăng ký tăng lên. Điều này làm cho mô hình Pub/Sub trở thành lựa chọn phù hợp cho các hệ thống cần khả năng mở rộng theo chiều ngang.
