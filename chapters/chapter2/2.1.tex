@@ -20,7 +20,7 @@ có thể thay đổi và phát triển theo thời gian mà không ảnh hưở
 thống \cite{richardson2019}.
 
 \subsection{So sánh với kiến trúc nguyên khối}
-Để hiểu rõ hơn về kiến trúc vi dịch vụ, việc so sánh với kiến trúc nguyên khối là rất hữu ích. Trong kiến trúc nguyên khối, toàn bộ ứng dụng được xây dựng như một đơn vị duy nhất. Tất cả các chức năng nằm trong một codebase và được triển khai cùng nhau.
+Để hiểu rõ hơn về kiến trúc vi dịch vụ, việc so sánh với kiến trúc nguyên khối là rất hữu ích. Trong kiến trúc nguyên khối, toàn bộ ứng dụng được xây dựng như một đơn vị duy nhất. Tất cả các chức năng nằm trong một mã nguồn và được triển khai cùng nhau.
 
 Về triển khai, kiến trúc nguyên khối đòi hỏi toàn bộ ứng dụng được triển khai
 cùng một lúc, trong khi kiến trúc vi dịch vụ cho phép các dịch vụ được triển
@@ -32,7 +32,7 @@ thêm tài nguyên. Ngược lại, kiến trúc vi dịch vụ cho phép mở r
 vụ riêng biệt, tối ưu hóa việc sử dụng tài nguyên.
 
 Về phát triển, kiến trúc nguyên khối thường có một nhóm phát triển làm việc
-trên một codebase, dẫn đến các xung đột trong quá trình phát triển và triển
+trên một mã nguồn, dẫn đến các xung đột trong quá trình phát triển và triển
 khai. Trong khi đó, kiến trúc vi dịch vụ cho phép nhiều nhóm làm việc độc lập
 trên các dịch vụ khác nhau, tăng tốc độ phát triển và giảm thiểu xung đột \cite{richardson2019}.
 
@@ -104,7 +104,7 @@ máy khác nhau và sử dụng các công nghệ khác nhau. Các kỹ thuật 
 đồng và môi trường kiểm thử tích hợp được sử dụng để giải quyết vấn đề này \cite{newman2015}.
 
 \subsection{Các nguyên tắc thiết kế}
-Để thiết kế một kiến trúc vi dịch vụ hiệu quả, một số nguyên tắc thiết kế chính cần được tuân thủ. Nguyên tắc đầu tiên là Single Responsibility Principle (Nguyên tắc Trách nhiệm Đơn lẻ), theo đó mỗi dịch vụ nên chịu trách nhiệm cho một chức năng nghiệp vụ duy nhất. Điều này giúp giữ các dịch vụ đơn giản và tập trung, dễ hiểu và bảo trì.
+Để thiết kế một kiến trúc vi dịch vụ hiệu quả, một số nguyên tắc thiết kế chính cần được tuân thủ. Nguyên tắc đầu tiên là Nguyên tắc Trách nhiệm Đơn lẻ, theo đó mỗi dịch vụ nên chịu trách nhiệm cho một chức năng nghiệp vụ duy nhất. Điều này giúp giữ các dịch vụ đơn giản và tập trung, dễ hiểu và bảo trì.
 
 Domain-Driven Design (DDD) là một phương pháp thiết kế hữu ích cho kiến trúc
 vi dịch vụ. DDD sử dụng các khái niệm như Bounded Context để định nghĩa ranh
@@ -117,8 +117,7 @@ giao tiếp hiệu quả và rằng các thay đổi không phá vỡ tương th
 
 Tự động hóa là một phần quan trọng của kiến trúc vi dịch vụ thành công. Tự
 động hóa quá trình xây dựng, kiểm thử và triển khai giúp quản lý sự phức tạp
-của việc phát triển và vận hành nhiều dịch vụ. Các công cụ CI/CD (Continuous
-Integration/Continuous Deployment) là rất quan trọng trong môi trường
+của việc phát triển và vận hành nhiều dịch vụ. Các công cụ CI/CD là rất quan trọng trong môi trường
 vi dịch vụ.
 
 Monitoring và Observability là các nguyên tắc quan trọng khác. Thiết kế hệ
@@ -126,7 +125,7 @@ thống để dễ dàng giám sát và hiểu được hoạt động nội b�
 quyết vấn đề một cách nhanh chóng. Các công cụ như logging tập trung, theo dõi
 phân tán và thu thập số liệu là rất quan trọng.
 
-Cuối cùng, Fault Tolerance (Khả năng chịu lỗi) là một nguyên tắc thiết kế quan
+Cuối cùng, Khả năng chịu lỗi là một nguyên tắc thiết kế quan
 trọng cho kiến trúc vi dịch vụ. Các dịch vụ nên được thiết kế để xử lý lỗi
 một cách thanh nhã, sử dụng các kỹ thuật như Circuit Breaker. Circuit Breaker
 ngăn lỗi lan truyền bằng cách ngừng gửi yêu cầu đến các dịch vụ không phản hồi.
